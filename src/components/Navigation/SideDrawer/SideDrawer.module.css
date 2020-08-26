@@ -1,0 +1,5 @@
+.SideDrawer {
+  width: 300px;
+  height: calc(100vh - 50px);
+  background-color: #ea641d;
+}
