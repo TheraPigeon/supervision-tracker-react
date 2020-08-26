@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -50,10 +51,10 @@ export const auth = (email, password, isSignup) => {
         password: password,
       },
     };
-    let url = 'https://identitytoolkit.googleapis.com/api/users/login/';
+    let url = 'https://abasoup.herokuapp.com/api/users/login/';
 
     if (isSignup) {
-      url = 'https://identitytoolkit.googleapis.com/api/users/';
+      url = 'https://abasoup.herokuapp.com/api/users/';
     }
     axios
       .post(url, authData)
@@ -64,7 +65,7 @@ export const auth = (email, password, isSignup) => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch(authFail(err.response.data.error));
+        // dispatch(authFail(err.response.data.error));
       });
   };
 };
