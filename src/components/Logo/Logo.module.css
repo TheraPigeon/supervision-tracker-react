@@ -1,2 +1,14 @@
 .Logo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 7px;
+  height: 100%;
+  text-align: center;
+}
+
+.Logo img {
+  height: 100%;
+  border-radius: 8px;
 }
