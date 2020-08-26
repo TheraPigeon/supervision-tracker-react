@@ -1,0 +1,12 @@
+.Toolbar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  height: 50px;
+  background-color: #000;
+}
+.Toolbar span {
+  margin-left: auto;
+  color: #fff;
+  margin-right: 10px;
+}
