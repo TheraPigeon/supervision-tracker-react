@@ -1,12 +1,13 @@
 .Toolbar {
+  grid-column: 1 / -1;
   display: flex;
   position: relative;
   align-items: center;
   height: 50px;
-  background-color: #000;
+  background-color: #231f20;
 }
 .Toolbar span {
   margin-left: auto;
-  color: #fff;
-  margin-right: 10px;
+  color: #ec9c71;
+  margin-right: 20px;
 }
