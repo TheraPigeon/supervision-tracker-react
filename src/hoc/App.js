@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import PrivateRoute from '../containers/Login/Auth/PrivateRoute/PrivateRoute';
+
 import Layout from './Layout/Layout';
-import Auth from '../containers/Auth/Auth';
+import Login from '../containers/Login/Login';
 import Dashboard from '../containers/Dashboard/Dashboard';
 class App extends Component {
   render() {
@@ -9,14 +13,23 @@ class App extends Component {
       <div>
         <Layout>
           <Switch>
-            <Route path="/auth" component={Auth} />
+            <Route path="/login" component={Login} />
             {/* <Route path="/logout" component={Logout} /> */}
-            <Route path="/" exact component={Dashboard} />
+            <PrivateRoute
+              auth={this.props.isAuthorized}
+              path="/"
+              exact
+              component={Dashboard}
+            />
           </Switch>
         </Layout>
       </div>
     );
   }
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthorized: state.auth.token !== null,
+  };
+};
+export default connect(mapStateToProps)(App);
