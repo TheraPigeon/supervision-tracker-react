@@ -59,6 +59,14 @@ export const auth = (email, password, isSignup) => {
     axios
       .post(url, authData)
       .then((res) => {
+        if (isSignup) {
+          url = 'https://abasoup.herokuapp.com/api/rosters';
+          axios
+            .post(url, null, {
+              headers: { Authorization: 'Token ' + res.data.token },
+            })
+            .then((res) => console.log(res));
+        }
         console.log(res);
         dispatch(authSuccess(res.data.token, res.data.id));
         const expiresIn = 36000;

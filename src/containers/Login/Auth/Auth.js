@@ -123,7 +123,10 @@ class Auth extends Component {
     let switchAuthModeMessage = (
       <p>
         Not a memeber?
-        <span onClick={this.switchAuthModeHandler} class={classes.SignupBtn}>
+        <span
+          onClick={this.switchAuthModeHandler}
+          className={classes.SignupBtn}
+        >
           Join Soup
         </span>
       </p>
@@ -132,7 +135,10 @@ class Auth extends Component {
       switchAuthModeMessage = (
         <p>
           Already a memeber?
-          <span onClick={this.switchAuthModeHandler} class={classes.SignupBtn}>
+          <span
+            onClick={this.switchAuthModeHandler}
+            className={classes.SignupBtn}
+          >
             Log in
           </span>
         </p>
