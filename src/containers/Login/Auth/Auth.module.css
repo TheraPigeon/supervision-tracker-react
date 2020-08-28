@@ -51,21 +51,11 @@
   padding-top: 25px;
   color: #fff;
   z-index: 1;
-  animation: fadein 0.5s ease;
-}
-.Auth form::before {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  opacity: 0.95;
-  z-index: -1;
   border-radius: 10px;
   background-color: var(--grey-background);
+  animation: fadein 0.5s ease;
 }
+
 .Auth form * {
   margin: 5px 0;
 }
