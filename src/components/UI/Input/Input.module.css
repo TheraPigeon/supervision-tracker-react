@@ -1,28 +1,43 @@
 .Input {
+  position: relative;
   width: 100%;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .Label {
-  font-weight: bold;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .InputElement {
   display: block;
   width: 100%;
   outline: none;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: none;
+  background: none;
+  border-bottom: 1px solid rgb(112, 112, 112);
   font: inherit;
-  padding: 6px 10px;
+  padding: 6px 4px 4px 4px;
+  margin: 5px 0;
 }
 
-.InputElement:focus {
-  background-color: #ccc;
+.InputElement:focus + label,
+.InputElement:not([value='']) + label {
+  transform: translateY(-160%);
+  font-size: 0.9em;
+  left: 0;
 }
-
-.Invalid {
-  border: 1px solid red;
+.Input label {
+  position: absolute;
+  bottom: 16px;
+  left: 4px;
+  transition: 0.2s ease;
+  z-index: -1;
+}
+.Input .Invalid {
+  border-bottom: 2px solid red;
+  margin-bottom: 4px;
+}
+.Invalid + label {
+  color: red;
 }

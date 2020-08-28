@@ -5,7 +5,12 @@ const input = (props) => {
   let inputElement = null;
   const inputClasses = [classes.InputElement];
 
-  if (props.invalid && props.shouldValidate && props.touched) {
+  if (
+    props.invalid &&
+    props.shouldValidate &&
+    props.touched &&
+    props.registring
+  ) {
     inputClasses.push(classes.Invalid);
   }
   switch (props.elementType) {
@@ -56,8 +61,8 @@ const input = (props) => {
   }
   return (
     <div className={classes.Input}>
-      <label className={classes.Label}>{props.label}</label>
       {inputElement}
+      <label className={classes.Label}>{props.label}</label>
     </div>
   );
 };
