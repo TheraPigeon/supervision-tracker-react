@@ -1,5 +1,5 @@
 .Dashboard {
-  background-color: #363940;
+  background-color: var(--grey-background);
   height: 100%;
 
   color: #fff;

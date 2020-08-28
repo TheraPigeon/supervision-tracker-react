@@ -122,7 +122,7 @@ class Auth extends Component {
     }
     let switchAuthModeMessage = (
       <p>
-        Not a memeber?
+        Not a member?
         <span
           onClick={this.switchAuthModeHandler}
           className={classes.SignupBtn}
@@ -134,7 +134,7 @@ class Auth extends Component {
     if (this.state.isSignup) {
       switchAuthModeMessage = (
         <p>
-          Already a memeber?
+          Already a member?
           <span
             onClick={this.switchAuthModeHandler}
             className={classes.SignupBtn}
