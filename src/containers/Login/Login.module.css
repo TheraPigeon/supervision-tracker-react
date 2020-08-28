@@ -1,4 +1,7 @@
 .Login {
   display: grid;
   grid-template-columns: 60% auto;
+  height: 100%;
+  background-color: var(--orange-background);
+  background: linear-gradient(135deg, var(--orange-background), #f42);
 }

@@ -60,8 +60,11 @@ export const auth = (email, password, isSignup) => {
       .post(url, authData)
       .then((res) => {
         console.log(res);
-        dispatch(authSuccess(res.data.idToken, res.data.localId));
-        dispatch(checkAuthTimeout(res.data.expiresIn));
+        dispatch(authSuccess(res.data.token, res.data.id));
+        const expiresIn = 36000;
+        dispatch(checkAuthTimeout(expiresIn));
+
+        //dispatch(checkAuthTimeout(res.data.expiresIn)); NEED expiresIn from Server Response
       })
       .catch((err) => {
         console.log(err);

@@ -4,7 +4,11 @@
   position: relative;
   align-items: center;
   height: 50px;
-  background-color: #231f20;
+  background-color: var(--black-background);
+  z-index: 400;
+  -webkit-box-shadow: 0px 2px 13px -6px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 2px 13px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 2px 13px -6px rgba(0, 0, 0, 0.75);
 }
 .Toolbar span {
   margin-left: auto;
