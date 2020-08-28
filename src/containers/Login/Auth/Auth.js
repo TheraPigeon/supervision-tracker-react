@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input';
+import Button from '../../../components/UI/Button/Button';
+
 import classes from './Auth.module.css';
 import * as actions from '../../../store/actions/index';
 class Auth extends Component {
@@ -12,7 +14,6 @@ class Auth extends Component {
         elementType: 'email',
         elementConfig: {
           type: 'text',
-          placeholder: 'Your Email',
         },
         value: '',
         validation: {
@@ -21,12 +22,12 @@ class Auth extends Component {
         },
         valid: false,
         touched: false,
+        label: 'Email',
       },
       password: {
         elementType: 'email',
         elementConfig: {
           type: 'password',
-          placeholder: 'Your Password',
         },
         value: '',
         validation: {
@@ -35,9 +36,10 @@ class Auth extends Component {
         },
         valid: false,
         touched: false,
+        label: 'Password',
       },
     },
-    isSignup: true,
+    isSignup: false,
   };
   checkValidity = (value, rules) => {
     if (!rules) return true;
@@ -86,6 +88,11 @@ class Auth extends Component {
       this.state.isSignup
     );
   };
+  switchAuthModeHandler = () => {
+    this.setState((prevState) => {
+      return { isSignup: !prevState.isSignup };
+    });
+  };
   render() {
     const formElementArray = [];
     for (let key in this.state.controls) {
@@ -105,23 +112,47 @@ class Auth extends Component {
         shouldValidate={formElement.config.validation}
         invalid={!formElement.config.valid}
         touched={formElement.config.touched}
+        label={formElement.config.label}
+        registring={this.state.isSignup}
       />
     ));
     let authRedirect = null;
     if (this.props.isAuthenticated) {
       authRedirect = <Redirect to="/" />;
     }
+    let switchAuthModeMessage = (
+      <p>
+        Not a memeber?
+        <span onClick={this.switchAuthModeHandler} class={classes.SignupBtn}>
+          Join Soup
+        </span>
+      </p>
+    );
+    if (this.state.isSignup) {
+      switchAuthModeMessage = (
+        <p>
+          Already a memeber?
+          <span onClick={this.switchAuthModeHandler} class={classes.SignupBtn}>
+            Log in
+          </span>
+        </p>
+      );
+    }
     return (
       <div className={classes.Auth}>
         {authRedirect}
         {/* {errorMessage} */}
         <form onSubmit={this.submitHandler}>
+          <h2>{this.state.isSignup ? 'Join Soup' : 'Login to Soup'}</h2>
           {form}
           {/* <Button btnType="Success">SUBMIT</Button>
           <Button btnType="Danger" clicked={this.switchAuthModeHandler}>
             SWITCH TO {this.state.isSignup ? 'SIGN-IN' : 'SIGNUP'}
           </Button> */}
-          <button>Sign up</button>
+          <Button btnType="Login">
+            {this.state.isSignup ? 'Signup' : 'Login'}
+          </Button>
+          {switchAuthModeMessage}
         </form>
       </div>
     );
