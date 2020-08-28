@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 body * {
   box-sizing: border-box;
@@ -12,4 +13,9 @@ body * {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+:root {
+  --orange-background: #ea641d;
+  --black-background: #231f20;
+  --black: #231f20;
 }
