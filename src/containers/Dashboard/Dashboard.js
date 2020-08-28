@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import classes from './Dashboard.module.css';
 
 class Dashboard extends Component {
   render() {
-    return <div>Dashboard</div>;
+    return <div className={classes.Dashboard}>Dashboard</div>;
   }
 }
 

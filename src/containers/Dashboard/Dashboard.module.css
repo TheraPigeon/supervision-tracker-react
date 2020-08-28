@@ -1,0 +1,9 @@
+.Dashboard {
+  background-color: #363940;
+  height: 100%;
+
+  color: #fff;
+  font-size: 2em;
+  /* font-weight: bold; */
+  padding: 20px;
+}
