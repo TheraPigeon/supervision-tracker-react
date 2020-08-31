@@ -1,0 +1,43 @@
+.Member {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 20px;
+  border: 1px solid var(--orange-background);
+  border-radius: var(--border-radius);
+}
+.Member aside {
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.Member aside span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 100%;
+  cursor: default;
+}
+.Id {
+  display: block;
+  width: 40px;
+  padding: 3px;
+  background-color: #555;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: var(--border-radius);
+}
+
+.Member main {
+  display: flex;
+  flex-direction: column;
+}
+.Member h3 {
+  display: block;
+  font-size: 1.5em;
+  margin-top: auto;
+}

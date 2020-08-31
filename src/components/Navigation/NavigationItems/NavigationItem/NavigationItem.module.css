@@ -1,0 +1,18 @@
+.NavigationItem a {
+  display: block;
+  margin-right: 15px;
+  padding: 20px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+.NavigationItem a:hover {
+  background-color: rgb(255, 144, 124);
+}
+.NavigationItem .active {
+  font-weight: 600;
+  background-color: #f42;
+  pointer-events: none;
+}

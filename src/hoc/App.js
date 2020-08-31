@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import PrivateRoute from '../containers/Login/Auth/PrivateRoute/PrivateRoute';
@@ -8,22 +8,36 @@ import Layout from './Layout/Layout';
 import Login from '../containers/Login/Login';
 import Logout from '../containers/Login/Logout/Logout';
 import Dashboard from '../containers/Dashboard/Dashboard';
+import Roster from '../containers/Roster/Roster';
+
 class App extends Component {
   render() {
     return (
       <div>
         <Layout>
           <Switch>
+            {/* Public routes */}
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
-
-            {/* <Route path="/logout" component={Logout} /> */}
+            {/* Hitory Route */}
+            {/* Authorization required */}
+            <PrivateRoute
+              auth={this.props.isAuthorized}
+              path="/roster"
+              component={Roster}
+            />
+            <PrivateRoute
+              auth={this.props.isAuthorized}
+              path="/members"
+              component={Roster} //Replace with Members component
+            />
             <PrivateRoute
               auth={this.props.isAuthorized}
               path="/"
               exact
               component={Dashboard}
             />
+            <Redirect to="/" />
           </Switch>
         </Layout>
       </div>

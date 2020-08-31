@@ -7,11 +7,13 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, roster, clinics) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
-    userId: userId,
+    userId,
+    roster,
+    clinics,
   };
 };
 
@@ -59,16 +61,15 @@ export const auth = (email, password, isSignup) => {
     axios
       .post(url, authData)
       .then((res) => {
-        if (isSignup) {
-          url = 'https://abasoup.herokuapp.com/api/rosters';
-          axios
-            .post(url, null, {
-              headers: { Authorization: 'Token ' + res.data.token },
-            })
-            .then((res) => console.log(res));
-        }
         console.log(res);
-        dispatch(authSuccess(res.data.token, res.data.id));
+        dispatch(
+          authSuccess(
+            res.data.token,
+            res.data.id,
+            res.data.roster_members,
+            res.data.clinics
+          )
+        );
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
 

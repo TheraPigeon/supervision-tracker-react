@@ -1,9 +1,4 @@
 .Dashboard {
-  background-color: var(--grey-background);
   height: 100%;
-
-  color: #fff;
   font-size: 2em;
-  /* font-weight: bold; */
-  padding: 20px;
 }

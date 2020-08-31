@@ -11,7 +11,7 @@ class Auth extends Component {
   state = {
     controls: {
       email: {
-        elementType: 'email',
+        elementType: 'input',
         elementConfig: {
           type: 'text',
         },
@@ -25,7 +25,7 @@ class Auth extends Component {
         label: 'Email',
       },
       password: {
-        elementType: 'email',
+        elementType: 'input',
         elementConfig: {
           type: 'password',
         },
@@ -37,6 +37,17 @@ class Auth extends Component {
         valid: false,
         touched: false,
         label: 'Password',
+      },
+      intern: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'checkbox',
+        },
+        value: '',
+        validation: {},
+        valid: true,
+        touched: false,
+        label: "I'm an intern",
       },
     },
     isSignup: false,
@@ -76,6 +87,7 @@ class Auth extends Component {
           this.state.controls[controlName].validation
         ),
         touched: true,
+        checked: event.target.checked,
       },
     };
     this.setState({ controls: updatedControls });
@@ -144,6 +156,7 @@ class Auth extends Component {
         </p>
       );
     }
+    console.log(this.state.isSignup);
     return (
       <div className={classes.Auth}>
         {authRedirect}
@@ -151,10 +164,6 @@ class Auth extends Component {
         <form onSubmit={this.submitHandler}>
           <h2>{this.state.isSignup ? 'Join Soup' : 'Login to Soup'}</h2>
           {form}
-          {/* <Button btnType="Success">SUBMIT</Button>
-          <Button btnType="Danger" clicked={this.switchAuthModeHandler}>
-            SWITCH TO {this.state.isSignup ? 'SIGN-IN' : 'SIGNUP'}
-          </Button> */}
           <Button btnType="Login">
             {this.state.isSignup ? 'Signup' : 'Login'}
           </Button>

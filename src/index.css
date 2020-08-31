@@ -18,5 +18,8 @@ code {
   --orange-background: #ea641d;
   --black-background: #231f20;
   --grey-background: #363940;
+  --teal-background: #03dac5;
   --black: #231f20;
+
+  --border-radius: 5px;
 }
