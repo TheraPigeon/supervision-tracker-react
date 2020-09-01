@@ -1,47 +1,7 @@
 .SideDrawer {
   position: relative;
-  display: grid;
-  grid-template-columns: 0px 1fr;
   width: 300px;
   height: calc(100vh - 50px);
   background-color: var(--orange-background);
   z-index: 100;
-}
-.SideDrawer > div:not(.AddClinic) {
-  grid-column: 2 / span 1;
-}
-.SideDrawer .AddClinic {
-  /* position: absolute; */
-  position: relative;
-
-  background-color: var(--grey-background);
-  border-right: 1px solid var(--grey-background);
-}
-.SideDrawer .AddClinic span {
-  display: block;
-  width: 50px;
-  height: 50px;
-  border: 1px solid #ccc;
-  margin: 10px auto;
-  border-radius: 100%;
-}
-.SideDrawer .AddClinic {
-  position: absolute;
-  height: 100%;
-  width: 60px;
-  transition: all 0.5s ease-in-out;
-  transform: translateX(-100%);
-  transition-delay: 1.5s;
-}
-.SideDrawer .AddClinic::before {
-  position: absolute;
-  content: '';
-  height: 100%;
-  width: 30px;
-  right: -30px;
-  background-color: transparent;
-}
-.SideDrawer .AddClinic:hover {
-  transform: translateX(0);
-  transition-delay: 0s;
 }
