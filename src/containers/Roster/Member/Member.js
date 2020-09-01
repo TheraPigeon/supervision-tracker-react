@@ -7,7 +7,7 @@ const member = (props) => {
   return (
     <section className={classes.Member}>
       <main>
-        <span class={classes.Id}>{props.memberId}</span>
+        <span className={classes.Id}>{props.memberId}</span>
         <button>Report</button>
         <button>Add Soup</button>
         <h3>{props.name}</h3>

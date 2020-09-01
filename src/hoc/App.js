@@ -9,6 +9,7 @@ import Login from '../containers/Login/Login';
 import Logout from '../containers/Login/Logout/Logout';
 import Dashboard from '../containers/Dashboard/Dashboard';
 import Roster from '../containers/Roster/Roster';
+import AllMembers from '../containers/AllMembers/AllMembers';
 
 class App extends Component {
   render() {
@@ -29,7 +30,7 @@ class App extends Component {
             <PrivateRoute
               auth={this.props.isAuthorized}
               path="/members"
-              component={Roster} //Replace with Members component
+              component={AllMembers} //Replace with Members component
             />
             <PrivateRoute
               auth={this.props.isAuthorized}

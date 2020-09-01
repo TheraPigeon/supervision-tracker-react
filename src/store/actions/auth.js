@@ -16,7 +16,12 @@ export const authSuccess = (token, userId, roster, clinics) => {
     clinics,
   };
 };
-
+export const setCurrentClinic = (clinicId) => {
+  return {
+    type: actionTypes.SET_CURRENT_CLINIC,
+    currentClinic: clinicId,
+  };
+};
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
@@ -70,6 +75,7 @@ export const auth = (email, password, isSignup) => {
             res.data.clinics
           )
         );
+        dispatch(setCurrentClinic(res.data.clinics[0].id));
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
 

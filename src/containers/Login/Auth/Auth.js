@@ -156,7 +156,6 @@ class Auth extends Component {
         </p>
       );
     }
-    console.log(this.state.isSignup);
     return (
       <div className={classes.Auth}>
         {authRedirect}

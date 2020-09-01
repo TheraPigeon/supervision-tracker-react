@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Member from './Member/Member';
 import AddMember from './AddMember/AddMember';
 import classes from './Roster.module.css';
+import * as actions from '../../store/actions/index';
 
 class Roster extends Component {
+  componentDidMount() {}
   render() {
-    console.log(this.props.roster);
     const roster = Object.keys(this.props.roster).map((member) => {
-      console.log(member);
       const { name } = this.props.roster[member];
       return <Member key={member} memberId={member} name={name} />;
     });
@@ -28,4 +28,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Roster);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrectClinic: dispatch(actions.setCurrentClinic),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Roster);
