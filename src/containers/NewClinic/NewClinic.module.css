@@ -1,0 +1,25 @@
+.NewClinic {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100%;
+}
+.NewClinic div {
+  height: 135px;
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid var(--orange-background);
+  line-height: 1.2;
+  cursor: pointer;
+}
+.NewClinic div:hover {
+  background-color: #555;
+}
+.NewClinic span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
