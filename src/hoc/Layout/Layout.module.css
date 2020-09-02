@@ -5,4 +5,6 @@
 .Content {
   /* grid-column: 1 / -1; */
   height: calc(100vh - 50px);
+  background-color: var(--grey-background);
+  overflow-y: scroll;
 }

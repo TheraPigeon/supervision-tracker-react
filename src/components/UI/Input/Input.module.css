@@ -21,7 +21,7 @@
   margin: 5px 0;
 }
 
-.InputElement:focus + label,
+.InputElement:focus:not([type='checkbox']) + label,
 .InputElement:not([value='']) + label {
   transform: translateY(-160%);
   font-size: 0.9em;
@@ -40,4 +40,15 @@
 }
 .Invalid + label {
   color: red;
+}
+.InputElement[type='checkbox'] {
+  margin: 0;
+}
+.InputElement[type='checkbox'] + label {
+  display: unset;
+  position: relative;
+}
+.InputElement[type='checkbox'].Hide,
+.InputElement[type='checkbox'].Hide + label {
+  display: none;
 }

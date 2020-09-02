@@ -1,1 +1,2 @@
-export { auth, logout, setAuthRedirectPath } from './auth';
+export { auth, logout, setAuthRedirectPath, setCurrentClinic } from './auth';
+export { fetchMembers } from './allmembers';

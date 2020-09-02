@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -7,14 +7,21 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, roster, clinics) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
-    userId: userId,
+    userId,
+    roster,
+    clinics,
   };
 };
-
+export const setCurrentClinic = (clinicId) => {
+  return {
+    type: actionTypes.SET_CURRENT_CLINIC,
+    currentClinic: clinicId,
+  };
+};
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
@@ -51,24 +58,24 @@ export const auth = (email, password, isSignup) => {
         password: password,
       },
     };
-    let url = 'https://abasoup.herokuapp.com/api/users/login/';
+    let url = 'api/users/login/';
 
     if (isSignup) {
-      url = 'https://abasoup.herokuapp.com/api/users/';
+      url = 'api/users/';
     }
     axios
       .post(url, authData)
       .then((res) => {
-        if (isSignup) {
-          url = 'https://abasoup.herokuapp.com/api/rosters';
-          axios
-            .post(url, null, {
-              headers: { Authorization: 'Token ' + res.data.token },
-            })
-            .then((res) => console.log(res));
-        }
         console.log(res);
-        dispatch(authSuccess(res.data.token, res.data.id));
+        dispatch(
+          authSuccess(
+            res.data.token,
+            res.data.id,
+            res.data.roster_members,
+            res.data.clinics
+          )
+        );
+        dispatch(setCurrentClinic(res.data.clinics[0].id));
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
 

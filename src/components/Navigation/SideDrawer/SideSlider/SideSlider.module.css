@@ -1,0 +1,56 @@
+.SideSlider {
+  position: relative;
+  background-color: var(--grey-background);
+  color: #fff;
+  font-size: 24px;
+}
+.SideSlider span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #777;
+  margin: 10px auto;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.SideSlider span:hover {
+  background-color: #555;
+}
+.SideSlider a {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 13px; /* (50px - 4px) / 2*/
+  color: inherit;
+  font-size: 20px;
+}
+
+.SideSlider .active {
+  background-color: #f42;
+  pointer-events: none;
+}
+.SideSlider {
+  position: absolute;
+  height: 100%;
+  width: 60px;
+  transform: translateX(-100%);
+  transition: all 0.5s ease-in-out;
+  transition-delay: 1s;
+}
+.SideSlider::before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 20px;
+  right: -20px;
+  background-color: transparent;
+}
+.SideSlider:hover {
+  transform: translateX(0);
+  transition-delay: 0s;
+  -webkit-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+}

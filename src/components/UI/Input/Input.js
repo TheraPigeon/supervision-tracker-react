@@ -3,8 +3,8 @@ import classes from './Input.module.css';
 
 const input = (props) => {
   let inputElement = null;
-  const inputClasses = [classes.InputElement];
-
+  const hideClass = !props.registring ? classes.Hide : null;
+  const inputClasses = [classes.InputElement, hideClass];
   if (
     props.invalid &&
     props.shouldValidate &&
@@ -24,6 +24,7 @@ const input = (props) => {
         />
       );
       break;
+
     case 'textarea':
       inputElement = (
         <textarea

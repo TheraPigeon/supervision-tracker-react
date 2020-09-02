@@ -1,8 +1,17 @@
 import React from 'react';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import AddMember from '../../../containers/Roster/AddMember/AddMember';
+import SideSlider from './SideSlider/SideSlider';
 import classes from './SideDrawer.module.css';
+
 const sidedrawer = (props) => (
   <div className={classes.SideDrawer}>
-    <nav>{/* Nav Items */}</nav>
+    <SideSlider />
+    <div>
+      <nav>
+        <NavigationItems />
+      </nav>
+    </div>
   </div>
 );
 

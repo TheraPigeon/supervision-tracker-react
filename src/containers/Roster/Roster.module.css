@@ -1,0 +1,9 @@
+.Roster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+.Roster h1 {
+  grid-column: 1 / -1;
+  font-size: 2em;
+}

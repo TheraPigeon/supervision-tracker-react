@@ -22,7 +22,6 @@
 }
 
 .Auth {
-  animation: slideInFromLeft 0.5s 0s ease-in-out;
   display: flex;
   place-items: center;
   position: relative;
@@ -30,6 +29,7 @@
   width: 300px;
   margin-right: 50px;
   z-index: 1;
+  animation: slideInFromLeft 0.5s 0s ease-in-out;
 }
 
 .Auth::before {
@@ -46,14 +46,18 @@
 }
 
 .Auth form {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  padding: 85px 15px;
-  padding-top: 25px;
+  padding: 25px 15px;
   color: #fff;
   z-index: 1;
   border-radius: 10px;
   background-color: var(--grey-background);
   animation: fadein 0.5s ease;
+}
+.Auth button:first-of-type {
+  /* margin-top: 20px; */
 }
 
 .Auth form * {
@@ -66,10 +70,11 @@
 }
 .Auth p {
   padding: 10px 0;
+  text-align: center;
 }
 
 .SignupBtn {
-  padding-left: 5px;
+  display: block;
   color: var(--orange-background);
   text-decoration: underline;
   cursor: pointer;

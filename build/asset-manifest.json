@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/supervision-tracker-react/static/css/main.9172f3a9.chunk.css",
+    "main.js": "/supervision-tracker-react/static/js/main.4a77a481.chunk.js",
+    "main.js.map": "/supervision-tracker-react/static/js/main.4a77a481.chunk.js.map",
+    "runtime-main.js": "/supervision-tracker-react/static/js/runtime-main.0fb5ebaf.js",
+    "runtime-main.js.map": "/supervision-tracker-react/static/js/runtime-main.0fb5ebaf.js.map",
+    "static/js/2.f235649a.chunk.js": "/supervision-tracker-react/static/js/2.f235649a.chunk.js",
+    "static/js/2.f235649a.chunk.js.map": "/supervision-tracker-react/static/js/2.f235649a.chunk.js.map",
+    "index.html": "/supervision-tracker-react/index.html",
+    "precache-manifest.ee380ffa7c9c91be553c3aeca1734194.js": "/supervision-tracker-react/precache-manifest.ee380ffa7c9c91be553c3aeca1734194.js",
+    "service-worker.js": "/supervision-tracker-react/service-worker.js",
+    "static/css/main.9172f3a9.chunk.css.map": "/supervision-tracker-react/static/css/main.9172f3a9.chunk.css.map",
+    "static/js/2.f235649a.chunk.js.LICENSE.txt": "/supervision-tracker-react/static/js/2.f235649a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0fb5ebaf.js",
+    "static/js/2.f235649a.chunk.js",
+    "static/css/main.9172f3a9.chunk.css",
+    "static/js/main.4a77a481.chunk.js"
+  ]
+}

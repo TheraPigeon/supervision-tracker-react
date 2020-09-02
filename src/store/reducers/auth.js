@@ -7,8 +7,14 @@ const initialState = {
   error: null,
   loading: false,
   authRedirectPath: '/',
+  roster: null,
+  clinics: null,
+  currentClinic: null,
 };
 
+const setCurrectClinic = (state, action) => {
+  return updateObject(state, { currentClinic: action.currentClinic });
+};
 const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
 };
@@ -19,6 +25,8 @@ const authSuccess = (state, action) => {
     userId: action.userId,
     error: null,
     loading: false,
+    roster: action.roster,
+    clinics: action.clinics,
   });
 };
 
@@ -48,7 +56,8 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
-
+    case actionTypes.SET_CURRENT_CLINIC:
+      return setCurrectClinic(state, action);
     default:
       return state;
   }

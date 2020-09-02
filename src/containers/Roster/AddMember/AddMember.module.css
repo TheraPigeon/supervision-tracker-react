@@ -1,0 +1,58 @@
+.AddMember {
+  grid-column: 1 / -1;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  width: 190px;
+  height: 40px;
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: var(--border-radius);
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+}
+.AddMember button {
+  position: absolute;
+  color: #fff;
+  height: calc(100% + 2px);
+  width: 40px;
+  top: -1px;
+  right: -40px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-top-right-radius: var(--border-radius);
+}
+.AddMember:hover {
+  /* border-color: #f42; */
+  color: #f42;
+}
+.AddMember span {
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
+}
+.AddMember span::before {
+  content: '+';
+}
+
+.AddMember form {
+  display: flex;
+  z-index: 500;
+}
+.AddMember input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #888;
+  color: #fff;
+  padding: 5px;
+  margin: 0 5px;
+}
+.AddMember input:first-child {
+  width: 70%;
+}
+.AddMember input:nth-child(2) {
+  width: 20%;
+}

@@ -8,13 +8,17 @@ const layout = (props) => {
   const style = {
     gridColumn: '1 / -1',
   };
+  const styleAuthed = {
+    color: '#fff',
+    padding: '30px',
+  };
   return (
     <div className={classes.Layout}>
       {/* Toolbar, Sidebar, Backdrop */}
       <Toolbar isAuth={props.isAuthorized} />
       {props.isAuthorized ? <SideDrawer /> : null}
       <main
-        style={!props.isAuthorized ? style : null}
+        style={!props.isAuthorized ? style : styleAuthed}
         className={classes.Content}
       >
         {props.children}
