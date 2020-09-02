@@ -10,6 +10,7 @@ import Logout from '../containers/Login/Logout/Logout';
 import Dashboard from '../containers/Dashboard/Dashboard';
 import Roster from '../containers/Roster/Roster';
 import AllMembers from '../containers/AllMembers/AllMembers';
+import NewClinic from '../containers/NewClinic/NewClinic';
 
 class App extends Component {
   render() {
@@ -30,7 +31,12 @@ class App extends Component {
             <PrivateRoute
               auth={this.props.isAuthorized}
               path="/members"
-              component={AllMembers} //Replace with Members component
+              component={AllMembers}
+            />
+            <PrivateRoute
+              auth={this.props.isAuthorized}
+              path="/join"
+              component={NewClinic}
             />
             <PrivateRoute
               auth={this.props.isAuthorized}

@@ -18,6 +18,19 @@
 .SideSlider span:hover {
   background-color: #555;
 }
+.SideSlider a {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 13px; /* (50px - 4px) / 2*/
+  color: inherit;
+  font-size: 20px;
+}
+
+.SideSlider .active {
+  background-color: #f42;
+  pointer-events: none;
+}
 .SideSlider {
   position: absolute;
   height: 100%;

@@ -7,9 +7,7 @@ const navigationItem = (props) => {
     backgroundColor: '#fff',
   };
   const active = document.getElementsByClassName('active');
-  console.log(active);
   if (active.length > 0) {
-    console.log(active);
     active[0].parentNode.style = activeStyle;
   }
   return (

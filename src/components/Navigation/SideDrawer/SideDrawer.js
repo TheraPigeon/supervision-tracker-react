@@ -8,7 +8,6 @@ const sidedrawer = (props) => (
   <div className={classes.SideDrawer}>
     <SideSlider />
     <div>
-      <AddMember />
       <nav>
         <NavigationItems />
       </nav>

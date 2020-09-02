@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../axios-soup';
 
 export const fetchMembersStart = () => {
   return {
@@ -25,13 +25,14 @@ export const fetchMembers = (clinicId, token) => {
   return (dispatch) => {
     dispatch(fetchMembersStart());
     axios
-      .get('https://abasoup.herokuapp.com/api/clinics/' + clinicId, {
+      .get('api/clinics/' + clinicId, {
         headers: {
           Authorization: 'Token ' + token,
         },
       })
       .then((res) => {
         console.log(res);
+        dispatch(fetchMembersSuccess(res.data));
       })
       .catch((err) => {
         console.log(err);

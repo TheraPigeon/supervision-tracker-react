@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -58,10 +58,10 @@ export const auth = (email, password, isSignup) => {
         password: password,
       },
     };
-    let url = 'https://abasoup.herokuapp.com/api/users/login/';
+    let url = 'api/users/login/';
 
     if (isSignup) {
-      url = 'https://abasoup.herokuapp.com/api/users/';
+      url = 'api/users/';
     }
     axios
       .post(url, authData)

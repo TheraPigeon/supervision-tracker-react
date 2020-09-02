@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const setCurrectClinic = (state, action) => {
-  console.log(action);
   return updateObject(state, { currentClinic: action.currentClinic });
 };
 const authStart = (state, action) => {
