@@ -6,8 +6,11 @@ class AllMembers extends Component {
   componentDidMount() {
     this.props.fetchMembers(this.props.clinicId, this.props.token);
   }
-  componentDidUpdate() {
-    this.props.fetchMembers(this.props.clinicId, this.props.token);
+  componentDidUpdate(prevState) {
+    if (this.props.clinicId !== prevState.clinicId) {
+      this.props.fetchMembers(this.props.clinicId, this.props.token);
+      console.log('here');
+    }
   }
   render() {
     return (
