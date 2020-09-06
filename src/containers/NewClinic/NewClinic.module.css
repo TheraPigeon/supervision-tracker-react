@@ -1,10 +1,19 @@
 .NewClinic {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  /* align-items: center; */
-  height: 100%;
 }
-.NewClinic div {
+.NewClinic form {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  z-index: 1;
+}
+.NewClinic form > div {
+  margin-right: 20px;
+}
+
+.Button {
   height: 135px;
   width: 200px;
   margin: 20px;
@@ -13,10 +22,10 @@
   line-height: 1.2;
   cursor: pointer;
 }
-.NewClinic div:hover {
+.Button:hover {
   background-color: #555;
 }
-.NewClinic span {
+.Button span {
   display: block;
   margin-bottom: 10px;
   font-size: 20px;
