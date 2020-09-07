@@ -14,8 +14,11 @@ class Roster extends Component {
     });
     return (
       <div className={classes.Roster}>
-        <h1>My Roster</h1>
-        <AddMember />
+        <header>
+          <h1>My Roster</h1>
+          <AddMember />
+        </header>
+
         {roster}
       </div>
     );

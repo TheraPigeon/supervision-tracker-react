@@ -11,6 +11,7 @@ import Dashboard from '../containers/Dashboard/Dashboard';
 import Roster from '../containers/Roster/Roster';
 import AllMembers from '../containers/AllMembers/AllMembers';
 import NewClinic from '../containers/NewClinic/NewClinic';
+import NewSoup from '../containers/NewSoup/NewSoup';
 
 class App extends Component {
   render() {
@@ -37,6 +38,11 @@ class App extends Component {
               auth={this.props.isAuthorized}
               path="/join"
               component={NewClinic}
+            />
+            <PrivateRoute
+              auth={this.props.isAuthorized}
+              path="/soupervision/:id"
+              component={NewSoup}
             />
             <PrivateRoute
               auth={this.props.isAuthorized}

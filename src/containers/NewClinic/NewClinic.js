@@ -75,6 +75,7 @@ class NewClinic extends Component {
       this.state.controls.name.value,
       this.props.token
     );
+    this.props.history.push('/');
   };
   render() {
     let form = null;
@@ -94,7 +95,8 @@ class NewClinic extends Component {
             touched={this.state.controls.name.touched}
             label={this.state.controls.name.label}
           />
-          <Button>Submit</Button>
+          <Button type="submit">Submit</Button>
+          <Button type="button">Back</Button>
         </form>
       );
     }

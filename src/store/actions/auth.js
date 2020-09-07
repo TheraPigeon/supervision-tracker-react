@@ -1,6 +1,12 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 
+export const addClinic = (newClinic) => {
+  return {
+    type: actionTypes.ADD_CLINIC,
+    clinic: newClinic,
+  };
+};
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
@@ -75,7 +81,9 @@ export const auth = (email, password, isSignup) => {
             res.data.clinics
           )
         );
-        dispatch(setCurrentClinic(res.data.clinics[0].id));
+        if (res.data.clinics.length !== 0) {
+          dispatch(setCurrentClinic(res.data.clinics[0].id));
+        }
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
 

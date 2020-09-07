@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-soup';
+import * as actions from './index';
 
 export const joinClinicStart = () => {
   return {
@@ -20,10 +21,10 @@ export const joinClinicFail = (error) => {
 
 export const joinClinic = (isJoin, clinicData, token) => {
   return (dispatch) => {
-    dispatch(joinClinicStart);
+    dispatch(joinClinicStart());
     let url = 'api/clinics';
     if (isJoin) {
-      url = 'api/clinic/' + clinicData + '/join';
+      url = 'api/clinics/' + clinicData + '/join';
       axios
         .get(url, {
           headers: {
@@ -31,9 +32,13 @@ export const joinClinic = (isJoin, clinicData, token) => {
           },
         })
         .then((res) => {
+          dispatch(joinClinicSuccess());
+          dispatch(actions.addClinic({ ...res.data }));
+          dispatch(actions.setCurrentClinic(res.data.id));
           console.log(res);
         })
         .catch((err) => {
+          dispatch(joinClinicFail(err));
           console.log(err);
         });
     } else {
@@ -51,6 +56,11 @@ export const joinClinic = (isJoin, clinicData, token) => {
         .then((res) => {
           console.log(res);
           dispatch(joinClinicSuccess);
+          dispatch(actions.addClinic({ ...res.data }));
+          dispatch(actions.setCurrentClinic(res.data.id));
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
