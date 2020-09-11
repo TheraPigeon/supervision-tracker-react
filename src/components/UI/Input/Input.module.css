@@ -52,3 +52,42 @@
 .InputElement[type='checkbox'].Hide + label {
   display: none;
 }
+
+/* Radio buttons style */
+.Fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 40px;
+}
+.Fieldset h3 {
+  width: 100%;
+}
+.Fieldset input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.Fieldset input:checked ~ span {
+  background-color: red;
+}
+.Fieldset label {
+  display: block;
+  position: relative;
+  height: 40px;
+  width: 90px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid beige;
+}
+.Fieldset span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
