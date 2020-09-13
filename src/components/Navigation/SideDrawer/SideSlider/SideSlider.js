@@ -27,7 +27,7 @@ const sideslider = (props) => {
       </span>
       <span>
         <NavLink to="join">
-          <i class="fa fa-plus"></i>
+          <i className="fa fa-plus"></i>
         </NavLink>
       </span>
     </div>

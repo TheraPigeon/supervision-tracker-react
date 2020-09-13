@@ -1,0 +1,8 @@
+.NewSoup form {
+  position: relative;
+  z-index: 1;
+}
+
+.NewSoup button {
+  margin-top: 20px;
+}

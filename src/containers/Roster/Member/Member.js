@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Member.module.css';
+import { NavLink } from 'react-router-dom';
 
 const member = (props) => {
   return (
@@ -9,7 +10,10 @@ const member = (props) => {
       <main>
         <span className={classes.Id}>{props.memberId}</span>
         <button>Report</button>
-        <button>Add Soup</button>
+        {/* <button>Add Soup</button> */}
+        <NavLink to={{ pathname: '/soupervision/' + props.memberId }}>
+          Add Soup
+        </NavLink>
         <h3>{props.name}</h3>
       </main>
       <aside>

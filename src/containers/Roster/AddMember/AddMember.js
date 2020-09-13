@@ -7,8 +7,8 @@ const AddMember = (props) => {
   const [adding, setAdding] = useState(false);
   const addBtn = (
     <React.Fragment>
-      <span></span>
-      <p>Add New Member</p>
+      <i class="fa fa-cog"></i>
+      <p>Manage</p>
     </React.Fragment>
   );
   const submitHandler = (e) => {

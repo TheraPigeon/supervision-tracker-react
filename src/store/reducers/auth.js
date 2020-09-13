@@ -7,8 +7,8 @@ const initialState = {
   error: null,
   loading: false,
   authRedirectPath: '/',
-  roster: null,
-  clinics: null,
+  roster: [],
+  clinics: [],
   currentClinic: null,
 };
 
@@ -44,6 +44,10 @@ const authLogout = (state, action) => {
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });
 };
+const addClinic = (state, action) => {
+  const updatedClinics = [...state.clinics, action.clinic];
+  return updateObject(state, { clinics: updatedClinics });
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -58,6 +62,8 @@ const reducer = (state = initialState, action) => {
       return setAuthRedirectPath(state, action);
     case actionTypes.SET_CURRENT_CLINIC:
       return setCurrectClinic(state, action);
+    case actionTypes.ADD_CLINIC:
+      return addClinic(state, action);
     default:
       return state;
   }
