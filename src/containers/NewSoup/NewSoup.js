@@ -5,9 +5,8 @@ import Button from '../../components/UI/Button/Button';
 import classes from './NewSoup.module.css';
 class NewSoup extends Component {
   mainSelection = [
-    ['Always', 'A'],
-    ['Sometimes', 'S'],
-    ['Never', 'N'],
+    ['Yes', 'Y'],
+    ['No', 'N'],
     ['N/A', 'NA'],
   ];
   additionalMetricsSelection = [
