@@ -5,6 +5,7 @@ const input = (props) => {
   let inputElement = null;
   const hideClass = !props.registring ? classes.Hide : null;
   const inputClasses = [classes.InputElement, hideClass];
+  const textareaClasses = [classes.InputElement, classes.Textarea];
   if (
     props.invalid &&
     props.shouldValidate &&
@@ -29,7 +30,7 @@ const input = (props) => {
     case 'textarea':
       inputElement = (
         <textarea
-          className={inputClasses.join(' ')}
+          className={textareaClasses.join(' ')}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -84,6 +85,14 @@ const input = (props) => {
           );
         })}
       </fieldset>
+    );
+  } else if (props.elementType === 'textarea') {
+    render = (
+      <div className={classes.Input}>
+        <h3>{props.elementConfig.question}</h3>
+        {/* <label className={classes.Label}>{props.label}</label> */}
+        {inputElement}
+      </div>
     );
   } else {
     render = (

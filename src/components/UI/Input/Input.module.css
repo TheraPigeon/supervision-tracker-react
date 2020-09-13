@@ -27,7 +27,7 @@
   font-size: 0.9em;
   left: 0;
 }
-.Input label {
+.InputElement + label {
   position: absolute;
   bottom: 16px;
   left: 4px;
@@ -52,15 +52,25 @@
 .InputElement[type='checkbox'].Hide + label {
   display: none;
 }
-
+/* Textarea */
+.Textarea {
+  max-width: 450px;
+  background-color: rgb(42, 42, 42);
+  border: none;
+  resize: none;
+}
 /* Radio buttons style */
 .Fieldset {
   display: flex;
   flex-wrap: wrap;
   min-height: 40px;
+  margin: 10px 0;
 }
-.Fieldset h3 {
+.Fieldset h3,
+.Input h3 {
   width: 100%;
+  font-size: 1.1em;
+  margin-bottom: 5px;
 }
 .Fieldset input {
   position: absolute;
@@ -76,8 +86,10 @@
   display: block;
   position: relative;
   height: 40px;
-  width: 90px;
+  width: 110px;
+  margin-right: 10px;
   cursor: pointer;
+  text-align: center;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
