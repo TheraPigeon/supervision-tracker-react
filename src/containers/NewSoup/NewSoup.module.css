@@ -1,3 +1,19 @@
+.NewSoup header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid red;
+  font-size: 1.5em;
+}
+
+.NewSoup h1 {
+  font-weight: 600;
+}
+.NewSoup h1 span {
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
 .NewSoup form {
   position: relative;
   z-index: 1;

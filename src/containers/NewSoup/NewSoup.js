@@ -117,10 +117,16 @@ class NewSoup extends Component {
     this.setState({ controls: updatedControls });
   };
   render() {
+    console.log(this.props);
     return (
       <div className={classes.NewSoup}>
-        <h1>New Supervision</h1>
-        <div>{this.props.match.params.id}</div>
+        <header>
+          <h1>
+            New Supervision <span>for {this.props.location.name}</span>
+          </h1>
+          <span>14%</span>
+        </header>
+
         <form>
           <FormSection
             questions={this.state.controls}

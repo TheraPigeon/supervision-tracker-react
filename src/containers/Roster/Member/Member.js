@@ -11,7 +11,9 @@ const member = (props) => {
         <span className={classes.Id}>{props.memberId}</span>
         <button>Report</button>
         {/* <button>Add Soup</button> */}
-        <NavLink to={{ pathname: '/soupervision/' + props.memberId }}>
+        <NavLink
+          to={{ pathname: '/soupervision/' + props.memberId, name: props.name }}
+        >
           Add Soup
         </NavLink>
         <h3>{props.name}</h3>
