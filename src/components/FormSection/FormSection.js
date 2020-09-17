@@ -5,13 +5,6 @@ import classes from './FormSection.module.css';
 const FormSection = (props) => {
   const [expanded, setExpanded] = useState(false);
   const formElementArray = [];
-  // for (let i = props.start - 1; i < props.end; i++) {
-  //   console.log(props.questions);
-  //   formElementArray.push({
-  //     id: key,
-  //     config: props.questions[key],
-  //   });
-  // }
   const contentClasses = expanded
     ? [classes.Content, classes.Expanded]
     : [classes.Content];
