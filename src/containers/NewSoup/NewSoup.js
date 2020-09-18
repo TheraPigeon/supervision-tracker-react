@@ -27,7 +27,10 @@ class NewSoup extends Component {
             question: 'Arrives on time / follows late arrive protocol',
           },
           value: '',
-          validation: {},
+          validation: {
+            required: true,
+          },
+          valid: false,
         },
         q2: {
           elementType: 'input',
@@ -38,7 +41,10 @@ class NewSoup extends Component {
             question: 'Sets up materials/curriculum/data sheets for session',
           },
           value: '',
-          validation: {},
+          validation: {
+            required: true,
+          },
+          valid: false,
         },
       },
       main: {
@@ -51,7 +57,10 @@ class NewSoup extends Component {
             question: 'Sets up materials/curriculum/data sheets for session',
           },
           value: '',
-          validation: {},
+          validation: {
+            required: true,
+          },
+          valid: false,
         },
       },
       ending: {
@@ -64,7 +73,10 @@ class NewSoup extends Component {
             question: 'Sets up materials/curriculum/data sheets for session',
           },
           value: '',
-          validation: {},
+          validation: {
+            required: true,
+          },
+          valid: false,
         },
       },
       additional: {
@@ -77,7 +89,10 @@ class NewSoup extends Component {
             question: 'Sets up materials/curriculum/data sheets for session',
           },
           value: '',
-          validation: {},
+          validation: {
+            required: true,
+          },
+          valid: false,
         },
         q6: {
           elementType: 'textarea',
@@ -87,6 +102,7 @@ class NewSoup extends Component {
           },
           value: '',
           validation: {},
+          valid: true,
         },
         q7: {
           elementType: 'textarea',
@@ -96,6 +112,7 @@ class NewSoup extends Component {
           },
           value: '',
           validation: {},
+          valid: true,
         },
       },
     },
@@ -107,6 +124,26 @@ class NewSoup extends Component {
     },
     formIsValid: false,
   };
+  validateForm = (controls) => {
+    for (let section in controls) {
+      for (let question in controls[section]) {
+        const isValid = controls[section][question].valid;
+        if (!isValid) {
+          this.setState({ formIsValid: false });
+          return false;
+        }
+      }
+    }
+    this.setState({ formIsValid: true });
+  };
+  checkValidity = (value, rules) => {
+    if (!rules) return true;
+    let isValid = true;
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+    return isValid;
+  };
   inputChangedHandler = (event, category, controlName) => {
     const updatedControls = {
       ...this.state.controls,
@@ -115,10 +152,15 @@ class NewSoup extends Component {
         [controlName]: {
           ...this.state.controls[category][controlName],
           value: event.target.value,
+          valid: this.checkValidity(
+            event.target.value,
+            this.state.controls[category].validation
+          ),
         },
       },
     };
     this.setState({ controls: updatedControls });
+    this.validateForm(updatedControls);
   };
   formSubmitHandler = (e) => {
     const updateScore = {
@@ -209,7 +251,9 @@ class NewSoup extends Component {
           >
             Additional Metrics
           </FormSection>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={!this.state.formIsValid}>
+            Submit
+          </Button>
         </form>
       </div>
     );

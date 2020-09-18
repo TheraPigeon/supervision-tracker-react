@@ -69,7 +69,7 @@ const input = (props) => {
     render = (
       <fieldset className={classes.Fieldset}>
         <h3>{props.elementConfig.question}</h3>
-        {props.elementConfig.options.map(([label, value]) => {
+        {props.elementConfig.options.map(([label, value, score]) => {
           return (
             <label className={classes.Label}>
               <input
