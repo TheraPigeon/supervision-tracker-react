@@ -3,6 +3,10 @@ import { cloneDeep } from 'lodash';
 import FormSection from '../../components/FormSection/FormSection';
 import Button from '../../components/UI/Button/Button';
 import classes from './NewSoup.module.css';
+
+import axios from '../../axios-soup';
+import { connect } from 'react-redux';
+
 class NewSoup extends Component {
   mainSelection = [
     ['Yes', 'Y', 1],
@@ -208,6 +212,30 @@ class NewSoup extends Component {
 
     this.setState({ scores: calculatedScores });
     console.log(calculatedScores);
+    const data = {
+      soup: {
+        staff_member_id: '1',
+        supervisor_id: '1',
+        start_time: '12:00',
+        end_time: '14:00',
+        date: 'date',
+        group: 'false',
+        telehealth: 'false',
+      },
+    };
+    const url = 'api/supervisions';
+    axios
+      .post(url, data, {
+        headers: {
+          Authorization: 'Token ' + this.props.token,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     e.preventDefault();
   };
@@ -259,4 +287,10 @@ class NewSoup extends Component {
     );
   }
 }
-export default NewSoup;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+  };
+};
+
+export default connect(mapStateToProps)(NewSoup);
