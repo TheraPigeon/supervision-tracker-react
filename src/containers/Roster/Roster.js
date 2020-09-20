@@ -6,12 +6,15 @@ import classes from './Roster.module.css';
 import * as actions from '../../store/actions/index';
 
 class Roster extends Component {
-  componentDidMount() {}
   render() {
-    const roster = Object.keys(this.props.roster).map((member) => {
-      const { name } = this.props.roster[member];
-      return <Member key={member} memberId={member} name={name} />;
-    });
+    let roster = null;
+    if (this.props.roster) {
+      roster = Object.keys(this.props.roster).map((member) => {
+        const { name } = this.props.roster[member];
+        return <Member key={member} memberId={member} name={name} />;
+      });
+    }
+
     return (
       <div className={classes.Roster}>
         <header>
