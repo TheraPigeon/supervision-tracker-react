@@ -55,19 +55,25 @@ export const setAuthRedirectPath = (path) => {
   };
 };
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, isSignup, isIntern) => {
   return (dispatch) => {
     dispatch(authStart());
-    const authData = {
+    let url = 'api/users/login/';
+    let authData = {
       user: {
         email: email,
         password: password,
       },
     };
-    let url = 'api/users/login/';
-
     if (isSignup) {
       url = 'api/users/';
+      authData = {
+        user: {
+          email: email,
+          password: password,
+          intern: isIntern,
+        },
+      };
     }
     axios
       .post(url, authData)
@@ -86,7 +92,6 @@ export const auth = (email, password, isSignup) => {
         }
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
-
         //dispatch(checkAuthTimeout(res.data.expiresIn)); NEED expiresIn from Server Response
       })
       .catch((err) => {

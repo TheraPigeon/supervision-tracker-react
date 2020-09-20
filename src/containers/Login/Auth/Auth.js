@@ -87,9 +87,12 @@ class Auth extends Component {
           this.state.controls[controlName].validation
         ),
         touched: true,
-        checked: event.target.checked,
       },
     };
+    if (controlName === 'intern') {
+      updatedControls[controlName].checked = event.target.checked;
+    }
+    console.log(updatedControls);
     this.setState({ controls: updatedControls });
   };
   submitHandler = (e) => {
@@ -97,7 +100,8 @@ class Auth extends Component {
     this.props.onAuth(
       this.state.controls.email.value,
       this.state.controls.password.value,
-      this.state.isSignup
+      this.state.isSignup,
+      this.state.controls.intern.checked
     );
   };
   switchAuthModeHandler = () => {
@@ -183,8 +187,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password, isSignup) =>
-      dispatch(actions.auth(email, password, isSignup)),
+    onAuth: (email, password, isSignup, isIntern) =>
+      dispatch(actions.auth(email, password, isSignup, isIntern)),
   };
 };
 
