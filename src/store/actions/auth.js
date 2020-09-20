@@ -13,13 +13,14 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId, roster, clinics) => {
+export const authSuccess = (token, userId, roster, clinics, isIntern) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId,
     roster,
     clinics,
+    isIntern,
   };
 };
 export const setCurrentClinic = (clinicId) => {
@@ -84,7 +85,8 @@ export const auth = (email, password, isSignup, isIntern) => {
             res.data.token,
             res.data.id,
             res.data.roster_members,
-            res.data.clinics
+            res.data.clinics,
+            res.data.intern
           )
         );
         if (res.data.clinics.length !== 0) {

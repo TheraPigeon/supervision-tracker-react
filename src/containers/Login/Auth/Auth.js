@@ -92,7 +92,6 @@ class Auth extends Component {
     if (controlName === 'intern') {
       updatedControls[controlName].checked = event.target.checked;
     }
-    console.log(updatedControls);
     this.setState({ controls: updatedControls });
   };
   submitHandler = (e) => {

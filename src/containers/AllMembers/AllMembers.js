@@ -9,7 +9,6 @@ class AllMembers extends Component {
   componentDidUpdate(prevState) {
     if (this.props.clinicId !== prevState.clinicId) {
       this.props.fetchMembers(this.props.clinicId, this.props.token);
-      console.log('here');
     }
   }
   render() {

@@ -10,6 +10,7 @@ const initialState = {
   roster: [],
   clinics: [],
   currentClinic: null,
+  isIntern: null,
 };
 
 const setCurrectClinic = (state, action) => {
@@ -27,6 +28,7 @@ const authSuccess = (state, action) => {
     loading: false,
     roster: action.roster,
     clinics: action.clinics,
+    isIntern: action.isIntern,
   });
 };
 
