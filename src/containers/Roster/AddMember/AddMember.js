@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import classes from './AddMember.module.css';
-import Backdrop from '../../../components/UI/Backdrop/Backdrop';
-import Input from '../../../components/UI/Input/Input';
+// import Backdrop from '../../../components/UI/Backdrop/Backdrop';
+// import Input from '../../../components/UI/Input/Input';
 
 const AddMember = (props) => {
   const [adding, setAdding] = useState(false);
   const addBtn = (
     <React.Fragment>
-      <i class="fa fa-cog"></i>
+      <i className="fa fa-cog"></i>
       <p>Manage</p>
     </React.Fragment>
   );

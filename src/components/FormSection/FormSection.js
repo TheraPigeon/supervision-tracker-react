@@ -8,7 +8,7 @@ const FormSection = (props) => {
   const contentClasses = expanded
     ? [classes.Content, classes.Expanded]
     : [classes.Content];
-  const styleContent = expanded ? { height: '100%' } : null;
+  // const styleContent = expanded ? { height: '100%' } : null;
   for (let key in props.questions[props.category]) {
     formElementArray.push({
       id: key,

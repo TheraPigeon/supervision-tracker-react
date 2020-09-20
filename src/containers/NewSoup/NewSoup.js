@@ -214,8 +214,9 @@ class NewSoup extends Component {
     console.log(calculatedScores);
     const data = {
       soup: {
-        staff_member_id: '1',
-        supervisor_id: '1',
+        staff_member_id: this.props.match.params.id,
+        supervisor_id: this.props.staffId,
+        intern: 'true',
         start_time: '12:00',
         end_time: '14:00',
         date: 'date',
@@ -240,7 +241,8 @@ class NewSoup extends Component {
     e.preventDefault();
   };
   render() {
-    console.log(this.state);
+    console.log(this.props.match.params.id);
+    console.log(this.props.staffId);
     return (
       <div className={classes.NewSoup}>
         <header>
@@ -290,6 +292,7 @@ class NewSoup extends Component {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
+    staffId: state.auth.userId,
   };
 };
 
