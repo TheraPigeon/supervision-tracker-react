@@ -19,6 +19,14 @@ class NewSoup extends Component {
     ['Needs Improvement', 'NI', 0],
     ['N/A', 'NA', null],
   ];
+  setupSessionType = [
+    ['In-Person', 'in_person'],
+    ['Telehealth', 'telehealth'],
+  ];
+  setupSessionArrangement = [
+    ['Solo', 'solo'],
+    ['Group', 'group'],
+  ];
   state = {
     controls: {
       setup: {
@@ -27,7 +35,8 @@ class NewSoup extends Component {
           elementConfig: {
             type: 'date',
             name: 'date',
-            label: 'Date',
+            // label: 'Date',
+            question: 'Date of the session',
           },
           value: Date.now(),
           validation: {
@@ -60,6 +69,34 @@ class NewSoup extends Component {
             required: true,
           },
           valid: true,
+        },
+        q1: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'radio',
+            name: 'q1',
+            options: cloneDeep(this.setupSessionType),
+            question: 'Type of session',
+          },
+          value: '',
+          validation: {
+            required: true,
+          },
+          valid: false,
+        },
+        q2: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'radio',
+            name: 'q2',
+            options: cloneDeep(this.setupSessionArrangement),
+            question: 'Type of Session',
+          },
+          value: '',
+          validation: {
+            required: true,
+          },
+          valid: false,
         },
       },
       starting: {
