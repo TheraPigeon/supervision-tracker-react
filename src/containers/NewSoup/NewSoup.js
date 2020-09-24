@@ -70,11 +70,11 @@ class NewSoup extends Component {
           },
           valid: true,
         },
-        q1: {
+        telehealth: {
           elementType: 'input',
           elementConfig: {
             type: 'radio',
-            name: 'q1',
+            name: 'telehealth',
             options: cloneDeep(this.setupSessionType),
             question: 'Type of session',
           },
@@ -84,11 +84,11 @@ class NewSoup extends Component {
           },
           valid: false,
         },
-        q2: {
+        group: {
           elementType: 'input',
           elementConfig: {
             type: 'radio',
-            name: 'q2',
+            name: 'group',
             options: cloneDeep(this.setupSessionArrangement),
             question: 'Type of Session',
           },
@@ -309,11 +309,11 @@ class NewSoup extends Component {
         staff_member_id: this.props.match.params.id,
         supervisor_id: this.props.staffId,
         intern: this.props.isIntern,
-        start_time: '12:00',
-        end_time: '14:00',
-        date: 'date',
-        group: 'false',
-        telehealth: 'false',
+        start_time: this.state.controls.setup.start_time.value,
+        end_time: this.state.controls.setup.end_time.value,
+        date: this.state.controls.setup.date.value,
+        group: this.state.controls.setup.group.value === 'group',
+        telehealth: this.state.controls.setup.telehealth.value === 'telehealth',
       },
     };
     const url = 'api/supervisions';
