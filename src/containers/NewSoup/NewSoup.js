@@ -22,6 +22,47 @@ class NewSoup extends Component {
   state = {
     controls: {
       setup: {
+        date: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'date',
+            name: 'date',
+            label: 'Date',
+          },
+          value: Date.now(),
+          validation: {
+            required: true,
+          },
+          valid: true,
+        },
+        start_time: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'time',
+            name: 'start_time',
+            label: 'Start time',
+          },
+          value: Date.now(),
+          validation: {
+            required: true,
+          },
+          valid: true,
+        },
+        end_time: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'time',
+            name: 'end_time',
+            label: 'End time',
+          },
+          value: Date.now(),
+          validation: {
+            required: true,
+          },
+          valid: true,
+        },
+      },
+      starting: {
         q1: {
           elementType: 'input',
           elementConfig: {
@@ -149,20 +190,35 @@ class NewSoup extends Component {
     return isValid;
   };
   inputChangedHandler = (event, category, controlName) => {
-    const updatedControls = {
-      ...this.state.controls,
-      [category]: {
-        ...this.state.controls[category],
-        [controlName]: {
-          ...this.state.controls[category][controlName],
-          value: event.target.value,
-          valid: this.checkValidity(
-            event.target.value,
-            this.state.controls[category].validation
-          ),
+    console.log(controlName);
+    let updatedControls = null;
+    if (event instanceof Date) {
+      updatedControls = {
+        ...this.state.controls,
+        [category]: {
+          ...this.state.controls[category],
+          [controlName]: {
+            ...this.state.controls[category][controlName],
+            value: event,
+          },
         },
-      },
-    };
+      };
+    } else {
+      updatedControls = {
+        ...this.state.controls,
+        [category]: {
+          ...this.state.controls[category],
+          [controlName]: {
+            ...this.state.controls[category][controlName],
+            value: event.target.value,
+            valid: this.checkValidity(
+              event.target.value,
+              this.state.controls[category].validation
+            ),
+          },
+        },
+      };
+    }
     this.setState({ controls: updatedControls });
     this.validateForm(updatedControls);
   };
@@ -256,6 +312,13 @@ class NewSoup extends Component {
             category="setup"
           >
             Session set-up
+          </FormSection>
+          <FormSection
+            questions={this.state.controls}
+            radioChangeHandler={this.inputChangedHandler}
+            category="starting"
+          >
+            Starting the session
           </FormSection>
           <FormSection
             questions={this.state.controls}

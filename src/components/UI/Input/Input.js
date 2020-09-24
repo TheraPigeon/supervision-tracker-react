@@ -1,6 +1,43 @@
 import React from 'react';
 import classes from './Input.module.css';
+import { DatePicker, TimePicker } from '@material-ui/pickers';
+import { createMuiTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
+import orange from '@material-ui/core/colors/orange';
 
+const defaultMaterialTheme = createMuiTheme({
+  palette: {
+    primary: orange,
+  },
+  overrides: {
+    MuiPickersBasePicker: {
+      pickerView: {
+        overflow: 'hidden',
+      },
+    },
+    MuiFormLabel: {
+      root: {
+        color: '#fff',
+      },
+    },
+    MuiInputBase: {
+      input: {
+        color: '#fff',
+      },
+    },
+    MuiInput: {
+      underline: {
+        '&:before': {
+          borderBottomColor: 'red',
+        },
+        '&:hover:not(.Mui-disabled)::before': {
+          borderBottomColor: 'pink',
+        },
+        borderBottomColor: 'red',
+      },
+    },
+  },
+});
 const input = (props) => {
   let inputElement = null;
   const hideClass = !props.registring ? classes.Hide : null;
@@ -92,6 +129,36 @@ const input = (props) => {
         <h3>{props.elementConfig.question}</h3>
         {/* <label className={classes.Label}>{props.label}</label> */}
         {inputElement}
+      </div>
+    );
+  } else if (props.elementConfig.type === 'date') {
+    render = (
+      <div className={classes.Input}>
+        <h3>{props.elementConfig.question}</h3>
+        <ThemeProvider theme={defaultMaterialTheme}>
+          <DatePicker
+            format="d MMM yyyy"
+            value={props.value}
+            onChange={props.changed}
+            label={props.elementConfig.label}
+          />
+        </ThemeProvider>
+      </div>
+    );
+  } else if (props.elementConfig.type === 'time') {
+    render = (
+      <div className={classes.Input}>
+        <h3>{props.elementConfig.question}</h3>
+        <ThemeProvider theme={defaultMaterialTheme}>
+          <TimePicker
+            ampm={false}
+            showTodayButton
+            todayLabel="now"
+            value={props.value}
+            label={props.elementConfig.label}
+            onChange={props.changed}
+          />
+        </ThemeProvider>
       </div>
     );
   } else {
