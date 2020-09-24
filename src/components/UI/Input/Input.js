@@ -28,10 +28,10 @@ const defaultMaterialTheme = createMuiTheme({
     MuiInput: {
       underline: {
         '&:before': {
-          borderBottomColor: 'red',
+          borderBottomColor: 'rgb(112, 112, 112)',
         },
         '&:hover:not(.Mui-disabled)::before': {
-          borderBottomColor: 'pink',
+          borderBottomColor: '#fff',
         },
         borderBottomColor: 'red',
       },
