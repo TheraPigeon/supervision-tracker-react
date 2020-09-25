@@ -1,6 +1,6 @@
 .Member {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 20px;
   border: 1px solid var(--orange-background);
   border-radius: var(--border-radius);
@@ -40,4 +40,23 @@
   display: block;
   font-size: 1.5em;
   margin-top: auto;
+  white-space: nowrap;
+}
+.Member section {
+  align-self: center;
+}
+.Member a {
+  padding: 10px;
+  margin: 25px 0;
+  display: block;
+  min-width: 115px;
+  border: 1px solid #fff;
+  border-radius: var(--border-radius);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+.Member a:hover {
+  background-color: #fff;
+  color: var(--grey-background);
 }

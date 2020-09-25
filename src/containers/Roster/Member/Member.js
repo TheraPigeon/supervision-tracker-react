@@ -9,15 +9,22 @@ const member = (props) => {
     <section className={classes.Member}>
       <main>
         <span className={classes.Id}>{props.memberId}</span>
-        <button>Report</button>
-        {/* <button>Add Soup</button> */}
+
+        <h3>{props.name}</h3>
+      </main>
+      <section>
+        <NavLink
+          to={{ pathname: '/soupervision/' + props.memberId, name: props.name }}
+        >
+          View History
+        </NavLink>
         <NavLink
           to={{ pathname: '/soupervision/' + props.memberId, name: props.name }}
         >
           Add Soup
         </NavLink>
-        <h3>{props.name}</h3>
-      </main>
+      </section>
+
       <aside>
         <span>10%</span>
         <span>50%</span>
