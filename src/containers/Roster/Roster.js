@@ -6,6 +6,8 @@ import * as actions from '../../store/actions/index';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
+import AddMember from './AddMember/AddMember';
 
 class Roster extends Component {
   state = {
@@ -31,13 +33,39 @@ class Roster extends Component {
         return <Member key={member} memberId={member} name={name} />;
       });
     }
-    let listOfUsers = this.props.members;
+    // let listOfUsers = this.props.members.staff_members
+    let listOfUsers = null;
+    let userListArray = [];
+    if (this.props.members.staff_members) {
+      let roster = Object.keys(this.props.roster);
+      for (let key in this.props.members.staff_members) {
+        let userId = this.props.members.staff_members[key].id;
+        console.log(roster.includes(userId.toString()));
+        userListArray.push({
+          id: key,
+          inRoster: roster.includes(userId.toString()),
+          config: this.props.members.staff_members[key],
+        });
+      }
+      console.log(this.props.members);
+      listOfUsers = userListArray.map((member) => {
+        return (
+          <div key={member.id}>
+            {member.config.name}
+            <Button>Edit</Button>
+            <Button>{member.inRoster ? 'Unfollow' : 'Follow'}</Button>
+          </div>
+        );
+      });
+    }
+
     console.log(listOfUsers);
 
     return (
       <React.Fragment>
         <Modal show={this.state.managingStaff} modalClosed={this.handleModal}>
-          All RBT staff members here
+          <AddMember />
+          {listOfUsers}
         </Modal>
         <div className={classes.Roster}>
           <header>
