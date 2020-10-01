@@ -25,6 +25,11 @@ class Roster extends Component {
     });
     console.log('handleModal');
   };
+  handleRoster = (staffId, isInRoster) => {
+    if (!isInRoster) {
+      this.props.addToRoster(staffId, this.props.token);
+    }
+  };
   render() {
     let roster = null;
     if (this.props.roster) {
@@ -43,6 +48,7 @@ class Roster extends Component {
         console.log(roster.includes(userId.toString()));
         userListArray.push({
           id: key,
+          staffId: userId,
           inRoster: roster.includes(userId.toString()),
           config: this.props.members.staff_members[key],
         });
@@ -53,7 +59,11 @@ class Roster extends Component {
           <div key={member.id}>
             {member.config.name}
             <Button>Edit</Button>
-            <Button>{member.inRoster ? 'Unfollow' : 'Follow'}</Button>
+            <Button
+              clicked={() => this.handleRoster(member.staffId, member.inRoster)}
+            >
+              {member.inRoster ? 'Unfollow' : 'Follow'}
+            </Button>
           </div>
         );
       });
@@ -95,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
     setCurrectClinic: dispatch(actions.setCurrentClinic),
     fetchMembers: (clinicId, token) =>
       dispatch(actions.fetchMembers(clinicId, token)),
+    addToRoster: (staffId, token) => dispatch(actions.addStaff(staffId, token)),
   };
 };
 
