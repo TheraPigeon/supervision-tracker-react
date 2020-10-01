@@ -11,11 +11,13 @@ import * as serviceWorker from './serviceWorker';
 import authReducer from './store/reducers/auth';
 import allMembersReducer from './store/reducers/allmembers';
 import newClinicReducer from './store/reducers/newclinic';
+import rosterReducer from './store/reducers/roster';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   allmembers: allMembersReducer,
   newclinic: newClinicReducer,
+  roster: rosterReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
