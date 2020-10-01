@@ -4,6 +4,9 @@
   padding: 20px;
   border: 1px solid var(--orange-background);
   border-radius: var(--border-radius);
+
+  background-color: rgba(34, 179, 53, 0.2);
+  background-color: rgba(179, 56, 34, 0.2);
 }
 .Member aside {
   justify-self: end;

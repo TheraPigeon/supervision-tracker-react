@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import classes from './AddMember.module.css';
+import { connect } from 'react-redux';
 // import Backdrop from '../../../components/UI/Backdrop/Backdrop';
 // import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
-
+import * as actions from '../../../store/actions/index';
 const AddMember = (props) => {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState('');
@@ -17,6 +18,8 @@ const AddMember = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(name, init, follow);
+    const fullName = name + ' ' + init;
+    props.onCreateStaff(fullName, follow, props.clinicId, props.token);
     setAdding(false);
   };
   const form = (
@@ -53,4 +56,18 @@ const AddMember = (props) => {
   );
 };
 
-export default AddMember;
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+    clinicId: state.auth.currentClinic,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCreateStaff: (name, isFollow, clinicId, token) =>
+      dispatch(actions.createStaff(name, isFollow, clinicId, token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMember);
