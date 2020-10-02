@@ -1,0 +1,14 @@
+.StaffCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 20px 0;
+  border: 1px solid var(--orange-background);
+  border-radius: var(--border-radius);
+}
+.StaffCard button {
+  width: 120px;
+  background: none;
+  text-align: end;
+}
