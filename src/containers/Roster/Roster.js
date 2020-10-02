@@ -8,6 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import AddMember from './AddMember/AddMember';
+import StaffCard from '../../components/StaffCard/StaffCard';
 
 class Roster extends Component {
   state = {
@@ -26,6 +27,7 @@ class Roster extends Component {
     console.log('handleModal');
   };
   handleRoster = (staffId, isInRoster) => {
+    console.log(staffId);
     if (!isInRoster) {
       this.props.addToRoster(staffId, this.props.token);
     }
@@ -56,15 +58,15 @@ class Roster extends Component {
       console.log(this.props.members);
       listOfUsers = userListArray.map((member) => {
         return (
-          <div key={member.id}>
-            {member.config.name}
-            <Button>Edit</Button>
-            <Button
-              clicked={() => this.handleRoster(member.staffId, member.inRoster)}
-            >
-              {member.inRoster ? 'Unfollow' : 'Follow'}
-            </Button>
-          </div>
+          <StaffCard
+            key={member.id}
+            name={member.config.name}
+            inRoster={member.inRoster}
+            staffId={member.staffId}
+            handleFollow={() =>
+              this.handleRoster(member.staffId, member.inRoster)
+            }
+          />
         );
       });
     }
