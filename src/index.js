@@ -12,12 +12,14 @@ import authReducer from './store/reducers/auth';
 import allMembersReducer from './store/reducers/allmembers';
 import newClinicReducer from './store/reducers/newclinic';
 import rosterReducer from './store/reducers/roster';
+import historyReducer from './store/reducers/history';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   allmembers: allMembersReducer,
   newclinic: newClinicReducer,
   roster: rosterReducer,
+  history: historyReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
