@@ -77,6 +77,13 @@ class NewClinic extends Component {
     );
     this.props.history.push('/');
   };
+  handleGoBack = () => {
+    this.setState((prevState) => {
+      return {
+        showForm: !prevState.showForm,
+      };
+    });
+  };
   render() {
     let form = null;
     if (this.state.showForm) {
@@ -96,7 +103,9 @@ class NewClinic extends Component {
             label={this.state.controls.name.label}
           />
           <Button type="submit">Submit</Button>
-          <Button type="button">Back</Button>
+          <Button type="button" clicked={this.handleGoBack}>
+            Back
+          </Button>
         </form>
       );
     }

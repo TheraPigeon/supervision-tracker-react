@@ -12,6 +12,7 @@ import Roster from '../containers/Roster/Roster';
 import AllMembers from '../containers/AllMembers/AllMembers';
 import NewClinic from '../containers/NewClinic/NewClinic';
 import NewSoup from '../containers/NewSoup/NewSoup';
+import History from '../containers/History/History';
 
 // Date pickers
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -29,6 +30,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/logout" component={Logout} />
               {/* Hitory Route */}
+              <Route path="/history/:id" component={History} />
               {/* Authorization required */}
               <PrivateRoute
                 auth={this.props.isAuthorized}

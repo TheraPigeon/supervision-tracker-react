@@ -14,7 +14,7 @@ const member = (props) => {
       </main>
       <section>
         <NavLink
-          to={{ pathname: '/soupervision/' + props.memberId, name: props.name }}
+          to={{ pathname: '/history/' + props.memberId, name: props.name }}
         >
           View History
         </NavLink>
