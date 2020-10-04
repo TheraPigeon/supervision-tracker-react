@@ -50,13 +50,13 @@ class App extends Component {
                 path="/soupervision/:id"
                 component={NewSoup}
               />
-              <PrivateRoute
+              {/* <PrivateRoute
                 auth={this.props.isAuthorized}
                 path="/"
                 exact
                 component={Dashboard}
-              />
-              <Redirect to="/" />
+              /> */}
+              <Redirect to="/roster" />
             </Switch>
           </Layout>
         </MuiPickersUtilsProvider>
