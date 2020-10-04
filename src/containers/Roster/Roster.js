@@ -40,7 +40,6 @@ class Roster extends Component {
         return <Member key={member} memberId={member} name={name} />;
       });
     }
-    // let listOfUsers = this.props.members.staff_members
     let listOfUsers = null;
     let userListArray = [];
     if (this.props.members.staff_members) {
@@ -66,6 +65,7 @@ class Roster extends Component {
             handleFollow={() =>
               this.handleRoster(member.staffId, member.inRoster)
             }
+            follow
           />
         );
       });
