@@ -4,6 +4,7 @@ export {
   setAuthRedirectPath,
   setCurrentClinic,
   addClinic,
+  authCheckState,
 } from './auth';
 export { fetchMembers } from './allmembers';
 export { joinClinic } from './newclinic';

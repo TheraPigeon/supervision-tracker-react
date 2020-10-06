@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import * as actions from '../store/actions/index';
 import PrivateRoute from '../containers/Login/Auth/PrivateRoute/PrivateRoute';
 
 import Layout from './Layout/Layout';
@@ -20,6 +20,10 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.onAutoSignin();
+    //fetch data related to bcba - clinic, intern, roster
+  };
   render() {
     return (
       <div>
@@ -71,4 +75,11 @@ const mapStateToProps = (state) => {
     isAuthorized: state.auth.token !== null,
   };
 };
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAutoSignin: () => dispatch(actions.authCheckState()),
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -80,6 +80,8 @@ export const auth = (email, password, isSignup, isIntern) => {
       .post(url, authData)
       .then((res) => {
         console.log(res);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.id);
         dispatch(
           authSuccess(
             res.data.token,
@@ -100,5 +102,17 @@ export const auth = (email, password, isSignup, isIntern) => {
         console.log(err);
         // dispatch(authFail(err.response.data.error));
       });
+  };
+};
+
+export const authCheckState = () => {
+  return (dispatch) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      dispatch(logout());
+    } else {
+      const userId = localStorage.getItem('userId');
+      dispatch(authSuccess(token, userId));
+    }
   };
 };
