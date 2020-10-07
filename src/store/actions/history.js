@@ -22,17 +22,15 @@ export const fetchSupervisionsFail = (error) => {
 export const fetchSupervisions = (staffId, token) => {
   return (dispatch) => {
     dispatch(fetchSupervisionsStart());
-    let url = 'api/supervisions/' + staffId;
-    console.log(token);
+    let url = 'api/supervisions/';
+    const params = {
+      staff_id: staffId,
+    };
     axios
-      .get(url, {
-        headers: {
-          Authorization: 'Token ' + token,
-        },
-      })
+      .get(url, { params })
       .then((res) => {
         console.log(res);
-        dispatch(fetchSupervisionsSuccess());
+        dispatch(fetchSupervisionsSuccess(res.data.soups));
       })
       .catch((err) => {
         console.log(err);

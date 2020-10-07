@@ -308,12 +308,16 @@ class NewSoup extends Component {
       soup: {
         staff_member_id: this.props.match.params.id,
         supervisor_id: this.props.staffId,
-        intern: this.props.isIntern,
         start_time: this.state.controls.setup.start_time.value,
         end_time: this.state.controls.setup.end_time.value,
         date: this.state.controls.setup.date.value,
         group: this.state.controls.setup.group.value === 'group',
         telehealth: this.state.controls.setup.telehealth.value === 'telehealth',
+        starting: '1/10',
+        conducting: '8/10',
+        ending: '2/10',
+        total: '11/30',
+        json: { ...this.state.controls },
       },
     };
     const url = 'api/supervisions';

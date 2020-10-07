@@ -21,7 +21,7 @@ import DateFnsUtils from '@date-io/date-fns';
 
 class App extends Component {
   componentDidMount = () => {
-    this.props.onAutoSignin();
+    // this.props.onAutoSignin();
     //fetch data related to bcba - clinic, intern, roster
   };
   render() {
