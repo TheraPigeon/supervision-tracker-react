@@ -3,13 +3,28 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import { differenceInMilliseconds, format, formatDuration } from 'date-fns';
 
+import ViewSoup from './ViewSoup/ViewSoup'
+import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import classes from './History.module.css';
 
 class History extends Component {
+  state = {
+    viewingSoup: false,
+    soupId: null,
+  }
   componentDidMount() {
     this.props.fetchSupervisions(this.props.match.params.id, this.props.token);
   }
+  handleModal = (soupId) => {
+    if (!this.state.viewingSoup) {
+      //fetch one soup
+      this.setState({soupId: soupId})
+    }
+    this.setState((prevState) => {
+      return { viewingSoup: !prevState.viewingSoup};
+    });
+  };
   render() {
     let soups = null;
     if (this.props.supervisions) {
@@ -27,6 +42,7 @@ class History extends Component {
           },
           { format: ['hours', 'minutes'] }
         );
+        let soupId = soup.id;
         return (
           <tr
             key={soup.id + index}
@@ -40,8 +56,9 @@ class History extends Component {
             <td>{soup.ending}</td>
             <td>{soup.total}</td>
             <td>
-              <Button>View</Button>
+              <Button type="button" btnType="Transparent" clicked={() => this.handleModal(soupId)}>View</Button>
             </td>
+           
           </tr>
         );
       });
@@ -50,10 +67,13 @@ class History extends Component {
     console.log(this.props.match.params.id);
     return (
       <div className={classes.History}>
+        <Modal show={this.state.viewingSoup} modalClosed={()=>this.handleModal()}>
+          {/* component to display single soup */}
+          <ViewSoup soupId={this.state.soupId}/>
+        </Modal>
         <header>
           <h1>History</h1>
         </header>
-
         <table>
           <thead>
             <tr>

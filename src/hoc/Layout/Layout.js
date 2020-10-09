@@ -11,6 +11,7 @@ const layout = (props) => {
   const styleAuthed = {
     color: '#fff',
     padding: '30px',
+    overflowY: 'scroll',
   };
   return (
     <div className={classes.Layout}>

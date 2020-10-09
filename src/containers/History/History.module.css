@@ -1,7 +1,6 @@
 .History {
   color: #fff;
   text-align: center;
-  /* width: 100vw; */
 }
 
 .History h1 {
@@ -11,6 +10,10 @@
   width: 90%;
   margin: 0 auto;
   margin-top: 30px;
+
+  -webkit-box-shadow: 0px 6px 17px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 6px 17px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 6px 17px -5px rgba(0, 0, 0, 0.75);
 }
 .History thead {
   font-size: 1.3em;
@@ -20,14 +23,13 @@
 .History td {
   text-align: center;
   padding: 10px;
-  /* border-bottom: 1px solid #ccc; */
 }
 
 .Alternate {
   background-color: rgb(109, 87, 46);
 }
-
+/* 
 .History button {
   background: none;
   border: 1px solid #ccc;
-}
+} */
