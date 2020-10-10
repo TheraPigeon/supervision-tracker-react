@@ -38,3 +38,38 @@ export const fetchSupervisions = (staffId, token) => {
       });
   };
 };
+
+export const fetchSoupStart = () => {
+  return {
+    type: actionTypes.FETCH_SOUP_START,
+  };
+};
+export const fetchSoupSuccess = (soup) => {
+  return {
+    type: actionTypes.FETCH_SOUP_SUCCESS,
+    soup: soup,
+  };
+};
+export const fetchSoupFail = (error) => {
+  return {
+    type: actionTypes.FETCH_SOUP_FAIL,
+    error: error,
+  };
+};
+
+export const fetchSoup = (soupId) => {
+  return (dispatch) => {
+    dispatch(fetchSoupStart());
+    let url = 'api/supervisions/';
+    axios
+      .get(url + soupId)
+      .then((res) => {
+        console.log(res);
+        dispatch(fetchSoupSuccess(res.data.soup));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchSoupFail(err));
+      });
+  };
+};
