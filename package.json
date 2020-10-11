@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
+    "date-fns-timezone": "^0.1.4",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

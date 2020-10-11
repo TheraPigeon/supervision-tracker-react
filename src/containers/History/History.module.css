@@ -6,7 +6,7 @@
 .History h1 {
   font-size: 2em;
 }
-.History table {
+.History > table {
   width: 90%;
   margin: 0 auto;
   margin-top: 30px;
@@ -15,12 +15,12 @@
   -moz-box-shadow: 0px 6px 17px -5px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 6px 17px -5px rgba(0, 0, 0, 0.75);
 }
-.History thead {
+.History > table thead {
   font-size: 1.3em;
   /* font-weight: 600; */
   border-bottom: 1px solid #ccc;
 }
-.History td {
+.History > table td {
   text-align: center;
   padding: 10px;
 }

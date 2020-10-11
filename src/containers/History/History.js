@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import { differenceInMilliseconds, format, formatDuration } from 'date-fns';
+import { formatToTimeZone } from 'date-fns-timezone';
 
-import ViewSoup from './ViewSoup/ViewSoup'
+import ViewSoup from './ViewSoup/ViewSoup';
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import classes from './History.module.css';
@@ -12,18 +13,27 @@ class History extends Component {
   state = {
     viewingSoup: false,
     soupId: null,
-  }
+  };
   componentDidMount() {
     this.props.fetchSupervisions(this.props.match.params.id, this.props.token);
   }
+  shouldComponentUpdate = (nextState) => {
+    if (this.state.soupId === nextState.soupId) {
+      return false;
+    }
+    return true;
+  };
   handleModal = (soupId) => {
     if (!this.state.viewingSoup) {
       //fetch one soup
-      this.setState({soupId: soupId})
+      this.setState((prevState) => {
+        return { viewingSoup: !prevState.viewingSoup, soupId: soupId };
+      });
+    } else {
+      this.setState((prevState) => {
+        return { viewingSoup: !prevState.viewingSoup };
+      });
     }
-    this.setState((prevState) => {
-      return { viewingSoup: !prevState.viewingSoup};
-    });
   };
   render() {
     let soups = null;
@@ -33,8 +43,9 @@ class History extends Component {
           new Date(soup.end_time),
           new Date(soup.start_time)
         );
-        let userOffset = new Date().getTimezoneOffset() * 60000; // to cancel out local UTC
-        const formattedDur = format(duration + userOffset, 'H:m');
+        const formattedDur = formatToTimeZone(new Date(duration), 'H:m', {
+          timeZone: 'Africa/Conakry',
+        });
         const durOutput = formatDuration(
           {
             hours: parseInt(formattedDur.split(':')[0]),
@@ -56,9 +67,14 @@ class History extends Component {
             <td>{soup.ending}</td>
             <td>{soup.total}</td>
             <td>
-              <Button type="button" btnType="Transparent" clicked={() => this.handleModal(soupId)}>View</Button>
+              <Button
+                type="button"
+                btnType="Transparent"
+                clicked={() => this.handleModal(soupId)}
+              >
+                View
+              </Button>
             </td>
-           
           </tr>
         );
       });
@@ -67,9 +83,11 @@ class History extends Component {
     console.log(this.props.match.params.id);
     return (
       <div className={classes.History}>
-        <Modal show={this.state.viewingSoup} modalClosed={()=>this.handleModal()}>
-          {/* component to display single soup */}
-          <ViewSoup soupId={this.state.soupId}/>
+        <Modal
+          show={this.state.viewingSoup}
+          modalClosed={() => this.handleModal()}
+        >
+          <ViewSoup soupId={this.state.soupId} />
         </Modal>
         <header>
           <h1>History</h1>
