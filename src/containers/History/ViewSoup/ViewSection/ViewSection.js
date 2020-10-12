@@ -2,6 +2,7 @@ import React from 'react';
 
 const viewSection = (props) => {
   const soupArray = [];
+
   for (let key in props.questions[props.category]) {
     soupArray.push({
       id: key,
@@ -9,6 +10,7 @@ const viewSection = (props) => {
       config: props.questions[props.category][key],
     });
   }
+  console.log(soupArray);
   let soup = soupArray.map((soupElement) => {
     let answer = null;
     const value = soupElement.config.value;
@@ -39,11 +41,40 @@ const viewSection = (props) => {
       </tr>
     );
   });
+  let sectionTitle = null;
+  switch (props.category) {
+    case 'starting':
+      sectionTitle = 'Session set-up';
+      break;
+    case 'main':
+      sectionTitle = 'Conducting the session';
+      break;
+    case 'ending':
+      sectionTitle = 'Ending session';
+      break;
+    case 'additional':
+      sectionTitle = 'Additional Metrics';
+      break;
+    default:
+      return (sectionTitle = null);
+  }
   return (
     <React.Fragment>
       <thead>
         <tr>
-          <td>{props.category}</td>
+          <td>{sectionTitle}</td>
+          {props.score ? (
+            <td
+              style={{
+                fontStyle: 'italic',
+                fontSize: '1rem',
+                textAlign: 'end',
+              }}
+            >
+              {' '}
+              Score: {props.score}
+            </td>
+          ) : null}
         </tr>
       </thead>
       <tbody>{soup}</tbody>

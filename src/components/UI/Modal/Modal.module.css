@@ -3,11 +3,13 @@
   z-index: 500;
   background-color: var(--grey-background);
   width: 90%;
+  /* max-height: 70%; */
   /* border: 1px solid #ccc; */
-  /* box-shadow: 1px 1px 1px black; */
-  padding: 16px;
+  /* padding: 16px; */
+  height: 70%;
   left: 5%;
   top: 15%;
+  margin-bottom: 40px;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
   overflow-y: scroll;

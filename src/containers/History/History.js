@@ -81,33 +81,36 @@ class History extends Component {
     }
 
     console.log(this.props.match.params.id);
+
     return (
-      <div className={classes.History}>
+      <React.Fragment>
         <Modal
           show={this.state.viewingSoup}
           modalClosed={() => this.handleModal()}
         >
           <ViewSoup soupId={this.state.soupId} />
         </Modal>
-        <header>
-          <h1>History</h1>
-        </header>
-        <table>
-          <thead>
-            <tr>
-              <td>Date</td>
-              <td>Supervisor</td>
-              <td>Duration</td>
-              <td>Starting</td>
-              <td>Conducting</td>
-              <td>Ending</td>
-              <td>Total</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>{soups}</tbody>
-        </table>
-      </div>
+        <div className={classes.History}>
+          <header>
+            <h1>History</h1>
+          </header>
+          <table>
+            <thead>
+              <tr>
+                <td>Date</td>
+                <td>Supervisor</td>
+                <td>Duration</td>
+                <td>Starting</td>
+                <td>Conducting</td>
+                <td>Ending</td>
+                <td>Total</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>{soups}</tbody>
+          </table>
+        </div>
+      </React.Fragment>
     );
   }
 }
