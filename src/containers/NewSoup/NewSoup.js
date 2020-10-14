@@ -8,33 +8,33 @@ import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 
 class NewSoup extends Component {
-  mainSelection = [
-    ['Yes', 'Y', 1],
-    ['No', 'N', 0],
-    ['N/A', 'NA', null],
-  ];
-  additionalMetricsSelection = [
-    ['Excellent', 'E', 2],
-    ['Satisfactory', 'S', 1],
-    ['Needs Improvement', 'NI', 0],
-    ['N/A', 'NA', null],
-  ];
-  setupSessionType = [
-    ['In-Person', 'in_person'],
-    ['Telehealth', 'telehealth'],
-  ];
-  setupSessionArrangement = [
-    ['Solo', 'solo'],
-    ['Group', 'group'],
-  ];
+  mainSelection = {
+    0: ['Yes', 'Y', 1],
+    1: ['No', 'N', 0],
+    2: ['N/A', 'NA', null],
+  };
+  additionalMetricsSelection = {
+    0: ['Excellent', 'E', 2],
+    1: ['Satisfactory', 'S', 1],
+    2: ['Needs Improvement', 'NI', 0],
+    3: ['N/A', 'NA', null],
+  };
+  setupSessionType = {
+    0: ['In-Person', 'in_person'],
+    1: ['Telehealth', 'telehealth'],
+  };
+  setupSessionArrangement = {
+    0: ['Solo', 'solo'],
+    1: ['Group', 'group'],
+  };
   state = {
     controls: {
       setup: {
-        date: {
+        0: {
           elementType: 'input',
           elementConfig: {
             type: 'date',
-            name: 'date',
+            name: '0',
             // label: 'Date',
             question: 'Date of the session',
           },
@@ -44,33 +44,33 @@ class NewSoup extends Component {
           },
           valid: true,
         },
-        start_time: {
+        1: {
           elementType: 'input',
           elementConfig: {
             type: 'time',
             name: 'start_time',
             label: 'Start time',
           },
-          value: Date.now(),
+          value: new Date(Date.now()),
           validation: {
             required: true,
           },
           valid: true,
         },
-        end_time: {
+        2: {
           elementType: 'input',
           elementConfig: {
             type: 'time',
             name: 'end_time',
             label: 'End time',
           },
-          value: Date.now(),
+          value: new Date(Date.now() + 60000 * 60),
           validation: {
             required: true,
           },
           valid: true,
         },
-        telehealth: {
+        3: {
           elementType: 'input',
           elementConfig: {
             type: 'radio',
@@ -84,7 +84,7 @@ class NewSoup extends Component {
           },
           valid: false,
         },
-        group: {
+        4: {
           elementType: 'input',
           elementConfig: {
             type: 'radio',
@@ -206,6 +206,13 @@ class NewSoup extends Component {
     },
     formIsValid: false,
   };
+  componentDidMount() {
+    console.log('[NewSoup.js componentDidMount');
+    if (this.props.location.edit) {
+      console.log(this.props.location.controls);
+      this.setState({ controls: cloneDeep(this.props.location.controls) });
+    }
+  }
   validateForm = (controls) => {
     for (let section in controls) {
       for (let question in controls[section]) {
@@ -304,25 +311,31 @@ class NewSoup extends Component {
     }
 
     this.setState({ scores: calculatedScores });
+    const adjustTimeZone = (value) =>
+      new Date(value.getTime() - value.getTimezoneOffset() * 60000);
     const data = {
       soup: {
         staff_member_id: this.props.match.params.id,
         supervisor_id: this.props.staffId,
-        start_time: this.state.controls.setup.start_time.value,
-        end_time: this.state.controls.setup.end_time.value,
-        date: this.state.controls.setup.date.value,
-        group: this.state.controls.setup.group.value === 'group',
-        telehealth: this.state.controls.setup.telehealth.value === 'telehealth',
-        starting: '1/10',
-        conducting: '8/10',
-        ending: '2/10',
-        total: '11/30',
-        json: { ...this.state.controls },
+        start_time: adjustTimeZone(this.state.controls.setup['1'].value),
+        end_time: adjustTimeZone(this.state.controls.setup['2'].value),
+        date: this.state.controls.setup['0'].value,
+        group: this.state.controls.setup['4'].value === 'group',
+        telehealth: this.state.controls.setup['3'].value === 'telehealth',
+        starting: calculatedScores.starting,
+        conducting: calculatedScores.main,
+        ending: calculatedScores.ending,
+        total: calculatedScores.total,
+        json: this.state.controls,
       },
     };
+    const strigify = JSON.stringify(data);
+    console.log(strigify);
+    const parse = JSON.parse(strigify);
+    console.log(parse);
     const url = 'api/supervisions';
     axios
-      .post(url, data, {
+      .post(url, parse, {
         headers: {
           Authorization: 'Token ' + this.props.token,
         },
@@ -337,6 +350,23 @@ class NewSoup extends Component {
     e.preventDefault();
   };
   render() {
+    const formOrder = [
+      ['setup', 'Session set-up'],
+      ['starting', 'Starting the session'],
+      ['main', 'Conducting the session'],
+      ['ending', 'Ending the session'],
+      ['additional', 'Additional Metrics'],
+    ];
+    const formSections = formOrder.map(([category, sectionLabel]) => {
+      return (
+        <FormSection
+          questions={this.state.controls}
+          radioChangeHandler={this.inputChangedHandler}
+          category={category}
+          sectionLabel={sectionLabel}
+        />
+      );
+    });
     return (
       <div className={classes.NewSoup}>
         <header>
@@ -345,43 +375,8 @@ class NewSoup extends Component {
           </h1>
           <span>14%</span>
         </header>
-
         <form onSubmit={(e) => this.formSubmitHandler(e)}>
-          <FormSection
-            questions={this.state.controls}
-            radioChangeHandler={this.inputChangedHandler}
-            category="setup"
-          >
-            Session set-up
-          </FormSection>
-          <FormSection
-            questions={this.state.controls}
-            radioChangeHandler={this.inputChangedHandler}
-            category="starting"
-          >
-            Starting the session
-          </FormSection>
-          <FormSection
-            questions={this.state.controls}
-            radioChangeHandler={this.inputChangedHandler}
-            category="main"
-          >
-            Conducting the session
-          </FormSection>
-          <FormSection
-            questions={this.state.controls}
-            radioChangeHandler={this.inputChangedHandler}
-            category="ending"
-          >
-            Ending the session
-          </FormSection>
-          <FormSection
-            questions={this.state.controls}
-            radioChangeHandler={this.inputChangedHandler}
-            category="additional"
-          >
-            Additional Metrics
-          </FormSection>
+          {formSections}
           <Button type="submit" disabled={!this.state.formIsValid}>
             Submit
           </Button>
