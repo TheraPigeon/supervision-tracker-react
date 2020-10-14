@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { format, getMilliseconds } from 'date-fns';
+import { NavLink } from 'react-router-dom';
 
 import { formatToTimeZone } from 'date-fns-timezone';
 import * as actions from '../../../store/actions/index';
@@ -15,7 +16,11 @@ class ViewSoup extends Component {
       console.log('[ViewSoup.js] - componentDidUpdate');
     }
   };
-
+  handleEdit = () => {
+    const link = `/soupervision/${this.props.soupId}`;
+    console.log(link);
+    // return <Redirect to={link} />;
+  };
   render() {
     console.log(this.props.soup);
     let soup = null;
@@ -57,7 +62,19 @@ class ViewSoup extends Component {
       soup = (
         <div className={classes.ViewSoup}>
           <div className={classes.Controls}>
-            <Button btnType="Transparent">Edit</Button>
+            <NavLink
+              to={{
+                pathname: '/soupervision/' + staff_member_id,
+                name: staff_member_id,
+                controls: json,
+                edit: true,
+              }}
+            >
+              <Button btnType="Transparent" clicked={this.handleEdit}>
+                Edit
+              </Button>
+            </NavLink>
+
             <Button btnType="Transparent">Print(PDF)</Button>
             <Button>Delete</Button>
           </div>

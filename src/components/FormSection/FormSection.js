@@ -37,7 +37,7 @@ const FormSection = (props) => {
     <div className={classes.FormSection}>
       <h2 onClick={() => setExpanded(!expanded)}>
         <span className={expanded ? classes.Rotate : null}></span>
-        {props.children}
+        {props.sectionLabel}
       </h2>
       <div className={contentClasses.join(' ')}>{form}</div>
     </div>
