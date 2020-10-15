@@ -2,8 +2,25 @@
   position: relative;
   width: 100%;
   padding: 10px 0;
+  /* grid-area: input; */
 }
 
+.Input [data-attr='name-login'] {
+  grid-area: name;
+}
+.Input [data-attr='initial-login'] {
+  grid-area: login;
+  width: 50%;
+}
+.Input[data-attr='email-login'] {
+  grid-area: email;
+}
+.Input[data-attr='password-login'] {
+  grid-area: password;
+}
+.Input[data-attr='intern-login'] {
+  grid-area: intern;
+}
 .Label {
   display: block;
   margin-bottom: 4px;

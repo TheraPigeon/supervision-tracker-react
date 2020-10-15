@@ -165,7 +165,10 @@ const input = (props) => {
     );
   } else {
     render = (
-      <div className={classes.Input}>
+      <div
+        className={classes.Input}
+        data-attr={props.elementConfig['data-attr']}
+      >
         {inputElement}
         <label className={classes.Label}>{props.label}</label>
       </div>

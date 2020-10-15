@@ -46,8 +46,8 @@
 }
 
 .Auth form {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   position: relative;
   padding: 25px 15px;
   color: #fff;
@@ -55,20 +55,34 @@
   border-radius: 10px;
   background-color: var(--grey-background);
   animation: fadein 0.5s ease;
+
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-areas:
+    'header header'
+    'name initial'
+    'email email'
+    'password password'
+    'intern intern'
+    'button button'
+    'switch switch';
+  gap: 10px;
 }
 .Auth button:first-of-type {
-  /* margin-top: 20px; */
+  grid-area: button;
 }
-
 .Auth form * {
   margin: 5px 0;
 }
 .Auth h2 {
+  grid-area: header;
   margin-bottom: 15px;
   font-size: 1.3em;
   font-weight: bold;
 }
 .Auth p {
+  grid-area: switch;
+
   padding: 10px 0;
   text-align: center;
 }

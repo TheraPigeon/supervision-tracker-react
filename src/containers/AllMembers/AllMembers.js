@@ -14,7 +14,6 @@ class AllMembers extends Component {
     }
   }
   handleRoster = (staffId, isInRoster) => {
-    console.log(staffId);
     if (!isInRoster) {
       this.props.addToRoster(staffId, this.props.token);
     }
