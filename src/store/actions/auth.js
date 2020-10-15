@@ -13,7 +13,7 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId, roster, clinics, isIntern) => {
+export const authSuccess = (token, userId, name, roster, clinics, isIntern) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
@@ -21,6 +21,7 @@ export const authSuccess = (token, userId, roster, clinics, isIntern) => {
     roster,
     clinics,
     isIntern,
+    name,
   };
 };
 export const setCurrentClinic = (clinicId) => {
@@ -56,7 +57,7 @@ export const setAuthRedirectPath = (path) => {
   };
 };
 
-export const auth = (email, password, isSignup, isIntern) => {
+export const auth = (email, password, isSignup, isIntern, name) => {
   return (dispatch) => {
     dispatch(authStart());
     let url = 'api/users/login/';
@@ -70,6 +71,7 @@ export const auth = (email, password, isSignup, isIntern) => {
       url = 'api/users/';
       authData = {
         user: {
+          name: name,
           email: email,
           password: password,
           intern: isIntern,
@@ -86,6 +88,7 @@ export const auth = (email, password, isSignup, isIntern) => {
           authSuccess(
             res.data.token,
             res.data.id,
+            res.data.name,
             res.data.roster_members,
             res.data.clinics,
             res.data.intern
@@ -119,6 +122,7 @@ export const authCheckState = () => {
           authSuccess(
             token,
             userId,
+            res.data.name,
             res.data.roster_members,
             res.data.clinics,
             res.data.intern

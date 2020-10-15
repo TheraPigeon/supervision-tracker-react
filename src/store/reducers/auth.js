@@ -5,6 +5,7 @@ const initialState = {
   token: null,
   userId: null,
   error: null,
+  name: null,
   loading: false,
   authRedirectPath: '/',
   roster: [],
@@ -29,6 +30,7 @@ const authSuccess = (state, action) => {
     roster: action.roster,
     clinics: action.clinics,
     isIntern: action.isIntern,
+    name: action.name,
   });
 };
 

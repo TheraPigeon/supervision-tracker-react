@@ -10,10 +10,39 @@ import * as actions from '../../../store/actions/index';
 class Auth extends Component {
   state = {
     controls: {
+      name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          'data-attr': 'name-login',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+        label: 'Name',
+      },
+      initial: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'text',
+          'data-attr': 'initial-login',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+        label: 'Initial',
+      },
       email: {
         elementType: 'input',
         elementConfig: {
           type: 'text',
+          'data-attr': 'email-login',
         },
         value: '',
         validation: {
@@ -28,6 +57,7 @@ class Auth extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'password',
+          'data-attr': 'password-login',
         },
         value: '',
         validation: {
@@ -42,6 +72,7 @@ class Auth extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'checkbox',
+          'data-attr': 'intern-login',
         },
         value: '',
         validation: {},
@@ -96,11 +127,16 @@ class Auth extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
+    const fullname = [
+      this.state.controls.name.value,
+      this.state.controls.initial.value,
+    ].join(' ');
     this.props.onAuth(
       this.state.controls.email.value,
       this.state.controls.password.value,
       this.state.isSignup,
-      this.state.controls.intern.checked
+      this.state.controls.intern.checked,
+      fullname
     );
   };
   switchAuthModeHandler = () => {
@@ -111,26 +147,31 @@ class Auth extends Component {
   render() {
     const formElementArray = [];
     for (let key in this.state.controls) {
-      formElementArray.push({
-        id: key,
-        config: this.state.controls[key],
-      });
+      if (!this.state.isSignup && (key === 'name' || key === 'initial')) {
+      } else {
+        formElementArray.push({
+          id: key,
+          config: this.state.controls[key],
+        });
+      }
     }
 
-    let form = formElementArray.map((formElement) => (
-      <Input
-        key={formElement.id}
-        elementType={formElement.config.elementType}
-        elementConfig={formElement.config.elementConfig}
-        value={formElement.config.value}
-        changed={(e) => this.inputChangedHandler(e, formElement.id)}
-        shouldValidate={formElement.config.validation}
-        invalid={!formElement.config.valid}
-        touched={formElement.config.touched}
-        label={formElement.config.label}
-        registring={this.state.isSignup}
-      />
-    ));
+    let form = formElementArray.map((formElement) => {
+      return (
+        <Input
+          key={formElement.id}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          changed={(e) => this.inputChangedHandler(e, formElement.id)}
+          shouldValidate={formElement.config.validation}
+          invalid={!formElement.config.valid}
+          touched={formElement.config.touched}
+          label={formElement.config.label}
+          registring={this.state.isSignup}
+        />
+      );
+    });
     let authRedirect = null;
     if (this.props.isAuthenticated) {
       authRedirect = <Redirect to="/" />;
@@ -186,8 +227,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password, isSignup, isIntern) =>
-      dispatch(actions.auth(email, password, isSignup, isIntern)),
+    onAuth: (email, password, isSignup, isIntern, name) =>
+      dispatch(actions.auth(email, password, isSignup, isIntern, name)),
   };
 };
 
