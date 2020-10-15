@@ -48,7 +48,12 @@ class Member extends Component {
     if (latestSoup.length) {
       this.setState({ latestScore: latestSoup[0].total });
     }
-    const percentage = (completedMinutes / WEEKLY_GOAL) * 100;
+    let percentage = (completedMinutes / WEEKLY_GOAL) * 100;
+    if (percentage > 100) {
+      percentage = 100;
+    } else if (percentage < 0) {
+      percentage = 0;
+    }
     this.setState({
       weeklyPercentage: parseFloat(percentage.toFixed(1)),
       internMin: internMinutes,
@@ -57,8 +62,17 @@ class Member extends Component {
   }
 
   render() {
+    const cardBgColor =
+      this.state.weeklyPercentage < 50
+        ? classes.Red
+        : this.state.weeklyPercentage === 100
+        ? classes.Green
+        : this.state.weeklyPercentage >= 50
+        ? classes.Yellow
+        : null;
+    const styleClasses = [classes.Member, cardBgColor].join(' ');
     return (
-      <section className={classes.Member}>
+      <section className={styleClasses}>
         <main>
           <span className={classes.Id}>{this.props.memberId}</span>
 
