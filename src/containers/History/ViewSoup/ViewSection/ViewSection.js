@@ -10,7 +10,6 @@ const viewSection = (props) => {
       config: props.questions[props.category][key],
     });
   }
-  console.log(soupArray);
   let soup = soupArray.map((soupElement) => {
     let answer = null;
     const value = soupElement.config.value;

@@ -17,7 +17,6 @@ const AddMember = (props) => {
   );
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(name, init, follow);
     const fullName = name + ' ' + init;
     props.onCreateStaff(fullName, follow, props.clinicId, props.token);
     setAdding(false);

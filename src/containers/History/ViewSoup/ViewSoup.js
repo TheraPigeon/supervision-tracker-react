@@ -18,11 +18,9 @@ class ViewSoup extends Component {
   };
   handleEdit = () => {
     const link = `/soupervision/${this.props.soupId}`;
-    console.log(link);
     // return <Redirect to={link} />;
   };
   render() {
-    console.log(this.props.soup);
     let soup = null;
     if (this.props.soup) {
       const {

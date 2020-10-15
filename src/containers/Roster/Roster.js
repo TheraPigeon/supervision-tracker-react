@@ -24,10 +24,8 @@ class Roster extends Component {
     this.setState((prevState) => {
       return { managingStaff: !prevState.managingStaff };
     });
-    console.log('handleModal');
   };
   handleRoster = (staffId, isInRoster) => {
-    console.log(staffId);
     if (!isInRoster) {
       this.props.addToRoster(staffId, this.props.token);
     }
@@ -46,7 +44,6 @@ class Roster extends Component {
       let roster = Object.keys(this.props.roster);
       for (let key in this.props.members.staff_members) {
         let userId = this.props.members.staff_members[key].id;
-        console.log(roster.includes(userId.toString()));
         userListArray.push({
           id: key,
           staffId: userId,
@@ -54,7 +51,6 @@ class Roster extends Component {
           config: this.props.members.staff_members[key],
         });
       }
-      console.log(this.props.members);
       listOfUsers = userListArray.map((member) => {
         return (
           <StaffCard
@@ -70,9 +66,6 @@ class Roster extends Component {
         );
       });
     }
-
-    console.log(listOfUsers);
-
     return (
       <React.Fragment>
         <Modal show={this.state.managingStaff} modalClosed={this.handleModal}>

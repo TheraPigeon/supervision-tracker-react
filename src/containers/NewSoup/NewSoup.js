@@ -209,7 +209,6 @@ class NewSoup extends Component {
   componentDidMount() {
     console.log('[NewSoup.js componentDidMount');
     if (this.props.location.edit) {
-      console.log(this.props.location.controls);
       this.setState({ controls: cloneDeep(this.props.location.controls) });
     }
   }
@@ -234,7 +233,6 @@ class NewSoup extends Component {
     return isValid;
   };
   inputChangedHandler = (event, category, controlName) => {
-    console.log(controlName);
     let updatedControls = null;
     if (event instanceof Date) {
       updatedControls = {
@@ -330,9 +328,7 @@ class NewSoup extends Component {
       },
     };
     const strigify = JSON.stringify(data);
-    console.log(strigify);
     const parse = JSON.parse(strigify);
-    console.log(parse);
     const url = 'api/supervisions';
     axios
       .post(url, parse, {

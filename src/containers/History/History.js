@@ -80,8 +80,6 @@ class History extends Component {
       });
     }
 
-    console.log(this.props.match.params.id);
-
     return (
       <React.Fragment>
         <Modal
