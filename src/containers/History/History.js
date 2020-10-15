@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
-import { differenceInMilliseconds, format, formatDuration } from 'date-fns';
+import { differenceInMilliseconds, formatDuration } from 'date-fns';
 import { formatToTimeZone } from 'date-fns-timezone';
 
 import ViewSoup from './ViewSoup/ViewSoup';

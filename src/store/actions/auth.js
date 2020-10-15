@@ -100,7 +100,7 @@ export const auth = (email, password, isSignup, isIntern) => {
       })
       .catch((err) => {
         console.log(err);
-        // dispatch(authFail(err.response.data.error));
+        dispatch(authFail(err.response.data.error));
       });
   };
 };
@@ -112,7 +112,19 @@ export const authCheckState = () => {
       dispatch(logout());
     } else {
       const userId = localStorage.getItem('userId');
-      dispatch(authSuccess(token, userId));
+      const url = 'api/users/';
+      const headers = {};
+      axios.post(url, null, headers).then((res) => {
+        dispatch(
+          authSuccess(
+            token,
+            userId,
+            res.data.roster_members,
+            res.data.clinics,
+            res.data.intern
+          )
+        );
+      });
     }
   };
 };
