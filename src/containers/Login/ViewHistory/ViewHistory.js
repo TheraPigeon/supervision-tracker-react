@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
-
+import { withRouter } from 'react-router-dom';
 import classes from './ViewHistory.module.css';
 
 class Viewhistory extends Component {
@@ -29,11 +30,15 @@ class Viewhistory extends Component {
     };
     this.setState({ controls: updatedControls });
   };
+  handleViewHistory = (e) => {
+    e.preventDefault();
+    this.props.history.push('/history/' + this.state.controls.search.value);
+  };
   render() {
     return (
       <div className={classes.ViewHistory}>
         <h2>Check your history</h2>
-        <form>
+        <form onSubmit={(e) => this.handleViewHistory(e)}>
           <Input
             elementType={this.state.controls.search.elementType}
             elementConfig={this.state.controls.search.elementConfig}
@@ -49,4 +54,4 @@ class Viewhistory extends Component {
   }
 }
 
-export default Viewhistory;
+export default withRouter(Viewhistory);
