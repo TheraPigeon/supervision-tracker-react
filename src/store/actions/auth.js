@@ -25,6 +25,9 @@ export const authSuccess = (token, userId, name, roster, clinics, isIntern) => {
   };
 };
 export const setCurrentClinic = (clinicId) => {
+  if (typeof clinicId === 'number') {
+    localStorage.setItem('currentClinic', clinicId);
+  }
   return {
     type: actionTypes.SET_CURRENT_CLINIC,
     currentClinic: clinicId,
@@ -94,7 +97,13 @@ export const auth = (email, password, isSignup, isIntern, name) => {
             res.data.intern
           )
         );
-        if (res.data.clinics.length !== 0) {
+        const currentClinic = localStorage.getItem('currentClinic');
+        const inClinic = res.data.clinics.filter((a) => {
+          return a.id == currentClinic;
+        });
+        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
+          dispatch(setCurrentClinic(parseInt(currentClinic)));
+        } else if (res.data.clinics.length !== 0) {
           dispatch(setCurrentClinic(res.data.clinics[0].id));
         }
         const expiresIn = 36000;
