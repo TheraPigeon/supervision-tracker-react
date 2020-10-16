@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { differenceInMilliseconds, differenceInMinutes } from 'date-fns';
-
+import { isEqual } from 'lodash';
 import classes from './Member.module.css';
 import { NavLink } from 'react-router-dom';
 
@@ -11,7 +11,11 @@ class Member extends Component {
     internMin: 0,
     latestScore: 'N/A',
   };
-  componentDidMount() {
+  componentDidMount = () => {
+    this.updateCircleItems();
+  };
+
+  updateCircleItems() {
     const WEEKLY_GOAL = 120; // = 5% of 40 hours
     const currentWeekSoups = this.props.roster[
       this.props.memberId
@@ -43,10 +47,11 @@ class Member extends Component {
       if (soup.intern) {
         internMinutes += diff;
       }
+      return true;
     });
-    const latestSoup = currentWeekSoups.slice(-1);
-    if (latestSoup.length) {
-      this.setState({ latestScore: latestSoup[0].total });
+    console.log(currentWeekSoups);
+    if (currentWeekSoups.length) {
+      this.setState({ latestScore: currentWeekSoups[0].total });
     }
     let percentage = (completedMinutes / WEEKLY_GOAL) * 100;
     if (percentage > 100) {

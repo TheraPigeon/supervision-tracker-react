@@ -211,6 +211,7 @@ class NewSoup extends Component {
     if (this.props.location.edit) {
       this.setState({ controls: cloneDeep(this.props.location.controls) });
     }
+    console.log(this.props);
   }
   validateForm = (controls) => {
     for (let section in controls) {
@@ -327,6 +328,7 @@ class NewSoup extends Component {
         json: this.state.controls,
       },
     };
+    this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
     const strigify = JSON.stringify(data);
     const parse = JSON.parse(strigify);
     const url = 'api/supervisions';
@@ -338,11 +340,11 @@ class NewSoup extends Component {
       })
       .then((res) => {
         console.log(res);
+        this.props.history.push('/roster');
       })
       .catch((err) => {
         console.log(err);
       });
-
     e.preventDefault();
   };
   render() {
@@ -387,6 +389,7 @@ const mapStateToProps = (state) => {
     token: state.auth.token,
     staffId: state.auth.userId,
     isIntern: state.auth.isIntern,
+    roster: state.auth.roster,
   };
 };
 
