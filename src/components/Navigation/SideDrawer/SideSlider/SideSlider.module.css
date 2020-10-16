@@ -4,6 +4,16 @@
   color: #fff;
   font-size: 24px;
 }
+.SideSlider section {
+  max-height: 90%;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  border-bottom: 1px solid #777;
+}
+.SideSlider section::-webkit-scrollbar {
+  display: none;
+}
 .SideSlider span {
   display: flex;
   align-items: center;

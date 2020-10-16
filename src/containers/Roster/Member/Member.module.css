@@ -8,6 +8,11 @@
   -moz-box-shadow: 0px 5px 15px -7px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 15px -7px rgba(0, 0, 0, 0.75);
 }
+.Member:hover {
+  -webkit-box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.75);
+}
 .Red {
   background-color: rgba(179, 56, 34, 0.2);
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { format, getMilliseconds } from 'date-fns';
+import { format } from 'date-fns';
 import { NavLink } from 'react-router-dom';
 
 import { formatToTimeZone } from 'date-fns-timezone';
@@ -17,7 +17,7 @@ class ViewSoup extends Component {
     }
   };
   handleEdit = () => {
-    const link = `/soupervision/${this.props.soupId}`;
+    // const link = `/soupervision/${this.props.soupId}`;
     // return <Redirect to={link} />;
   };
   render() {
@@ -34,7 +34,7 @@ class ViewSoup extends Component {
         starting,
         conducting,
         ending,
-        total,
+        // total,
         json,
       } = this.props.soup;
       const startTime = formatToTimeZone(new Date(start_time), 'HH:mm', {

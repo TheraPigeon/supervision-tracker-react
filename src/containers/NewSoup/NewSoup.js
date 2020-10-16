@@ -353,9 +353,10 @@ class NewSoup extends Component {
       ['ending', 'Ending the session'],
       ['additional', 'Additional Metrics'],
     ];
-    const formSections = formOrder.map(([category, sectionLabel]) => {
+    const formSections = formOrder.map(([category, sectionLabel], i) => {
       return (
         <FormSection
+          key={category + i}
           questions={this.state.controls}
           radioChangeHandler={this.inputChangedHandler}
           category={category}

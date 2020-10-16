@@ -6,7 +6,7 @@ const StaffCard = (props) => {
     <div className={classes.StaffCard}>
       <span> {props.name}</span>
       {props.follow ? (
-        <Button clicked={props.handleFollow}>
+        <Button clicked={props.handleFollow} btnType="NoBg">
           {props.inRoster ? 'Unfollow' : 'Follow'}
         </Button>
       ) : null}

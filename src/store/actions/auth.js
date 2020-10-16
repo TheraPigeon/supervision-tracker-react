@@ -99,7 +99,7 @@ export const auth = (email, password, isSignup, isIntern, name) => {
         );
         const currentClinic = localStorage.getItem('currentClinic');
         const inClinic = res.data.clinics.filter((a) => {
-          return a.id == currentClinic;
+          return a.id === currentClinic;
         });
         if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
           dispatch(setCurrentClinic(parseInt(currentClinic)));

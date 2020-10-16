@@ -107,9 +107,9 @@ const input = (props) => {
       <fieldset className={classes.Fieldset}>
         <h3>{props.elementConfig.question}</h3>
         {Object.values(props.elementConfig.options).map(
-          ([label, value, score]) => {
+          ([label, value, score], i) => {
             return (
-              <label className={classes.Label}>
+              <label key={label + i} className={classes.Label}>
                 <input
                   key={value}
                   className={inputClasses.join(' ')}

@@ -22,10 +22,12 @@ class AllMembers extends Component {
     const categories = ['staff_members', 'supervisors'];
     let userListArray = [];
     let allMembers = null;
-    let bcbaMembers = null;
     if (this.props.members) {
       categories.forEach((category) => {
-        let roster = Object.keys(this.props.roster);
+        let roster = [];
+        if (this.props.roster) {
+          roster = Object.keys(this.props.roster);
+        }
         userListArray.push({
           category: category,
         });
@@ -39,17 +41,18 @@ class AllMembers extends Component {
             config: this.props.members[category][key],
           });
         }
-        allMembers = userListArray.map((member) => {
+        allMembers = userListArray.map((member, i) => {
           if (member.category) {
             return member.category === 'staff_members' ? (
-              <h2>RBT</h2>
+              <h2 key={category + i}>RBT</h2>
             ) : (
-              <h2>BCBA</h2>
+              <h2 key={category + i}>BCBA</h2>
             );
           }
+
           return (
             <StaffCard
-              key={member.id}
+              key={category + member.id + i}
               name={member.config.name || member.config.email}
               inRoster={member.inRoster}
               staffId={member.staffId}

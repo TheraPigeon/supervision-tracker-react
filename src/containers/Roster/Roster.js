@@ -6,7 +6,6 @@ import * as actions from '../../store/actions/index';
 
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
-import Input from '../../components/UI/Input/Input';
 import AddMember from './AddMember/AddMember';
 import StaffCard from '../../components/StaffCard/StaffCard';
 
@@ -41,7 +40,10 @@ class Roster extends Component {
     let listOfUsers = null;
     let userListArray = [];
     if (this.props.members.staff_members) {
-      let roster = Object.keys(this.props.roster);
+      let roster = [];
+      if (this.props.roster) {
+        roster = Object.keys(this.props.roster);
+      }
       for (let key in this.props.members.staff_members) {
         let userId = this.props.members.staff_members[key].id;
         userListArray.push({

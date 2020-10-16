@@ -7,7 +7,6 @@ import PrivateRoute from '../containers/Login/Auth/PrivateRoute/PrivateRoute';
 import Layout from './Layout/Layout';
 import Login from '../containers/Login/Login';
 import Logout from '../containers/Login/Logout/Logout';
-import Dashboard from '../containers/Dashboard/Dashboard';
 import Roster from '../containers/Roster/Roster';
 import AllMembers from '../containers/AllMembers/AllMembers';
 import NewClinic from '../containers/NewClinic/NewClinic';

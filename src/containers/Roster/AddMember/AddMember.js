@@ -19,7 +19,13 @@ const AddMember = (props) => {
     e.preventDefault();
     const fullName = name + ' ' + init;
     props.onCreateStaff(fullName, follow, props.clinicId, props.token);
+    resetForm();
+  };
+  const resetForm = () => {
     setAdding(false);
+    setName('');
+    setInit('');
+    setFollow(false);
   };
   const form = (
     <React.Fragment>
@@ -43,7 +49,9 @@ const AddMember = (props) => {
           />
         </label>
         <Button>Add</Button>
-        <Button clicked={() => setAdding(false)}>Cancel</Button>
+        <Button clicked={() => resetForm()} btnType="Transparent">
+          Cancel
+        </Button>
       </form>
     </React.Fragment>
   );

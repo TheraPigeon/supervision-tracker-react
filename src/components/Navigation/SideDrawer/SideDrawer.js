@@ -1,6 +1,5 @@
 import React from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
-import AddMember from '../../../containers/Roster/AddMember/AddMember';
 import SideSlider from './SideSlider/SideSlider';
 import classes from './SideDrawer.module.css';
 
