@@ -1,6 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
+import { merge, cloneDeep } from 'lodash';
+
 const initialState = {
   token: null,
   userId: null,
@@ -44,7 +46,6 @@ const authFail = (state, action) => {
 const authLogout = (state, action) => {
   return updateObject(state, { token: null, userId: null });
 };
-
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });
 };
@@ -52,6 +53,32 @@ const addClinic = (state, action) => {
   const updatedClinics = [...state.clinics, action.clinic];
   return updateObject(state, { clinics: updatedClinics });
 };
+
+const addStaffStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+const addStaffSuccess = (state, action) => {
+  const updatedRoster = merge({}, state.roster, action.staffData);
+  return updateObject(state, { loading: false, roster: updatedRoster });
+};
+const addStaffFail = (state, action) => {
+  return updateObject(state, { loading: false, error: action.error });
+};
+
+const kickStaffStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+const kickStaffSuccess = (state, action) => {
+  //action.staffID
+
+  const updatedRoster = cloneDeep(state.roster);
+  delete updatedRoster[action.staffId];
+  return updateObject(state, { loading: false, roster: updatedRoster });
+};
+const kickStaffFail = (state, action) => {
+  return updateObject(state, { loading: false, error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -68,6 +95,18 @@ const reducer = (state = initialState, action) => {
       return setCurrectClinic(state, action);
     case actionTypes.ADD_CLINIC:
       return addClinic(state, action);
+    case actionTypes.ADD_STAFF_START:
+      return addStaffStart(state, action);
+    case actionTypes.ADD_STAFF_SUCCESS:
+      return addStaffSuccess(state, action);
+    case actionTypes.ADD_STAFF_FAIL:
+      return addStaffFail(state, action);
+    case actionTypes.KICK_STAFF_START:
+      return kickStaffStart(state, action);
+    case actionTypes.KICK_STAFF_SUCCESS:
+      return kickStaffSuccess(state, action);
+    case actionTypes.KICK_STAFF_FAIL:
+      return kickStaffFail(state, action);
     default:
       return state;
   }

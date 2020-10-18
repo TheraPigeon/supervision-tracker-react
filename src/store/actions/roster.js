@@ -51,9 +51,10 @@ export const addStaffStart = () => {
     type: actionTypes.ADD_STAFF_START,
   };
 };
-export const addStaffSuccess = () => {
+export const addStaffSuccess = (staffData) => {
   return {
     type: actionTypes.ADD_STAFF_SUCCESS,
+    staffData: staffData,
   };
 };
 export const addStaffFail = (error) => {
@@ -63,25 +64,57 @@ export const addStaffFail = (error) => {
   };
 };
 
-export const addStaff = (staffId, token) => {
+export const kickStaffStart = () => {
+  return {
+    type: actionTypes.KICK_STAFF_START,
+  };
+};
+export const kickStaffSuccess = (staffId) => {
+  return {
+    type: actionTypes.KICK_STAFF_SUCCESS,
+    staffId: staffId,
+  };
+};
+export const kickStaffFail = (error) => {
+  return {
+    type: actionTypes.KICK_STAFF_FAIL,
+    error: error,
+  };
+};
+
+export const addStaff = (staffId, token, isFollowing) => {
   return (dispatch) => {
-    dispatch(addStaffStart());
     let authData = {
       roster: { staff_ids: [staffId] },
     };
+    let url = 'api/rosters/add_staff';
+    if (isFollowing) {
+      url = 'api/rosters/kick_staff';
+      dispatch(kickStaffStart());
+    } else {
+      dispatch(addStaffStart());
+    }
     axios
-      .post('api/staff_members', authData, {
+      .post(url, authData, {
         headers: {
           Authorization: 'Token ' + token,
         },
       })
       .then((res) => {
         console.log(res);
-        dispatch(createStaffSuccess());
+        if (isFollowing) {
+          dispatch(kickStaffSuccess(staffId));
+        } else {
+          dispatch(addStaffSuccess(res.data.added_members));
+        }
       })
       .catch((err) => {
         console.log(err);
-        dispatch(createStaffFail(err));
+        if (isFollowing) {
+          dispatch(kickStaffFail);
+        } else {
+          dispatch(addStaffFail(err));
+        }
       });
   };
 };

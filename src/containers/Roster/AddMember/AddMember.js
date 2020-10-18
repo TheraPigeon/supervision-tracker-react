@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import classes from './AddMember.module.css';
 import { connect } from 'react-redux';
-// import Backdrop from '../../../components/UI/Backdrop/Backdrop';
-// import Input from '../../../components/UI/Input/Input';
+
 import Button from '../../../components/UI/Button/Button';
 import * as actions from '../../../store/actions/index';
 const AddMember = (props) => {

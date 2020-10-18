@@ -14,9 +14,8 @@ class AllMembers extends Component {
     }
   }
   handleRoster = (staffId, isInRoster) => {
-    if (!isInRoster) {
-      this.props.addToRoster(staffId, this.props.token);
-    }
+    console.log(isInRoster);
+    this.props.addToRoster(staffId, this.props.token, isInRoster);
   };
   render() {
     const categories = ['staff_members', 'supervisors'];
@@ -87,7 +86,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchMembers: (clinicId, token) =>
       dispatch(actions.fetchMembers(clinicId, token)),
-    addToRoster: (staffId, token) => dispatch(actions.addStaff(staffId, token)),
+    addToRoster: (staffId, token, isFollowing) =>
+      dispatch(actions.addStaff(staffId, token, isFollowing)),
   };
 };
 

@@ -24,10 +24,8 @@ class Roster extends Component {
       return { managingStaff: !prevState.managingStaff };
     });
   };
-  handleRoster = (staffId, isInRoster) => {
-    if (!isInRoster) {
-      this.props.addToRoster(staffId, this.props.token);
-    }
+  handleRoster = (staffId, isFollow) => {
+    this.props.addToRoster(staffId, this.props.token, isFollow);
   };
   render() {
     let roster = null;
@@ -102,7 +100,8 @@ const mapDispatchToProps = (dispatch) => {
     setCurrectClinic: dispatch(actions.setCurrentClinic),
     fetchMembers: (clinicId, token) =>
       dispatch(actions.fetchMembers(clinicId, token)),
-    addToRoster: (staffId, token) => dispatch(actions.addStaff(staffId, token)),
+    addToRoster: (staffId, token, isFollow) =>
+      dispatch(actions.addStaff(staffId, token, isFollow)),
   };
 };
 

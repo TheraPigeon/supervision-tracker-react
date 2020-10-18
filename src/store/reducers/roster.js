@@ -16,16 +16,6 @@ const createStaffFail = (state, action) => {
   return updateObject(state, { loading: false, error: action.error });
 };
 
-const addStaffStart = (state, action) => {
-  return updateObject(state, { loading: true });
-};
-const addStaffSuccess = (state, action) => {
-  return updateObject(state, { loading: false });
-};
-const addStaffFail = (state, action) => {
-  return updateObject(state, { loading: false, error: action.error });
-};
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CREATE_STAFF_START:
@@ -34,12 +24,7 @@ const reducer = (state = initialState, action) => {
       return createStaffSuccess(state, action);
     case actionTypes.CREATE_STAFF_FAIL:
       return createStaffFail(state, action);
-    case actionTypes.ADD_STAFF_START:
-      return addStaffStart(state, action);
-    case actionTypes.ADD_STAFF_SUCCESS:
-      return addStaffSuccess(state, action);
-    case actionTypes.ADD_STAFF_FAIL:
-      return addStaffFail(state, action);
+
     default:
       return state;
   }
