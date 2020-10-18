@@ -20,10 +20,10 @@ import DateFnsUtils from '@date-io/date-fns';
 
 class App extends Component {
   componentDidMount = () => {
-    // this.props.onAutoSignin();
-    //fetch data related to bcba - clinic, intern, roster
+    this.props.onAutoSignin();
   };
   render() {
+    console.log(this.props.isAuthorized);
     return (
       <div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>

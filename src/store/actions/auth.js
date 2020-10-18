@@ -28,6 +28,7 @@ export const setCurrentClinic = (clinicId) => {
   if (typeof clinicId === 'number') {
     localStorage.setItem('currentClinic', clinicId);
   }
+
   return {
     type: actionTypes.SET_CURRENT_CLINIC,
     currentClinic: clinicId,
@@ -99,7 +100,7 @@ export const auth = (email, password, isSignup, isIntern, name) => {
         );
         const currentClinic = localStorage.getItem('currentClinic');
         const inClinic = res.data.clinics.filter((a) => {
-          return a.id === currentClinic;
+          return a.id === parseInt(currentClinic);
         });
         if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
           dispatch(setCurrentClinic(parseInt(currentClinic)));
@@ -124,9 +125,10 @@ export const authCheckState = () => {
       dispatch(logout());
     } else {
       const userId = localStorage.getItem('userId');
-      const url = 'api/users/';
+      const url = 'api/user_data?user_id=' + userId;
       const headers = {};
       axios.post(url, null, headers).then((res) => {
+        console.log(res.data);
         dispatch(
           authSuccess(
             token,
@@ -137,6 +139,15 @@ export const authCheckState = () => {
             res.data.intern
           )
         );
+        const currentClinic = localStorage.getItem('currentClinic');
+        const inClinic = res.data.clinics.filter((a) => {
+          return a.id === parseInt(currentClinic);
+        });
+        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
+          dispatch(setCurrentClinic(parseInt(currentClinic)));
+        } else if (res.data.clinics.length !== 0) {
+          dispatch(setCurrentClinic(res.data.clinics[0].id));
+        }
       });
     }
   };
