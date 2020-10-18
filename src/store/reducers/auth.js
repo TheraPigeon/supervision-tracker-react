@@ -79,6 +79,17 @@ const kickStaffFail = (state, action) => {
   return updateObject(state, { loading: false, error: action.error });
 };
 
+const createStaffStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+const createStaffSuccess = (state, action) => {
+  const updatedRoster = merge({}, state.roster, action.newStaff);
+  return updateObject(state, { loading: false, roster: updatedRoster });
+};
+const createStaffFail = (state, action) => {
+  return updateObject(state, { loading: false, error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -107,6 +118,12 @@ const reducer = (state = initialState, action) => {
       return kickStaffSuccess(state, action);
     case actionTypes.KICK_STAFF_FAIL:
       return kickStaffFail(state, action);
+    case actionTypes.CREATE_STAFF_START:
+      return createStaffStart(state, action);
+    case actionTypes.CREATE_STAFF_SUCCESS:
+      return createStaffSuccess(state, action);
+    case actionTypes.CREATE_STAFF_FAIL:
+      return createStaffFail(state, action);
     default:
       return state;
   }

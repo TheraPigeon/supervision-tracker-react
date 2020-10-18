@@ -6,9 +6,10 @@ export const createStaffStart = () => {
     type: actionTypes.CREATE_STAFF_START,
   };
 };
-export const createStaffSuccess = () => {
+export const createStaffSuccess = (newStaff) => {
   return {
     type: actionTypes.CREATE_STAFF_SUCCESS,
+    newStaff: newStaff,
   };
 };
 export const createStaffFail = (error) => {
@@ -34,7 +35,15 @@ export const createStaff = (name, isFollow, clinicId, token) => {
       })
       .then((res) => {
         console.log(res);
-        dispatch(createStaffSuccess());
+        const id = res.data.staff_member.id;
+        const data = {
+          [id]: {
+            clinic_id: res.data.staff_member.clinic.id,
+            name: res.data.staff_member.name,
+            supervisions: [{}],
+          },
+        };
+        dispatch(createStaffSuccess(data));
       })
       .catch((err) => {
         console.log(err);

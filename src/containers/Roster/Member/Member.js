@@ -12,7 +12,9 @@ class Member extends Component {
     latestScore: 'N/A',
   };
   componentDidMount = () => {
-    this.updateCircleItems();
+    if (this.props.roster[this.props.memberId].supervisions) {
+      this.updateCircleItems();
+    }
   };
 
   updateCircleItems() {
