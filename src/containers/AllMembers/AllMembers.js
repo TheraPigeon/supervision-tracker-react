@@ -14,7 +14,6 @@ class AllMembers extends Component {
     }
   }
   handleRoster = (staffId, isInRoster) => {
-    console.log(isInRoster);
     this.props.addToRoster(staffId, this.props.token, isInRoster);
   };
   render() {
@@ -43,9 +42,9 @@ class AllMembers extends Component {
         allMembers = userListArray.map((member, i) => {
           if (member.category) {
             return member.category === 'staff_members' ? (
-              <h2 key={category + i}>RBT</h2>
+              <h2 key={category + i}>Therapists</h2>
             ) : (
-              <h2 key={category + i}>BCBA</h2>
+              <h2 key={category + i}>Supervisors</h2>
             );
           }
 

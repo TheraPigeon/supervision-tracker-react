@@ -20,7 +20,6 @@ export const createStaffFail = (error) => {
 };
 
 export const createStaff = (name, isFollow, clinicId, token) => {
-  console.log(clinicId);
   return (dispatch) => {
     dispatch(createStaffStart());
     let authData = {

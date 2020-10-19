@@ -23,47 +23,49 @@ class App extends Component {
     this.props.onAutoSignin();
   };
   render() {
-    console.log(this.props.isAuthorized);
+    let routes = (
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route path="/history/:id" component={History} />
+        <Redirect from="/" to="/login" />
+      </Switch>
+    );
+    if (this.props.isAuthorized) {
+      routes = (
+        <Switch>
+          {/* Public routes */}
+          <Route path="/logout" component={Logout} />
+          {/* Hitory Route */}
+          <Route path="/history/:id" component={History} />
+          {/* Authorization required */}
+          <PrivateRoute
+            auth={this.props.isAuthorized}
+            path="/roster"
+            component={Roster}
+          />
+          <PrivateRoute
+            auth={this.props.isAuthorized}
+            path="/members"
+            component={AllMembers}
+          />
+          <PrivateRoute
+            auth={this.props.isAuthorized}
+            path="/join"
+            component={NewClinic}
+          />
+          <PrivateRoute
+            auth={this.props.isAuthorized}
+            path="/soupervision/:id"
+            component={NewSoup}
+          />
+          <Redirect to="/roster" />
+        </Switch>
+      );
+    }
     return (
       <div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Layout>
-            <Switch>
-              {/* Public routes */}
-              <Route path="/login" component={Login} />
-              <Route path="/logout" component={Logout} />
-              {/* Hitory Route */}
-              <Route path="/history/:id" component={History} />
-              {/* Authorization required */}
-              <PrivateRoute
-                auth={this.props.isAuthorized}
-                path="/roster"
-                component={Roster}
-              />
-              <PrivateRoute
-                auth={this.props.isAuthorized}
-                path="/members"
-                component={AllMembers}
-              />
-              <PrivateRoute
-                auth={this.props.isAuthorized}
-                path="/join"
-                component={NewClinic}
-              />
-              <PrivateRoute
-                auth={this.props.isAuthorized}
-                path="/soupervision/:id"
-                component={NewSoup}
-              />
-              {/* <PrivateRoute
-                auth={this.props.isAuthorized}
-                path="/"
-                exact
-                component={Dashboard}
-              /> */}
-              <Redirect to="/roster" />
-            </Switch>
-          </Layout>
+          <Layout>{routes}</Layout>
         </MuiPickersUtilsProvider>
       </div>
     );

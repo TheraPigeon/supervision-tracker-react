@@ -51,7 +51,6 @@ class Member extends Component {
       }
       return true;
     });
-    console.log(currentWeekSoups);
     if (currentWeekSoups.length) {
       this.setState({ latestScore: currentWeekSoups[0].total });
     }

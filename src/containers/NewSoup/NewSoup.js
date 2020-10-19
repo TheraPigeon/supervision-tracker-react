@@ -15,7 +15,6 @@ class NewSoup extends Component {
     if (this.props.location.edit) {
       this.setState({ controls: cloneDeep(this.props.location.controls) });
     }
-    console.log(this.props);
   }
   validateForm = (controls) => {
     for (let section in controls) {

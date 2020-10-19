@@ -1,7 +1,7 @@
 {
   "name": "supervision-tracker-react",
   "version": "0.1.0",
-  "homepage": "https://soup.therapigeon.com/",
+  "homepage": "https://abasoup.web.app",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",

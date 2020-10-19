@@ -1,6 +1,6 @@
 .SideSlider {
   position: relative;
-  background-color: var(--grey-background);
+  background: var(--grey-background);
   color: #fff;
   font-size: 24px;
 }
@@ -24,6 +24,7 @@
   margin: 10px auto;
   border-radius: 100%;
   cursor: pointer;
+  background-color: var(--grey-background);
 }
 .SideSlider span:hover {
   background-color: #555;
@@ -45,18 +46,37 @@
   position: absolute;
   height: 100%;
   width: 60px;
-  transform: translateX(-100%);
+  /* change transform translateX to -100% */
+  transform: translateX(-80%);
   transition: all 0.5s ease-in-out;
   transition-delay: 1s;
 }
 .SideSlider::before {
   position: absolute;
-  content: '';
+  content: '\276F';
+  text-align: end;
+  line-height: 190px;
+  padding-right: 5px;
   height: 100%;
   width: 20px;
   right: -20px;
   background-color: transparent;
+  top: calc(50% - 95px);
+  left: 20px;
+  height: 190px;
+  width: 60px;
+  border-radius: 40%;
+  background: inherit;
+  transition: left ease 0.3s;
+  transition-delay: 1s;
+  z-index: -1;
 }
+.SideSlider:hover:before {
+  content: '';
+  left: -60px;
+  transition-delay: 0.2s;
+}
+
 .SideSlider:hover {
   transform: translateX(0);
   transition-delay: 0s;

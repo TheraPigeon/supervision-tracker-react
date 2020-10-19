@@ -99,7 +99,7 @@ export const initialState = {
           type: 'radio',
           name: 's0',
           options: cloneDeep(mainSelection),
-          question: 'Arrived on time / followed late arrive protocol',
+          question: 'Arrived on time / followed late arrival protocol',
         },
         value: '',
         validation: {
@@ -128,7 +128,7 @@ export const initialState = {
           name: 's2',
           options: cloneDeep(mainSelection),
           question:
-            'Informed care givers of programming session items\n-shared if new programs will be run or antivipate propblem behavior during the session and plan of aciton\n-inquired if there is anything special going on at home or session needed to end early',
+            'Informed care givers of programming session items\n-shared if new programs will be run or anticipate problem behavior during the session and plan of action\n-inquired if there is anything special going on at home or session needed to end early',
         },
         value: '',
         validation: {
@@ -158,7 +158,7 @@ export const initialState = {
           type: 'radio',
           name: 'm0',
           options: cloneDeep(mainSelection),
-          question: 'Sets up materials/curriculum/data sheets for session',
+          question: 'Set up materials/curriculum/data sheets for session',
         },
         value: '',
         validation: {
@@ -172,7 +172,7 @@ export const initialState = {
           type: 'radio',
           name: 'm1',
           options: cloneDeep(mainSelection),
-          question: 'Used antecedent procefures as outlined in the BIP',
+          question: 'Used antecedent procedures as outlined in the BIP',
         },
         value: '',
         validation: {
@@ -229,7 +229,7 @@ export const initialState = {
           name: 'm5',
           options: cloneDeep(mainSelection),
           question:
-            'Indetified in the moment MO and used it to reward/shape behavior',
+            'Identified in the moment MO and used it to reward/shape behavior',
         },
         value: '',
         validation: {
@@ -314,7 +314,7 @@ export const initialState = {
           type: 'radio',
           name: 'm11',
           options: cloneDeep(mainSelection),
-          question: 'Delivered clear SDs',
+          question: 'Delivered clear Sds',
         },
         value: '',
         validation: {
@@ -389,7 +389,7 @@ export const initialState = {
           name: 'm17',
           options: cloneDeep(mainSelection),
           question:
-            'Provided adequate number of verbal models and shapes novel language acquisition',
+            'Provided adequate number of verbal models and shaped novel language acquisition',
         },
         value: '',
         validation: {
@@ -460,7 +460,7 @@ export const initialState = {
           type: 'radio',
           name: 'm22',
           options: cloneDeep(mainSelection),
-          question: 'Faded manual propmpts when necessary',
+          question: 'Faded manual prompts when necessary',
         },
         value: '',
         validation: {
@@ -532,7 +532,7 @@ export const initialState = {
           type: 'radio',
           name: 'm27',
           options: cloneDeep(mainSelection),
-          question: 'Voice tone vaired regarding activity',
+          question: 'Voice tone varied regarding activity',
         },
         value: '',
         validation: {
@@ -605,7 +605,7 @@ export const initialState = {
           type: 'radio',
           name: 'e3',
           options: cloneDeep(mainSelection),
-          question: 'Provided summary to parants / caregivers',
+          question: 'Provided summary to parents / caregivers',
         },
         value: '',
         validation: {
@@ -659,21 +659,21 @@ export const initialState = {
         },
         valid: false,
       },
-      a2: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'radio',
-          name: 'a2',
-          options: cloneDeep(additionalMetricsSelection),
-          question: '',
-        },
-        value:
-          'Rendering / NPA Appointments (i.e., communicated appointment modifications, added notes, rendered withindate)',
-        validation: {
-          required: true,
-        },
-        valid: false,
-      },
+      // a2: {
+      //   elementType: 'input',
+      //   elementConfig: {
+      //     type: 'radio',
+      //     name: 'a2',
+      //     options: cloneDeep(additionalMetricsSelection),
+      //     question:
+      //       'Rendering / NPA Appointments (i.e., communicated appointment modifications, added notes, rendered withindate)',
+      //   },
+      //   value: '',
+      //   validation: {
+      //     required: true,
+      //   },
+      //   valid: false,
+      // },
       a3: {
         elementType: 'input',
         elementConfig: {
@@ -681,7 +681,7 @@ export const initialState = {
           name: 'a3',
           options: cloneDeep(additionalMetricsSelection),
           question:
-            'Rapport Building / Enthusiasm / FUN in session (i.e., made learning fun, age appropriate joke, spoke in positive/up beat voice tone)',
+            'Rapport Building / Enthusiasm / FUN in session (i.e., made learning fun, age appropriate jokes, spoke in positive/up beat voice tone)',
         },
         value: '',
         validation: {

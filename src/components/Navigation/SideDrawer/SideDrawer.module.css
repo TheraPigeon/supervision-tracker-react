@@ -1,6 +1,6 @@
 .SideDrawer {
   position: relative;
-  width: 300px;
+  width: 250px;
   height: calc(100vh - 50px);
   background-color: var(--orange-background);
   z-index: 100;
