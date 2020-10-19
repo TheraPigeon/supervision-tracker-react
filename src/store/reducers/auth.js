@@ -44,6 +44,9 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('currentClinic');
   return updateObject(state, { token: null, userId: null });
 };
 const setAuthRedirectPath = (state, action) => {
