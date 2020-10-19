@@ -716,6 +716,17 @@ export const initialState = {
         elementConfig: {
           type: 'text',
           name: 'a6',
+          question: 'Overall feedback:',
+        },
+        value: '',
+        validation: {},
+        valid: true,
+      },
+      a7: {
+        elementType: 'textarea',
+        elementConfig: {
+          type: 'text',
+          name: 'a7',
           question: 'Team Member Comments:',
         },
         value: '',
