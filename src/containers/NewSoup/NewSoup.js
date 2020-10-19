@@ -3,209 +3,13 @@ import { cloneDeep } from 'lodash';
 import FormSection from '../../components/FormSection/FormSection';
 import Button from '../../components/UI/Button/Button';
 import classes from './NewSoup.module.css';
-
+import { initialState } from './initialState';
 import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 
 class NewSoup extends Component {
-  mainSelection = {
-    0: ['Yes', 'Y', 1],
-    1: ['No', 'N', 0],
-    2: ['N/A', 'NA', null],
-  };
-  additionalMetricsSelection = {
-    0: ['Excellent', 'E', 2],
-    1: ['Satisfactory', 'S', 1],
-    2: ['Needs Improvement', 'NI', 0],
-    3: ['N/A', 'NA', null],
-  };
-  setupSessionType = {
-    0: ['In-Person', 'in_person'],
-    1: ['Telehealth', 'telehealth'],
-  };
-  setupSessionArrangement = {
-    0: ['Solo', 'solo'],
-    1: ['Group', 'group'],
-  };
-  state = {
-    controls: {
-      setup: {
-        0: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'date',
-            name: '0',
-            // label: 'Date',
-            question: 'Date of the session',
-          },
-          value: Date.now(),
-          validation: {
-            required: true,
-          },
-          valid: true,
-        },
-        1: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'time',
-            name: 'start_time',
-            label: 'Start time',
-          },
-          value: new Date(Date.now()),
-          validation: {
-            required: true,
-          },
-          valid: true,
-        },
-        2: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'time',
-            name: 'end_time',
-            label: 'End time',
-          },
-          value: new Date(Date.now() + 60000 * 60),
-          validation: {
-            required: true,
-          },
-          valid: true,
-        },
-        3: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'telehealth',
-            options: cloneDeep(this.setupSessionType),
-            question: 'Type of session',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-        4: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'group',
-            options: cloneDeep(this.setupSessionArrangement),
-            question: 'Type of Session',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-      },
-      starting: {
-        q1: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'q1',
-            options: cloneDeep(this.mainSelection),
-            question: 'Arrives on time / follows late arrive protocol',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-        q2: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'q2',
-            options: cloneDeep(this.mainSelection),
-            question: 'Sets up materials/curriculum/data sheets for session',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-      },
-      main: {
-        q3: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'q3',
-            options: cloneDeep(this.mainSelection),
-            question: 'Sets up materials/curriculum/data sheets for session',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-      },
-      ending: {
-        q4: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'q4',
-            options: cloneDeep(this.mainSelection),
-            question: 'Sets up materials/curriculum/data sheets for session',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-      },
-      additional: {
-        q5: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'radio',
-            name: 'q5',
-            options: cloneDeep(this.additionalMetricsSelection),
-            question: 'Sets up materials/curriculum/data sheets for session',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-        },
-        q6: {
-          elementType: 'textarea',
-          elementConfig: {
-            type: 'text',
-            question: 'Improvements from previous session',
-          },
-          value: '',
-          validation: {},
-          valid: true,
-        },
-        q7: {
-          elementType: 'textarea',
-          elementConfig: {
-            type: 'text',
-            question: 'Suggestions for next session',
-          },
-          value: '',
-          validation: {},
-          valid: true,
-        },
-      },
-    },
-    scores: {
-      start: null,
-      main: null,
-      end: null,
-      total: null,
-    },
-    formIsValid: false,
-  };
+  state = initialState;
+
   componentDidMount() {
     console.log('[NewSoup.js componentDidMount');
     if (this.props.location.edit) {
@@ -372,7 +176,8 @@ class NewSoup extends Component {
           <h1>
             New Supervision <span>for {this.props.location.name}</span>
           </h1>
-          <span>14%</span>
+          {/* span to display completion percentage */}
+          <span></span>
         </header>
         <form onSubmit={(e) => this.formSubmitHandler(e)}>
           {formSections}

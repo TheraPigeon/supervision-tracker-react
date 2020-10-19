@@ -102,10 +102,10 @@ const input = (props) => {
   let render = null;
   if (props.elementConfig.type === 'radio') {
     inputClasses.push(classes.Radio);
-
+    const question = props.elementConfig.question;
     render = (
       <fieldset className={classes.Fieldset}>
-        <h3>{props.elementConfig.question}</h3>
+        <h3>{question}</h3>
         {Object.values(props.elementConfig.options).map(
           ([label, value, score], i) => {
             return (
