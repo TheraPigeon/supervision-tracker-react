@@ -21,6 +21,7 @@
     brightness(96%) contrast(91%);
 
   z-index: 400;
+  outline: 0;
 }
 @media screen and (min-width: 769px) {
   .Toolbar button {
