@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import classes from './Layout.module.css';
-const layout = (props) => {
+const Layout = (props) => {
   const style = {
     gridColumn: '1 / -1',
   };
@@ -13,11 +13,20 @@ const layout = (props) => {
     padding: '30px',
     overflowY: 'scroll',
   };
+  const [expandedMenu, setExpandMenu] = useState(false);
+  const handleSideDrawerToggle = () => {
+    console.log('expanding menu');
+    setExpandMenu(!expandedMenu);
+  };
   return (
     <div className={classes.Layout}>
       {/* Toolbar, Sidebar, Backdrop */}
-      <Toolbar isAuth={props.isAuthorized} />
-      {props.isAuthorized ? <SideDrawer /> : null}
+      <Toolbar
+        isAuth={props.isAuthorized}
+        expandMenu={handleSideDrawerToggle}
+        isExpanded={expandedMenu}
+      />
+      {props.isAuthorized ? <SideDrawer showMenu={expandedMenu} /> : null}
       <main
         style={!props.isAuthorized ? style : styleAuthed}
         className={classes.Content}
@@ -33,4 +42,4 @@ const mapStateToProps = (state) => {
     isAuthorized: state.auth.token !== null,
   };
 };
-export default connect(mapStateToProps)(layout);
+export default connect(mapStateToProps)(Layout);

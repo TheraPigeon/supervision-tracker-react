@@ -45,6 +45,7 @@ class Member extends Component {
         new Date(soup.end_time),
         new Date(soup.start_time)
       );
+      console.log(soup.intern);
       completedMinutes += diff;
       if (soup.intern) {
         internMinutes += diff;
@@ -60,9 +61,14 @@ class Member extends Component {
     } else if (percentage < 0) {
       percentage = 0;
     }
+    console.log(internMinutes);
+    console.log(completedMinutes);
     this.setState({
       weeklyPercentage: parseFloat(percentage.toFixed(1)),
-      internMin: internMinutes,
+      internMin:
+        completedMinutes !== 0
+          ? Math.round((internMinutes / completedMinutes) * 100)
+          : '0',
       // latestScore: currentWeekSoups.slice(-1)[0].total,
     });
   }
@@ -105,7 +111,7 @@ class Member extends Component {
 
         <aside>
           <span>{this.state.weeklyPercentage}%</span>
-          <span>{this.state.internMin}m</span>
+          <span>{this.state.internMin}%</span>
           <span>{this.state.latestScore}</span>
         </aside>
       </section>

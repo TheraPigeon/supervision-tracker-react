@@ -8,6 +8,9 @@
   display: flex;
   justify-content: space-between;
 }
+.Roster i {
+  margin-right: 5px;
+}
 .Roster h1 {
   font-size: 2em;
 }

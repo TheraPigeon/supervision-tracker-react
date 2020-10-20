@@ -16,3 +16,8 @@
   background-color: #f42;
   pointer-events: none;
 }
+.NavigationItem:last-child {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+}

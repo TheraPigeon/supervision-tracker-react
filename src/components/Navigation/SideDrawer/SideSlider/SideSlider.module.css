@@ -1,8 +1,14 @@
 .SideSlider {
-  position: relative;
+  position: absolute;
+  height: 100%;
+  width: 60px;
   background: var(--grey-background);
   color: #fff;
   font-size: 24px;
+  transform: translateX(-100%);
+  transition: all 0.5s ease-in-out;
+  transition-delay: 1s;
+  z-index: 200;
 }
 .SideSlider section {
   max-height: 90%;
@@ -42,45 +48,38 @@
   background-color: #f42;
   pointer-events: none;
 }
-.SideSlider {
-  position: absolute;
-  height: 100%;
-  width: 60px;
-  /* change transform translateX to -100% */
-  transform: translateX(-80%);
-  transition: all 0.5s ease-in-out;
-  transition-delay: 1s;
-}
-.SideSlider::before {
-  position: absolute;
-  content: '\276F';
-  text-align: end;
-  line-height: 190px;
-  padding-right: 5px;
-  height: 100%;
-  width: 20px;
-  right: -20px;
-  background-color: transparent;
-  top: calc(50% - 95px);
-  left: 20px;
-  height: 190px;
-  width: 60px;
-  border-radius: 40%;
-  background: inherit;
-  transition: left ease 0.3s;
-  transition-delay: 1s;
-  z-index: -1;
-}
-.SideSlider:hover:before {
-  content: '';
-  left: -60px;
-  transition-delay: 0.2s;
-}
 
-.SideSlider:hover {
-  transform: translateX(0);
-  transition-delay: 0s;
-  -webkit-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+@media screen and (min-width: 769px) {
+  .SideSlider::before {
+    position: absolute;
+    content: '\276F';
+    text-align: end;
+    line-height: 190px;
+    padding-right: 5px;
+    height: 100%;
+    width: 20px;
+    right: -20px;
+    background-color: transparent;
+    top: calc(50% - 95px);
+    left: 20px;
+    height: 190px;
+    width: 60px;
+    border-radius: 40%;
+    background: inherit;
+    transition: left ease 0.3s;
+    transition-delay: 1s;
+    z-index: -1;
+  }
+  .SideSlider:hover:before {
+    content: '';
+    left: -60px;
+    transition-delay: 0.2s;
+  }
+  .SideSlider:hover {
+    transform: translateX(0);
+    transition-delay: 0s;
+    -webkit-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+  }
 }

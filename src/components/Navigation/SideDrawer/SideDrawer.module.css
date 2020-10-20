@@ -3,5 +3,18 @@
   width: 250px;
   height: calc(100vh - 50px);
   background-color: var(--orange-background);
-  z-index: 100;
+  transition: all ease-in-out 0.3s;
+  z-index: 200;
+}
+
+@media screen and (max-width: 768px) {
+  .SideDrawer {
+    display: absolute;
+    /* transform: translateX(-100%); */
+    left: -250px;
+  }
+  .SideDrawer.Open {
+    transform: translateX(0);
+    left: 60px;
+  }
 }

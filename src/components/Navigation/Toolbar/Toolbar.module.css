@@ -12,6 +12,18 @@
 }
 .Toolbar span {
   margin-left: auto;
-  color: #ec9c71;
+  color: var(--orange-background);
   margin-right: 20px;
+}
+
+.Toolbar button {
+  filter: invert(58%) sepia(66%) saturate(4793%) hue-rotate(351deg)
+    brightness(96%) contrast(91%);
+
+  z-index: 400;
+}
+@media screen and (min-width: 769px) {
+  .Toolbar button {
+    display: none;
+  }
 }

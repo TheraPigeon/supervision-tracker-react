@@ -25,24 +25,34 @@
   display: flex;
   place-items: center;
   position: relative;
-  justify-self: end;
+  justify-self: center;
+  margin: 0;
   width: 300px;
-  margin-right: 50px;
   z-index: 1;
   animation: slideInFromLeft 0.5s 0s ease-in-out;
+  grid-area: login;
 }
-
-.Auth::before {
-  position: absolute;
-  content: '';
-  top: -50%;
-  right: -130%;
-  width: 260%;
-  height: 200%;
-  background-color: rgb(19, 3, 1);
-  border-radius: 100%;
-  opacity: 0.3;
-  z-index: -1;
+@media screen and (min-width: 769px) {
+  .Auth {
+    justify-self: end;
+    margin-right: 50px;
+  }
+  .Auth form {
+    width: 100%;
+    padding: 0;
+  }
+  .Auth::before {
+    position: absolute;
+    content: '';
+    top: -50%;
+    right: -130%;
+    width: 260%;
+    height: 200%;
+    background-color: rgb(19, 3, 1);
+    border-radius: 100%;
+    opacity: 0.3;
+    z-index: -1;
+  }
 }
 
 .Auth form {
@@ -55,7 +65,7 @@
   border-radius: 10px;
   background-color: var(--grey-background);
   animation: fadein 0.5s ease;
-
+  width: 100%;
   display: grid;
   /* grid-template-columns: 1fr 1fr; */
   grid-template-areas:

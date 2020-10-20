@@ -7,3 +7,12 @@
   height: calc(100vh - 50px);
   background-color: var(--grey-background);
 }
+
+@media screen and (max-width: 768px) {
+  .Layout {
+    grid-template-columns: 0 1fr;
+  }
+  .Content {
+    overflow-x: scroll;
+  }
+}
