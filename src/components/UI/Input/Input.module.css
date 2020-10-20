@@ -98,7 +98,7 @@
   width: 0;
 }
 .Fieldset input:checked ~ span {
-  background-color: red;
+  background-color: var(--orange-background);
 }
 .Fieldset label {
   display: block;
