@@ -56,8 +56,6 @@
 }
 
 .Auth form {
-  /* display: flex;
-  flex-direction: column; */
   position: relative;
   padding: 25px 15px;
   color: #fff;
@@ -67,7 +65,6 @@
   animation: fadein 0.5s ease;
   width: 100%;
   display: grid;
-  /* grid-template-columns: 1fr 1fr; */
   grid-template-areas:
     'header header'
     'name initial'
@@ -81,6 +78,16 @@
 .Auth button:first-of-type {
   grid-area: button;
 }
+.Auth form div {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.Auth a {
+  grid-area: intern;
+  color: #fff;
+  color: var(--orange-background);
+  /* z-index: 10; */
+}
 .Auth form * {
   margin: 5px 0;
 }
@@ -92,7 +99,6 @@
 }
 .Auth p {
   grid-area: switch;
-
   padding: 10px 0;
   text-align: center;
 }

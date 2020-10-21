@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
@@ -86,11 +86,9 @@ class Auth extends Component {
   checkValidity = (value, rules) => {
     if (!rules) return true;
     let isValid = true;
-
     if (rules.required) {
       isValid = value.trim() !== '' && isValid;
     }
-
     if (rules.minLength) {
       isValid = value.length >= rules.minLength && isValid;
     }
@@ -157,6 +155,13 @@ class Auth extends Component {
     }
 
     let form = formElementArray.map((formElement) => {
+      if (
+        !this.state.isSignup &&
+        formElement.config.elementConfig['data-attr'] === 'intern-login'
+      ) {
+        console.log('INSIDE');
+        return false;
+      }
       return (
         <Input
           key={formElement.id}
@@ -207,6 +212,9 @@ class Auth extends Component {
         <form onSubmit={this.submitHandler}>
           <h2>{this.state.isSignup ? 'Join Soup' : 'Login to Soup'}</h2>
           {form}
+          {!this.state.isSignup ? (
+            <NavLink to="/reset_password">Forgot password?</NavLink>
+          ) : null}
           <Button btnType="Login">
             {this.state.isSignup ? 'Signup' : 'Login'}
           </Button>
