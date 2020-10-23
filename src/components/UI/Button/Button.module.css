@@ -13,6 +13,15 @@
 .Button:hover {
   background-color: #900803;
 }
+.Button:disabled {
+  cursor: not-allowed;
+  color: #ccc;
+}
+.Button:disabled:hover {
+  background-color: inherit;
+  cursor: not-allowed;
+  color: #ccc;
+}
 /* .Button:first-of-type {
   margin-left: 0;
   padding-left: 0;

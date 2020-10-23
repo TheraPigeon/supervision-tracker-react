@@ -82,6 +82,9 @@
   padding-bottom: 0;
   margin-bottom: 0;
 }
+.Auth form label {
+  bottom: 5px;
+}
 .Auth a {
   grid-area: intern;
   color: #fff;

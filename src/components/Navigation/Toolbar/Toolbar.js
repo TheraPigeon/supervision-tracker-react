@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Logo from '../../Logo/Logo';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import classes from './Toolbar.module.css';
-import menuSVG from '../../../assets/images/menu.svg';
 import elasticMenu from '../../../assets/css/elastic_ham_menu.module.css';
 const toolbar = (props) => {
   const buttonStyle = [elasticMenu.hamburger, elasticMenu.hamburgerElastic];

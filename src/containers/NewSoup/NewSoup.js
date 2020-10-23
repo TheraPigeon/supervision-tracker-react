@@ -6,7 +6,7 @@ import classes from './NewSoup.module.css';
 import { initialState } from './initialState';
 import axios from '../../axios-soup';
 import { connect } from 'react-redux';
-
+import { checkValidity } from '../../shared/checkValidity';
 class NewSoup extends Component {
   state = initialState;
 
@@ -27,14 +27,6 @@ class NewSoup extends Component {
       }
     }
     this.setState({ formIsValid: true });
-  };
-  checkValidity = (value, rules) => {
-    if (!rules) return true;
-    let isValid = true;
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-    return isValid;
   };
   inputChangedHandler = (event, category, controlName) => {
     let updatedControls = null;
@@ -57,7 +49,7 @@ class NewSoup extends Component {
           [controlName]: {
             ...this.state.controls[category][controlName],
             value: event.target.value,
-            valid: this.checkValidity(
+            valid: checkValidity(
               event.target.value,
               this.state.controls[category].validation
             ),
