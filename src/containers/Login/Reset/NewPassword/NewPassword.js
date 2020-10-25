@@ -5,7 +5,7 @@ import { checkValidity } from '../../../../shared/checkValidity';
 import Input from '../../../../components/UI/Input/Input';
 import Button from '../../../../components/UI/Button/Button';
 
-import classes from './NewPassword.module.css';
+import classes from './NewPassword.module.scss';
 class NewPassword extends Component {
   state = {
     controls: {
@@ -73,22 +73,20 @@ class NewPassword extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
+    console.log(this.props.location.search.split('=')[1]);
     console.log(this.props);
     for (let key in this.state.controls) {
       if (!this.state.controls[key].valid) {
         return false;
       }
     }
-    console.log(this.props.location.search);
+
     const data = {
       password: this.state.controls.password.value,
+      token: this.props.location.search.split('=')[1],
     };
     axios
-      .post('api/new_password', data, {
-        headers: {
-          Authorization: 'Token ', //get token from reset_token query param
-        },
-      })
+      .post('api/password/reset', data)
       .then((res) => {
         console.log(res);
         this.props.history.push('/login');
