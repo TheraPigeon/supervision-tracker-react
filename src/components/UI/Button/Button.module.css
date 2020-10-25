@@ -36,6 +36,7 @@
 .Login {
   display: block;
   width: 100%;
+  height: 40px;
   margin: 0 auto;
   font-size: 1.1em;
   color: var(--grey-background);

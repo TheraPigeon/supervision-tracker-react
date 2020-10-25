@@ -32,9 +32,12 @@ export const joinClinic = (isJoin, clinicData, token) => {
           },
         })
         .then((res) => {
-          dispatch(joinClinicSuccess());
-          dispatch(actions.addClinic({ ...res.data }));
-          dispatch(actions.setCurrentClinic(res.data.id));
+          if (res.status === 200) {
+            dispatch(joinClinicSuccess());
+            dispatch(actions.addClinic({ ...res.data }));
+            dispatch(actions.setCurrentClinic(res.data.id));
+          }
+
           console.log(res);
         })
         .catch((err) => {

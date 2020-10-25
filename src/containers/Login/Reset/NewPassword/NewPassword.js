@@ -73,8 +73,6 @@ class NewPassword extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    console.log(this.props.location.search.split('=')[1]);
-    console.log(this.props);
     for (let key in this.state.controls) {
       if (!this.state.controls[key].valid) {
         return false;

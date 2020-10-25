@@ -4,6 +4,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 import classes from './Auth.module.css';
 import * as actions from '../../../store/actions/index';
@@ -197,7 +198,15 @@ class Auth extends Component {
             <NavLink to="/reset_password">Forgot password?</NavLink>
           ) : null}
           <Button btnType="Login">
-            {this.state.isSignup ? 'Signup' : 'Login'}
+            {this.props.loading ? (
+              this.state.isSignup ? (
+                'Signup'
+              ) : (
+                'Login'
+              )
+            ) : (
+              <Spinner />
+            )}
           </Button>
           {switchAuthModeMessage}
         </form>
