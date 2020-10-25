@@ -13,6 +13,8 @@ import NewClinic from '../containers/NewClinic/NewClinic';
 import NewSoup from '../containers/NewSoup/NewSoup';
 import History from '../containers/History/History';
 import Reset from '../containers/Login/Reset/Reset';
+import NewPassword from '../containers/Login/Reset/NewPassword/NewPassword';
+
 // Date pickers
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // Date management
@@ -28,7 +30,7 @@ class App extends Component {
         <Route exact path="/login" component={Login} />
         <Route path="/history/:id" component={History} />
         <Route path="/reset_password" component={Reset} />
-
+        <Route path="/new_password" component={NewPassword} />
         <Redirect from="/" to="/login" />
       </Switch>
     );

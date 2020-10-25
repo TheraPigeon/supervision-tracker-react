@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { differenceInMilliseconds, differenceInMinutes } from 'date-fns';
-import { isEqual } from 'lodash';
 import classes from './Member.module.css';
 import { NavLink } from 'react-router-dom';
 

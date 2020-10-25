@@ -18,6 +18,10 @@ export const checkValidity = (value, rules) => {
     const pattern = /^\d+$/;
     isValid = pattern.test(value) && isValid;
   }
+  if (rules.isMatch) {
+    const [password, verifyPassword] = value;
+    isValid = password === verifyPassword && isValid;
+  }
   console.log(isValid);
   return isValid;
 };
