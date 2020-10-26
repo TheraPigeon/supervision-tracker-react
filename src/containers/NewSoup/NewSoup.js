@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { cloneDeep } from 'lodash';
 import FormSection from '../../components/FormSection/FormSection';
 import Button from '../../components/UI/Button/Button';
+import Modal from '../../components/UI/Modal/Modal';
+import Note from './Note/Note';
 import classes from './NewSoup.module.css';
 import { initialState } from './initialState';
 import axios from '../../axios-soup';
@@ -60,6 +62,24 @@ class NewSoup extends Component {
     this.setState({ controls: updatedControls });
     this.validateForm(updatedControls);
   };
+  inputNoteHandler = (event, category, controlName) => {
+    let updatedControls = null;
+    console.log(event);
+    console.log(category);
+    console.log(controlName);
+    updatedControls = {
+      ...this.state.controls,
+      [category]: {
+        ...this.state.controls[category],
+        [controlName]: {
+          ...this.state.controls[category][controlName],
+          noteValue: event.target.value,
+        },
+      },
+    };
+    this.setState({ controls: updatedControls });
+  };
+
   formSubmitHandler = (e) => {
     const updateScore = {
       ...this.state.controls,
@@ -142,6 +162,46 @@ class NewSoup extends Component {
       });
     e.preventDefault();
   };
+  handleAddNote = (e) => {
+    console.log('adding note');
+  };
+  handleModal = (category, questionId, noteValue) => {
+    console.log(category);
+    console.log(questionId);
+    if (!this.state.addingNote) {
+      //fetch one soup
+      this.setState((prevState) => {
+        return {
+          addingNote: !prevState.addingNote,
+          questionCategory: category,
+          questionId: questionId,
+          noteValue: noteValue,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        return { addingNote: !prevState.addingNote };
+      });
+    }
+  };
+  handleNoteDelete = () => {
+    let updatedControls = null;
+
+    updatedControls = {
+      ...this.state.controls,
+      [this.state.questionCategory]: {
+        ...this.state.controls[this.state.questionCategory],
+        [this.state.questionId]: {
+          ...this.state.controls[this.state.questionCategory][
+            this.state.questionId
+          ],
+          noteValue: '',
+        },
+      },
+    };
+    this.setState({ controls: updatedControls });
+    this.handleModal();
+  };
   render() {
     const formOrder = [
       ['setup', 'Session set-up'],
@@ -158,25 +218,48 @@ class NewSoup extends Component {
           radioChangeHandler={this.inputChangedHandler}
           category={category}
           sectionLabel={sectionLabel}
+          clicked={this.handleModal}
         />
       );
     });
+
     return (
-      <div className={classes.NewSoup}>
-        <header>
-          <h1>
-            New Supervision <span>for {this.props.location.name}</span>
-          </h1>
-          {/* span to display completion percentage */}
-          <span></span>
-        </header>
-        <form onSubmit={(e) => this.formSubmitHandler(e)}>
-          {formSections}
-          <Button type="submit" disabled={!this.state.formIsValid}>
-            Submit
-          </Button>
-        </form>
-      </div>
+      <React.Fragment>
+        <Modal
+          show={this.state.addingNote}
+          modalClosed={() => this.handleModal()}
+        >
+          <Note
+            questionId={this.state.questionId}
+            questionCategory={this.state.questionCategory}
+            changed={this.inputNoteHandler}
+            saveClicked={() => this.handleModal()}
+            deleteClicked={this.handleNoteDelete}
+            value={
+              this.state.questionId
+                ? this.state.controls[this.state.questionCategory][
+                    this.state.questionId
+                  ].noteValue
+                : ''
+            }
+          />
+        </Modal>
+        <div className={classes.NewSoup}>
+          <header>
+            <h1>
+              New Supervision <span>for {this.props.location.name}</span>
+            </h1>
+            {/* span to display completion percentage */}
+            <span></span>
+          </header>
+          <form onSubmit={(e) => this.formSubmitHandler(e)}>
+            {formSections}
+            <Button type="submit" disabled={!this.state.formIsValid}>
+              Submit
+            </Button>
+          </form>
+        </div>
+      </React.Fragment>
     );
   }
 }

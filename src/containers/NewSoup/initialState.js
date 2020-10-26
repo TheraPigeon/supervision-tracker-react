@@ -72,6 +72,7 @@ export const initialState = {
           question: 'Type of session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -86,6 +87,7 @@ export const initialState = {
           question: 'Type of Session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -102,6 +104,8 @@ export const initialState = {
           question: 'Arrived on time / followed late arrival protocol',
         },
         value: '',
+        noteValue: '',
+
         validation: {
           required: true,
         },
@@ -116,6 +120,7 @@ export const initialState = {
           question: 'Set up materials/curriculum/data sheets for session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -131,6 +136,7 @@ export const initialState = {
             'Informed care givers of programming session items\n-shared if new programs will be run or anticipate problem behavior during the session and plan of action\n-inquired if there is anything special going on at home or session needed to end early',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -145,6 +151,7 @@ export const initialState = {
           question: 'Reviewed data from previous day',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -161,6 +168,7 @@ export const initialState = {
           question: 'Set up materials/curriculum/data sheets for session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -175,6 +183,7 @@ export const initialState = {
           question: 'Used antecedent procedures as outlined in the BIP',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -189,6 +198,7 @@ export const initialState = {
           question: 'Accurately implemented BIP intervention procedures',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -203,6 +213,7 @@ export const initialState = {
           question: 'Used transition warnings if necessary',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -217,6 +228,7 @@ export const initialState = {
           question: 'Used environmental arrangement/set-up',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -232,6 +244,7 @@ export const initialState = {
             'Identified in the moment MO and used it to reward/shape behavior',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -246,6 +259,7 @@ export const initialState = {
           question: 'Identified potential setting events',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -260,6 +274,7 @@ export const initialState = {
           question: 'Took data throughout session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -274,6 +289,7 @@ export const initialState = {
           question: 'Interspersed targets within programs and across programs',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -288,6 +304,7 @@ export const initialState = {
           question: 'Conducted DT in various locations when applicable',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -303,6 +320,7 @@ export const initialState = {
             "Varied pacing as necessary to shape behaviour and learner's attention/interest",
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -317,6 +335,7 @@ export const initialState = {
           question: 'Delivered clear Sds',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -332,6 +351,7 @@ export const initialState = {
             'Taught and shaped all skill acquisition programs and accurately implemented teaching procedures as written within programs',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -347,6 +367,7 @@ export const initialState = {
             'Identified the difference between shaping skills within a session and the necessity of implementing a skill acquisition program',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -362,6 +383,7 @@ export const initialState = {
             'Demonstrated awareness of clinical skill limitation and requested assistance when necessary',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -377,6 +399,7 @@ export const initialState = {
             "Used familiar teaching procedures to ensure the learner's success in other activities/environments",
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -392,6 +415,7 @@ export const initialState = {
             'Provided adequate number of verbal models and shaped novel language acquisition',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -406,6 +430,7 @@ export const initialState = {
           question: 'Contrived manding opportunities',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -420,6 +445,7 @@ export const initialState = {
           question: 'Taught social competence skills',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -435,6 +461,7 @@ export const initialState = {
             'Delivered more rewards/praise statements vs. prompts throughout the session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -449,6 +476,7 @@ export const initialState = {
           question: 'Delivered effective prompts',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -463,6 +491,7 @@ export const initialState = {
           question: 'Faded manual prompts when necessary',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -477,6 +506,7 @@ export const initialState = {
           question: 'Implemented error correction procedures effectively',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -492,6 +522,7 @@ export const initialState = {
             "Learner's engagement was at 80% or greater during various activities",
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -507,6 +538,7 @@ export const initialState = {
             'Provided real life rationales throughout session as appropriate',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -521,6 +553,7 @@ export const initialState = {
           question: 'Followed the center schedule',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -535,6 +568,7 @@ export const initialState = {
           question: 'Voice tone varied regarding activity',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -549,6 +583,7 @@ export const initialState = {
           question: 'Modeled language through play/throughout activities',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -565,6 +600,7 @@ export const initialState = {
           question: 'Graphed data / wrote session note within session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -580,6 +616,7 @@ export const initialState = {
             'Communicated necessary info to next therapist working with learner',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -594,6 +631,7 @@ export const initialState = {
           question: 'Cleaned up materials / curriculum',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -608,6 +646,7 @@ export const initialState = {
           question: 'Provided summary to parents / caregivers',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -622,6 +661,7 @@ export const initialState = {
           question: 'Checked in with BCBA at end of session',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -639,6 +679,7 @@ export const initialState = {
             'Professionalism (i.e., used client first language, communicated with parents/staff, followed schedule, responded to emails within 24/48 hours)',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -654,6 +695,7 @@ export const initialState = {
             'Session notes (i.e., used appropriate vocabulary, summarized data, noted anything novel in session) AND Data Sheet loaded to the drive',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -669,6 +711,7 @@ export const initialState = {
       //       'Rendering / NPA Appointments (i.e., communicated appointment modifications, added notes, rendered withindate)',
       //   },
       //   value: '',
+      //   noteValue: '',
       //   validation: {
       //     required: true,
       //   },
@@ -684,6 +727,7 @@ export const initialState = {
             'Rapport Building / Enthusiasm / FUN in session (i.e., made learning fun, age appropriate jokes, spoke in positive/up beat voice tone)',
         },
         value: '',
+        noteValue: '',
         validation: {
           required: true,
         },
@@ -697,6 +741,7 @@ export const initialState = {
           question: 'Improvements from previous session:',
         },
         value: '',
+        noteValue: '',
         validation: {},
         valid: true,
       },
@@ -708,6 +753,7 @@ export const initialState = {
           question: 'Suggestions for next session:',
         },
         value: '',
+        noteValue: '',
         validation: {},
         valid: true,
       },
@@ -719,6 +765,7 @@ export const initialState = {
           question: 'Overall feedback:',
         },
         value: '',
+        noteValue: '',
         validation: {},
         valid: true,
       },
@@ -730,6 +777,7 @@ export const initialState = {
           question: 'Team Member Comments:',
         },
         value: '',
+        noteValue: '',
         validation: {},
         valid: true,
       },
@@ -742,4 +790,8 @@ export const initialState = {
     total: null,
   },
   formIsValid: false,
+  addingNote: false,
+  questionId: null,
+  questionCategory: null,
+  noteValue: '',
 };

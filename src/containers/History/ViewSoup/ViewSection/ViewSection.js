@@ -36,7 +36,7 @@ const viewSection = (props) => {
       <tr key={soupElement.id}>
         <td>{soupElement.config.elementConfig.question}</td>
         <td>{answer}</td>
-        <td>note</td>
+        <td>{soupElement.config.noteValue}</td>
       </tr>
     );
   });

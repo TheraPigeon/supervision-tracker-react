@@ -1,0 +1,14 @@
+.Note textarea {
+  width: 50%;
+  height: 150px;
+  margin: 40px auto;
+}
+.Note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Note button {
+  width: 80px;
+  margin: 0 35px;
+}

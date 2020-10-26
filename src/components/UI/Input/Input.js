@@ -4,6 +4,7 @@ import { DatePicker, TimePicker } from '@material-ui/pickers';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import orange from '@material-ui/core/colors/orange';
+import Button from '../Button/Button';
 
 const defaultMaterialTheme = createMuiTheme({
   palette: {
@@ -127,6 +128,9 @@ const input = (props) => {
             );
           }
         )}
+        <Button type="button" btnType="NoBg" clicked={props.clickedAddNote}>
+          Add Note
+        </Button>
       </fieldset>
     );
   } else if (props.elementType === 'textarea') {

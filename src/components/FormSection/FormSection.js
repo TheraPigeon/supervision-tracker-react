@@ -30,6 +30,13 @@ const FormSection = (props) => {
       invalid={!formElement.config.valid}
       touched={formElement.config.touched}
       label={formElement.config.label}
+      clickedAddNote={() =>
+        props.clicked(
+          formElement.category,
+          formElement.id,
+          formElement.config.noteValue
+        )
+      }
     />
   ));
 
