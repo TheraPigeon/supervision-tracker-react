@@ -70,7 +70,7 @@ class Roster extends Component {
       this.props.history.push('/join');
     }
     const currentClinicData = this.props.clinics.filter((clinic) => {
-      return clinic.id == this.props.clinicId;
+      return clinic.id === this.props.clinicId;
     });
     let clinicName = null;
     if (currentClinicData[0]) {
