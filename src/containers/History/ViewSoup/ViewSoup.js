@@ -37,6 +37,7 @@ class ViewSoup extends Component {
         // total,
         json,
       } = this.props.soup;
+      console.log(date);
       const startTime = formatToTimeZone(new Date(start_time), 'HH:mm', {
         timeZone: 'Africa/Conakry',
       });
@@ -44,7 +45,7 @@ class ViewSoup extends Component {
         timeZone: 'Africa/Conakry',
       });
       const soupDate = format(new Date(date), 'MMM d, yyyy');
-
+      console.log(soupDate);
       const category = ['starting', 'main', 'ending', 'additional'];
       const score = [starting, conducting, ending];
       const soupSections = category.map((soupSection, i) => {

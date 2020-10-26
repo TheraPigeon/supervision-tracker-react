@@ -127,13 +127,14 @@ class NewSoup extends Component {
     this.setState({ scores: calculatedScores });
     const adjustTimeZone = (value) =>
       new Date(value.getTime() - value.getTimezoneOffset() * 60000);
+
     const data = {
       soup: {
         staff_member_id: this.props.match.params.id,
         supervisor_id: this.props.staffId,
         start_time: adjustTimeZone(this.state.controls.setup['1'].value),
         end_time: adjustTimeZone(this.state.controls.setup['2'].value),
-        date: this.state.controls.setup['0'].value,
+        date: adjustTimeZone(this.state.controls.setup['0'].value),
         group: this.state.controls.setup['4'].value === 'group',
         telehealth: this.state.controls.setup['3'].value === 'telehealth',
         starting: calculatedScores.starting,
@@ -143,6 +144,7 @@ class NewSoup extends Component {
         json: this.state.controls,
       },
     };
+    console.log(data);
     this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
     const strigify = JSON.stringify(data);
     const parse = JSON.parse(strigify);
