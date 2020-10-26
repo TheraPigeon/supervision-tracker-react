@@ -108,8 +108,10 @@ const input = (props) => {
   if (props.elementConfig.type === 'radio') {
     inputClasses.push(classes.Radio);
     const question = props.elementConfig.question;
+    const noteAdded = props.noteAdded ? classes.NoteAdded : null;
+    console.log(props.noteAdded);
     render = (
-      <fieldset className={classes.Fieldset}>
+      <fieldset className={[classes.Fieldset, noteAdded].join(' ')}>
         <h3>{question}</h3>
         {Object.values(props.elementConfig.options).map(
           ([label, value, score], i) => {

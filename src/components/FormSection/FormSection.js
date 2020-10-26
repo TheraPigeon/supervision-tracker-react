@@ -37,6 +37,7 @@ const FormSection = (props) => {
           formElement.config.noteValue
         )
       }
+      noteAdded={formElement.config.noteValue}
     />
   ));
 
