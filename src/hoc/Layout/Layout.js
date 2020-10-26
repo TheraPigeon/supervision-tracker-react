@@ -15,7 +15,6 @@ const Layout = (props) => {
   };
   const [expandedMenu, setExpandMenu] = useState(false);
   const handleSideDrawerToggle = () => {
-    console.log('expanding menu');
     setExpandMenu(!expandedMenu);
   };
   return (

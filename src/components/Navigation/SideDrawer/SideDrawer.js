@@ -12,6 +12,7 @@ const sidedrawer = (props) => {
     <div className={styleClasses.join(' ')}>
       <SideSlider />
       <div>
+        {/* <h2>Clinic Name</h2> */}
         <nav>
           <NavigationItems />
         </nav>

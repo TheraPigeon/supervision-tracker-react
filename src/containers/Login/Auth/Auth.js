@@ -141,7 +141,6 @@ class Auth extends Component {
         !this.state.isSignup &&
         formElement.config.elementConfig['data-attr'] === 'intern-login'
       ) {
-        console.log('INSIDE');
         return false;
       }
       return (
@@ -198,7 +197,7 @@ class Auth extends Component {
             <NavLink to="/reset_password">Forgot password?</NavLink>
           ) : null}
           <Button btnType="Login">
-            {this.props.loading ? (
+            {!this.props.loading ? (
               this.state.isSignup ? (
                 'Signup'
               ) : (

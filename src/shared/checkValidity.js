@@ -22,6 +22,5 @@ export const checkValidity = (value, rules) => {
     const [password, verifyPassword] = value;
     isValid = password === verifyPassword && isValid;
   }
-  console.log(isValid);
   return isValid;
 };

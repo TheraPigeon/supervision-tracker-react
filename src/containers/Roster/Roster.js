@@ -66,6 +66,16 @@ class Roster extends Component {
         );
       });
     }
+    if (!this.props.clinics.length) {
+      this.props.history.push('/join');
+    }
+    const currentClinicData = this.props.clinics.filter((clinic) => {
+      return clinic.id == this.props.clinicId;
+    });
+    let clinicName = null;
+    if (currentClinicData[0]) {
+      clinicName = currentClinicData[0].name;
+    }
     return (
       <React.Fragment>
         <Modal show={this.state.managingStaff} modalClosed={this.handleModal}>
@@ -74,7 +84,9 @@ class Roster extends Component {
         </Modal>
         <div className={classes.Roster}>
           <header>
-            <h1>My Roster</h1>
+            <h1>
+              My {clinicName} Roster -ID: {this.props.clinicId}
+            </h1>
             <Button clicked={this.handleModal}>
               <i className="fa fa-cog"></i>Manage
             </Button>
@@ -92,6 +104,7 @@ const mapStateToProps = (state) => {
     members: state.allmembers.members,
     clinicId: state.auth.currentClinic,
     token: state.auth.token,
+    clinics: state.auth.clinics,
   };
 };
 

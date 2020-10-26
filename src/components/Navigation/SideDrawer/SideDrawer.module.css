@@ -6,7 +6,12 @@
   transition: all ease-in-out 0.3s;
   z-index: 200;
 }
-
+.SideDrawer h2 {
+  font-size: 1.2em;
+  color: #fff;
+  padding: 20px;
+  border-bottom: 1px solid rgb(255, 123, 0);
+}
 @media screen and (max-width: 768px) {
   .SideDrawer {
     display: absolute;

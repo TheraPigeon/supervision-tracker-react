@@ -128,7 +128,7 @@ export const authCheckState = () => {
       const url = 'api/user_data?user_id=' + userId;
       const headers = {};
       axios.post(url, null, headers).then((res) => {
-        console.log(res.data);
+        console.log(res);
         dispatch(
           authSuccess(
             token,

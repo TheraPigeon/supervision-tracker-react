@@ -59,7 +59,6 @@ class Reset extends Component {
       });
   };
   render() {
-    console.log(this.state.controls.email.valid);
     return (
       <div className={classes.Reset}>
         <h1>Get help signing in</h1>
