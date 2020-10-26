@@ -6,6 +6,7 @@
   background-color: var(--orange-background);
   background: linear-gradient(135deg, var(--orange-background), #f42);
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 @media screen and (max-width: 768px) {
