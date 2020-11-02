@@ -87,6 +87,16 @@ class Member extends Component {
           <h3>{this.props.name}</h3>
         </main>
         <section>
+          <div className={classes.AddBtn}>
+            <span>
+              <NavLink
+                to={{
+                  pathname: '/soupervision/' + this.props.memberId,
+                  name: this.props.name,
+                }}
+              ></NavLink>
+            </span>
+          </div>
           <NavLink
             to={{
               pathname: '/history/' + this.props.memberId,
@@ -94,14 +104,6 @@ class Member extends Component {
             }}
           >
             View History
-          </NavLink>
-          <NavLink
-            to={{
-              pathname: '/soupervision/' + this.props.memberId,
-              name: this.props.name,
-            }}
-          >
-            Add Soup
           </NavLink>
         </section>
 
