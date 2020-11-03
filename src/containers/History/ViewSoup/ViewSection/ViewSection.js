@@ -17,6 +17,9 @@ const viewSection = (props) => {
       case 'Y':
         answer = 'Yes';
         break;
+      case 'A':
+        answer = 'Almost';
+        break;
       case 'N':
         answer = 'No';
         break;

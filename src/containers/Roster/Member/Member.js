@@ -44,9 +44,11 @@ class Member extends Component {
         new Date(soup.end_time),
         new Date(soup.start_time)
       );
-      completedMinutes += diff;
+
       if (soup.intern) {
         internMinutes += diff;
+      } else {
+        completedMinutes += diff;
       }
       return true;
     });

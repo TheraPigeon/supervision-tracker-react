@@ -34,20 +34,21 @@ class ViewSoup extends Component {
         starting,
         conducting,
         ending,
+        additional,
         // total,
         json,
       } = this.props.soup;
-      console.log(date);
-      const startTime = formatToTimeZone(new Date(start_time), 'HH:mm', {
+      const startTime = formatToTimeZone(new Date(start_time), 'HH:mm A', {
         timeZone: 'Africa/Conakry',
       });
-      const endTime = formatToTimeZone(new Date(end_time), 'HH:mm', {
+      const endTime = formatToTimeZone(new Date(end_time), 'HH:mm A', {
         timeZone: 'Africa/Conakry',
       });
-      const soupDate = format(new Date(date), 'MMM d, yyyy');
-      console.log(soupDate);
+      const soupDate = formatToTimeZone(new Date(date), 'MMM D, YYYY', {
+        timeZone: 'Africa/Conakry',
+      });
       const category = ['starting', 'main', 'ending', 'additional'];
-      const score = [starting, conducting, ending];
+      const score = [starting, conducting, ending, additional];
       const soupSections = category.map((soupSection, i) => {
         return (
           <ViewSection
@@ -79,8 +80,8 @@ class ViewSoup extends Component {
           </div>
           <header>
             <div>
-              <span>Therapist: {supervisor_id}</span>
-              <span>Clinician: {staff_member_id}</span>
+              <span>Supervisor: {supervisor_id}</span>
+              <span>Therapist: {staff_member_id}</span>
               <span>
                 Note: Session was conducted{' '}
                 {telehealth ? 'remotely' : 'in-person'} and in{' '}

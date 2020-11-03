@@ -64,9 +64,6 @@ class NewSoup extends Component {
   };
   inputNoteHandler = (event, category, controlName) => {
     let updatedControls = null;
-    console.log(event);
-    console.log(category);
-    console.log(controlName);
     updatedControls = {
       ...this.state.controls,
       [category]: {
@@ -97,6 +94,10 @@ class NewSoup extends Component {
             sectionScore += 1;
             amountOfQuestions += 1;
             break;
+          case 'A':
+            sectionScore += 0.5;
+            amountOfQuestions += 1;
+            break;
           case 'N':
             amountOfQuestions += 1;
             break;
@@ -117,11 +118,8 @@ class NewSoup extends Component {
       }
       totalQuestions += amountOfQuestions;
       totalSectionScore += sectionScore;
-      if (section === 'additional') {
-        calculatedScores['total'] = totalSectionScore + '/' + totalQuestions;
-      } else {
-        calculatedScores[section] = sectionScore + '/' + amountOfQuestions;
-      }
+
+      calculatedScores[section] = sectionScore + '/' + amountOfQuestions;
     }
 
     this.setState({ scores: calculatedScores });
@@ -140,7 +138,8 @@ class NewSoup extends Component {
         starting: calculatedScores.starting,
         conducting: calculatedScores.main,
         ending: calculatedScores.ending,
-        total: calculatedScores.total,
+        additional: calculatedScores.additional,
+        total: totalSectionScore + '/' + totalQuestions,
         json: this.state.controls,
       },
     };

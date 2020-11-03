@@ -2,8 +2,9 @@ import { cloneDeep } from 'lodash';
 
 const mainSelection = {
   0: ['Yes', 'Y', 1],
-  1: ['No', 'N', 0],
-  2: ['N/A', 'NA', null],
+  1: ['Almost', 'A', 0.5],
+  2: ['No', 'N', 0],
+  3: ['N/A', 'NA', null],
 };
 const additionalMetricsSelection = {
   0: ['Excellent', 'E', 2],
@@ -787,6 +788,7 @@ export const initialState = {
     start: null,
     main: null,
     end: null,
+    additional: null,
     total: null,
   },
   formIsValid: false,
