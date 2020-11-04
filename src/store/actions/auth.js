@@ -18,10 +18,10 @@ export const authSuccess = (token, userId, name, roster, clinics, isIntern) => {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId,
+    name,
     roster,
     clinics,
     isIntern,
-    name,
   };
 };
 export const setCurrentClinic = (clinicId) => {

@@ -30,9 +30,18 @@ class Roster extends Component {
   render() {
     let roster = null;
     if (this.props.roster) {
+      console.log(this.props.roster);
       roster = Object.keys(this.props.roster).map((member) => {
         const { name } = this.props.roster[member];
-        return <Member key={member} memberId={member} name={name} />;
+        const { hours } = this.props.roster[member];
+        return (
+          <Member
+            key={member}
+            memberId={member}
+            name={name}
+            weeklyHours={hours}
+          />
+        );
       });
     }
     let listOfUsers = null;

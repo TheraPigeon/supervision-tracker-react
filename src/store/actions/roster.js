@@ -19,11 +19,11 @@ export const createStaffFail = (error) => {
   };
 };
 
-export const createStaff = (name, isFollow, clinicId, token) => {
+export const createStaff = (name, isFollow, clinicId, hours, token) => {
   return (dispatch) => {
     dispatch(createStaffStart());
     let authData = {
-      staff: { name: name, clinic_id: clinicId },
+      staff: { name: name, clinic_id: clinicId, hours: hours },
       roster_add: true,
     };
     axios
@@ -33,12 +33,12 @@ export const createStaff = (name, isFollow, clinicId, token) => {
         },
       })
       .then((res) => {
-        console.log(res);
         const id = res.data.staff_member.id;
         const data = {
           [id]: {
             clinic_id: res.data.staff_member.clinic.id,
             name: res.data.staff_member.name,
+            hours: res.data.staff_member.hours,
             supervisions: [{}],
           },
         };

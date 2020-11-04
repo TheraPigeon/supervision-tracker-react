@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { differenceInMilliseconds, differenceInMinutes } from 'date-fns';
 import classes from './Member.module.css';
 import { NavLink } from 'react-router-dom';
+import { isEqual } from 'lodash';
 
 class Member extends Component {
   state = {
@@ -17,7 +18,7 @@ class Member extends Component {
   };
 
   updateCircleItems() {
-    const WEEKLY_GOAL = 120; // = 5% of 40 hours
+    const WEEKLY_GOAL = this.props.weeklyHours * 0.05 * 60; // = 5% of weekly hours
     const currentWeekSoups = this.props.roster[
       this.props.memberId
     ].supervisions.filter((soup) => {
