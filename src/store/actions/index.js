@@ -9,4 +9,4 @@ export {
 export { fetchMembers } from './allmembers';
 export { joinClinic } from './newclinic';
 export { createStaff, addStaff } from './roster';
-export { fetchSupervisions, fetchSoup } from './history';
+export { fetchSupervisions, fetchSoup, deleteSoup } from './history';

@@ -12,6 +12,9 @@ import classes from './History.module.css';
 class History extends Component {
   state = {
     viewingSoup: false,
+    deletingSoup: false,
+    deleteSoupId: null,
+    soupDate: null,
     soupId: null,
   };
   componentDidMount() {
@@ -35,9 +38,30 @@ class History extends Component {
       });
     }
   };
+  handleDeleteModal = (soupData) => {
+    if (!this.state.deletingSoup) {
+      const { soupId, date } = soupData;
+      this.setState((prevState) => {
+        return {
+          deletingSoup: !prevState.deletingSoup,
+          deleteSoupId: soupId,
+          soupDate: date,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        return { deletingSoup: !prevState.deletingSoup };
+      });
+    }
+  };
+  handleSoupDeletion = () => {
+    this.props.onSoupDelete(this.state.deleteSoupId);
+    this.handleDeleteModal();
+  };
   render() {
     let soups = null;
     if (this.props.supervisions) {
+      console.log(this.props.supervisions);
       soups = this.props.supervisions.map((soup, index) => {
         const duration = differenceInMilliseconds(
           new Date(soup.end_time),
@@ -75,6 +99,16 @@ class History extends Component {
                 View
               </Button>
             </td>
+            <td>
+              <Button
+                type="button"
+                clicked={() =>
+                  this.handleDeleteModal({ soupId: soupId, date: soup.date })
+                }
+              >
+                Delete
+              </Button>
+            </td>
           </tr>
         );
       });
@@ -88,6 +122,28 @@ class History extends Component {
         >
           <ViewSoup soupId={this.state.soupId} />
         </Modal>
+        <Modal
+          show={this.state.deletingSoup}
+          modalClosed={() => this.handleDeleteModal()}
+        >
+          <div>
+            <p>
+              Are you sure you want to delete supervision which was created on{' '}
+              {this.state.soupDate}?
+            </p>
+            <Button type="button" clicked={this.handleSoupDeletion}>
+              Yes
+            </Button>
+            <Button
+              type="button"
+              btnType="Transparent"
+              clicked={this.handleDeleteModal}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Modal>
+
         <div className={classes.History}>
           <header>
             <h1>History</h1>
@@ -123,6 +179,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSupervisions: (staffId) =>
       dispatch(actions.fetchSupervisions(staffId)),
+    onSoupDelete: (soupId) => dispatch(actions.deleteSoup(soupId)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(History);

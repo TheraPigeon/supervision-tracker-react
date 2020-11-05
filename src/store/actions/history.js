@@ -73,3 +73,41 @@ export const fetchSoup = (soupId) => {
       });
   };
 };
+
+export const deleteSoupStart = () => {
+  return {
+    type: actionTypes.DELETE_SOUP_START,
+  };
+};
+export const deleteSoupSuccess = (soupId) => {
+  return {
+    type: actionTypes.DELETE_SOUP_SUCCESS,
+    soupId: soupId,
+  };
+};
+export const deleteSoupFail = (error) => {
+  return {
+    type: actionTypes.DELETE_SOUP_FAIL,
+    error: error,
+  };
+};
+
+export const deleteSoup = (soupId) => {
+  return (dispatch) => {
+    dispatch(deleteSoupStart());
+
+    dispatch(deleteSoupSuccess(soupId));
+
+    let url = 'api/supervisions/';
+    axios
+      .delete(url + soupId)
+      .then((res) => {
+        console.log(res);
+        dispatch(deleteSoupSuccess(soupId));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(deleteSoupFail(err));
+      });
+  };
+};
