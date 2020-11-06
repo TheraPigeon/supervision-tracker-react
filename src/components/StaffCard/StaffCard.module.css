@@ -4,12 +4,14 @@
   justify-content: space-between;
   height: 50px;
   padding: 10px;
-  margin: 20px 0;
+  margin: 20px 10px;
   border: 1px solid var(--orange-background);
   border-radius: var(--border-radius);
 }
 .StaffCard button {
   width: 120px;
   background: none;
+}
+.StaffCard button:last-of-type {
   text-align: end;
 }

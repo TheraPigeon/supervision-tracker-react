@@ -1,15 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../UI/Button/Button';
 import classes from './StaffCard.module.css';
+
+import AddMember from '../../containers/Roster/AddMember/AddMember';
 const StaffCard = (props) => {
+  const [editing, setEditing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleStaffDelete = (staffId) => {
+    props.deleteMember(staffId, props.token);
+    // setDeleting(false);
+  };
   return (
     <div className={classes.StaffCard}>
-      <span> {props.name}</span>
-      {props.follow ? (
-        <Button clicked={props.handleFollow} btnType="NoBg">
-          {props.inRoster ? 'Unfollow' : 'Follow'}
-        </Button>
-      ) : null}
+      {editing ? (
+        <AddMember
+          style={{ padding: 0, margin: 0 }}
+          editing
+          cancelEditing={() => setEditing(false)}
+          staffId={props.staffId}
+          memberData={{
+            name: props.name,
+            follow: props.inRoster,
+            hours: props.hours,
+          }}
+        />
+      ) : deleting ? (
+        <React.Fragment>
+          <p>
+            All data, all supervisions for this user will be deleted
+            permanently. Do you want to continue?
+          </p>
+          <Button
+            type="button"
+            clicked={() => handleStaffDelete(props.staffId)}
+          >
+            Yes
+          </Button>
+          <Button type="button" clicked={() => setDeleting(false)}>
+            No
+          </Button>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <span> {props.name}</span>
+          {props.follow ? (
+            <div>
+              <Button clicked={props.handleFollow} btnType="NoBg">
+                {props.inRoster ? 'Unfollow' : 'Follow'}
+              </Button>
+              <Button
+                clicked={() => setEditing(true)}
+                type="button"
+                btnType="Transparent"
+              >
+                Edit
+              </Button>
+              <Button type="button" clicked={() => setDeleting(true)}>
+                Delete
+              </Button>
+            </div>
+          ) : null}
+        </React.Fragment>
+      )}
     </div>
   );
 };

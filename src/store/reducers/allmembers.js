@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
-
+import { cloneDeep } from 'lodash';
+import { deleteSoupStart } from '../actions/history';
 const initialState = {
   members: [],
   loading: false,
@@ -21,6 +22,42 @@ const fetchMembersFail = (state, action) => {
   });
 };
 
+const editStaffStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+const editStaffSuccess = (state, action) => {
+  const updatedMembers = cloneDeep(state.members.staff_members);
+  const updatedClinic = cloneDeep(state.members);
+  const index = updatedMembers.findIndex((member) => {
+    return member.id === action.staffId;
+  });
+  for (let key in action.updatedStaff) {
+    updatedMembers[index][key] = action.updatedStaff[key];
+  }
+  updatedClinic.staff_members = updatedMembers;
+  return updateObject(state, { loading: false, members: updatedClinic });
+};
+const editStaffFail = (state, action) => {
+  return updateObject(state, { loading: false, error: action.error });
+};
+
+const deleteStaffStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+const deleteStaffSuccess = (state, action) => {
+  const updatedMembers = cloneDeep(state.members.staff_members);
+  const updatedClinic = cloneDeep(state.members);
+  const index = updatedMembers.findIndex((member) => {
+    return member.id === action.staffId;
+  });
+  updatedMembers.splice(index, 1);
+  updatedClinic.staff_members = updatedMembers;
+  return updateObject(state, { loading: false, members: updatedClinic });
+};
+const deleteStaffFail = (state, action) => {
+  return updateObject(state, { loading: false, error: action.error });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_MEMBERS_START:
@@ -29,6 +66,18 @@ const reducer = (state = initialState, action) => {
       return fetchMembersSuccess(state, action);
     case actionTypes.FETCH_MEMBERS_FAIL:
       return fetchMembersFail(state, action);
+    case actionTypes.EDIT_STAFF_START:
+      return editStaffStart(state, action);
+    case actionTypes.EDIT_STAFF_SUCCESS:
+      return editStaffSuccess(state, action);
+    case actionTypes.EDIT_STAFF_FAIL:
+      return editStaffFail(state, action);
+    case actionTypes.DELETE_STAFF_START:
+      return deleteStaffStart(state, action);
+    case actionTypes.DELETE_STAFF_SUCCESS:
+      return deleteStaffSuccess(state, action);
+    case actionTypes.DELETE_STAFF_FAIL:
+      return deleteStaffFail(state, action);
     default:
       return state;
   }

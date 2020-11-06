@@ -39,3 +39,91 @@ export const fetchMembers = (clinicId, token) => {
       });
   };
 };
+
+export const editStaffStart = () => {
+  return {
+    type: actionTypes.EDIT_STAFF_START,
+  };
+};
+export const editStaffSuccess = (updatedStaff, staffId) => {
+  return {
+    type: actionTypes.EDIT_STAFF_SUCCESS,
+    updatedStaff: updatedStaff,
+    staffId: staffId,
+  };
+};
+export const editStaffFail = (error) => {
+  return {
+    type: actionTypes.EDIT_STAFF_FAIL,
+    error: error,
+  };
+};
+
+export const editStaff = (userData, token) => {
+  return (dispatch) => {
+    const { name, hours, staffId } = userData;
+    const updatedStaff = {
+      staff: {
+        name: name,
+        hours: hours,
+      },
+    };
+    axios
+      .put('api/staff_members/' + staffId, updatedStaff, {
+        headers: {
+          Authorization: 'Token ' + token,
+        },
+      })
+      .then((res) => {
+        const id = res.data.staff_member.id;
+        const staffData = {
+          name: res.data.staff_member.name,
+          hours: res.data.staff_member.hours,
+        };
+        dispatch(editStaffSuccess(staffData, staffId));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(editStaffFail(err));
+      });
+  };
+};
+
+export const deleteStaffStart = () => {
+  return {
+    type: actionTypes.DELETE_STAFF_START,
+  };
+};
+
+export const deleteStaffSuccess = (staffId) => {
+  return {
+    type: actionTypes.DELETE_STAFF_SUCCESS,
+    staffId: staffId,
+  };
+};
+
+export const deleteStaffFail = (error) => {
+  return {
+    type: actionTypes.DELETE_STAFF_FAIL,
+    error: error,
+  };
+};
+
+export const deleteStaff = (staffId, token) => {
+  return (dispatch) => {
+    axios
+      .delete('api/staff_members/' + staffId, {
+        headers: {
+          Authorization: 'Token ' + token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(deleteStaffSuccess(staffId));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(deleteStaffFail(err));
+      });
+  };
+};

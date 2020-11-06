@@ -6,7 +6,7 @@ export {
   addClinic,
   authCheckState,
 } from './auth';
-export { fetchMembers } from './allmembers';
+export { fetchMembers, editStaff, deleteStaff } from './allmembers';
 export { joinClinic } from './newclinic';
 export { createStaff, addStaff } from './roster';
 export { fetchSupervisions, fetchSoup, deleteSoup } from './history';

@@ -4,12 +4,22 @@ import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
 import * as actions from '../../../store/actions/index';
+import { conforms } from 'lodash';
 const AddMember = (props) => {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState('');
   const [init, setInit] = useState('');
   const [follow, setFollow] = useState(false);
   const [hours, setHours] = useState(40);
+  if (props.editing && !adding) {
+    const { name, hours, follow } = props.memberData;
+    const [first, init] = name.split(' ');
+    setAdding(true);
+    setName(first);
+    setInit(init);
+    setFollow(follow);
+    setHours(hours);
+  }
   const addBtn = (
     <React.Fragment>
       <Button clicked={() => setAdding(!adding)}>Add New Member</Button>
@@ -18,10 +28,22 @@ const AddMember = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const fullName = name + ' ' + init;
-    props.onCreateStaff(fullName, follow, props.clinicId, hours, props.token);
+    if (props.editing) {
+      const staffData = {
+        name: fullName,
+        hours: hours,
+        staffId: props.staffId,
+      };
+      props.onEditStaff(staffData, props.token);
+    } else {
+      props.onCreateStaff(fullName, follow, props.clinicId, hours, props.token);
+    }
     resetForm();
   };
   const resetForm = () => {
+    if (props.editing) {
+      props.cancelEditing();
+    }
     setAdding(false);
     setName('');
     setInit('');
@@ -31,7 +53,7 @@ const AddMember = (props) => {
   for (let i = 0; i <= 100; i++) {
     hoursSelection.push(
       <option key={'hour' + i} value={i}>
-        {i}
+        {i}h
       </option>
     );
   }
@@ -51,7 +73,7 @@ const AddMember = (props) => {
         <label>
           Follow?
           <input
-            value={follow}
+            checked={follow}
             onChange={(e) => setFollow(e.target.checked)}
             type="checkbox"
           />
@@ -59,15 +81,16 @@ const AddMember = (props) => {
         <select value={hours} onChange={(e) => setHours(e.target.value)}>
           {hoursSelection}
         </select>
-        <Button>Add</Button>
-        <Button clicked={() => resetForm()} btnType="Transparent">
+        <span>/week</span>
+        <Button>{props.editing ? 'Save' : 'Add'}</Button>
+        <Button type="button" clicked={() => resetForm()} btnType="NoBg">
           Cancel
         </Button>
       </form>
     </React.Fragment>
   );
   return (
-    <div className={classes.AddMember}>
+    <div className={classes.AddMember} style={props.style}>
       {!adding ? addBtn : null}
       {adding ? form : null}
     </div>
@@ -85,6 +108,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCreateStaff: (name, isFollow, clinicId, hours, token) =>
       dispatch(actions.createStaff(name, isFollow, clinicId, hours, token)),
+    onEditStaff: (staffData, token) =>
+      dispatch(actions.editStaff(staffData, token)),
   };
 };
 
