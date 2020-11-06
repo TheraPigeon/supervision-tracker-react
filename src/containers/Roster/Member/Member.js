@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { differenceInMilliseconds, differenceInMinutes } from 'date-fns';
 import classes from './Member.module.css';
 import { NavLink } from 'react-router-dom';
-import { isEqual } from 'lodash';
 
 class Member extends Component {
   state = {
@@ -64,10 +63,7 @@ class Member extends Component {
     }
     this.setState({
       weeklyPercentage: parseFloat(percentage.toFixed(1)),
-      internMin:
-        completedMinutes !== 0
-          ? Math.round((internMinutes / completedMinutes) * 100)
-          : '0',
+      internMin: internMinutes,
       // latestScore: currentWeekSoups.slice(-1)[0].total,
     });
   }
@@ -112,7 +108,7 @@ class Member extends Component {
 
         <aside>
           <span>{this.state.weeklyPercentage}%</span>
-          <span>{this.state.internMin}%</span>
+          <span>{this.state.internMin}m</span>
           <span>{this.state.latestScore}</span>
         </aside>
       </section>

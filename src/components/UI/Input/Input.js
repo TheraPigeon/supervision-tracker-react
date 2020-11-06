@@ -163,7 +163,7 @@ const input = (props) => {
         <h3>{props.elementConfig.question}</h3>
         <ThemeProvider theme={defaultMaterialTheme}>
           <TimePicker
-            ampm={false}
+            // ampm={false}
             showTodayButton
             todayLabel="now"
             value={props.value}

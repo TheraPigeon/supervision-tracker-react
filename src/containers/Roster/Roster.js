@@ -16,6 +16,7 @@ class Roster extends Component {
   componentDidMount = () => {
     console.log('[Roster.js] componentDidMount');
   };
+
   handleModal = () => {
     if (!this.state.managingStaff) {
       this.props.fetchMembers(this.props.clinicId, this.props.token);
@@ -65,8 +66,11 @@ class Roster extends Component {
           <StaffCard
             key={member.id}
             name={member.config.name}
+            hours={member.config.hours}
             inRoster={member.inRoster}
             staffId={member.staffId}
+            deleteMember={this.props.onDeleteStaff}
+            token={this.props.token}
             handleFollow={() =>
               this.handleRoster(member.staffId, member.inRoster)
             }
@@ -124,6 +128,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.fetchMembers(clinicId, token)),
     addToRoster: (staffId, token, isFollow) =>
       dispatch(actions.addStaff(staffId, token, isFollow)),
+    onDeleteStaff: (staffId, token) =>
+      dispatch(actions.deleteStaff(staffId, token)),
   };
 };
 

@@ -1,6 +1,6 @@
 .Button {
   padding: 10px;
-  background-color: #bd0701;
+  background-color: var(--orange-background);
   color: white;
   font: inherit;
   border: 1px solid transparent;
@@ -11,7 +11,7 @@
   text-transform: uppercase;
 }
 .Button:hover {
-  background-color: #900803;
+  background-color: #ca5b00;
 }
 .Button:disabled {
   cursor: not-allowed;

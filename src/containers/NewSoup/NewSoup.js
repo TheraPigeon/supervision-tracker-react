@@ -9,13 +9,33 @@ import { initialState } from './initialState';
 import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/checkValidity';
+import { updateObject } from '../../store/utility';
 class NewSoup extends Component {
   state = initialState;
 
   componentDidMount() {
     console.log('[NewSoup.js componentDidMount');
+
     if (this.props.location.edit) {
       this.setState({ controls: cloneDeep(this.props.location.controls) });
+      console.log(this.props.location.startTime);
+
+      let updatedControls = {
+        ...this.state.controls,
+        setup: {
+          ...this.state.controls.setup,
+          ['0']: {
+            ...this.state.controls.setup['0'],
+            value: this.props.location.date,
+          },
+          ['1']: {
+            ...this.state.controls.setup['1'],
+            value: this.props.location.startTime,
+          },
+        },
+      };
+      console.log(updatedControls);
+      this.setState({ controls: updatedControls });
     }
   }
   validateForm = (controls) => {
@@ -124,7 +144,9 @@ class NewSoup extends Component {
 
     this.setState({ scores: calculatedScores });
     const adjustTimeZone = (value) =>
-      new Date(value.getTime() - value.getTimezoneOffset() * 60000);
+      new Date(
+        new Date(value).getTime() - new Date(value).getTimezoneOffset() * 60000
+      );
 
     const data = {
       soup: {
@@ -144,23 +166,43 @@ class NewSoup extends Component {
       },
     };
     console.log(data);
+    console.log(this.state.controls);
     this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
     const strigify = JSON.stringify(data);
     const parse = JSON.parse(strigify);
     const url = 'api/supervisions';
-    axios
-      .post(url, parse, {
-        headers: {
-          Authorization: 'Token ' + this.props.token,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        this.props.history.push('/roster');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (this.props.location.edit) {
+      console.log('Edit sent');
+      console.log(parse);
+      // axios
+      //   .patch(url, parse, {
+      //     headers: {
+      //       Authorization: 'Token ' + this.props.token,
+      //     },
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //     this.props.history.push('/soupervision/' + );
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      e.preventDefault();
+    } else {
+      axios
+        .post(url, parse, {
+          headers: {
+            Authorization: 'Token ' + this.props.token,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          this.props.history.push('/roster');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     e.preventDefault();
   };
   handleAddNote = (e) => {

@@ -38,10 +38,10 @@ class ViewSoup extends Component {
         // total,
         json,
       } = this.props.soup;
-      const startTime = formatToTimeZone(new Date(start_time), 'HH:mm A', {
+      const startTime = formatToTimeZone(new Date(start_time), 'hh:mm A', {
         timeZone: 'Africa/Conakry',
       });
-      const endTime = formatToTimeZone(new Date(end_time), 'HH:mm A', {
+      const endTime = formatToTimeZone(new Date(end_time), 'hh:mm A', {
         timeZone: 'Africa/Conakry',
       });
       const soupDate = formatToTimeZone(new Date(date), 'MMM D, YYYY', {
@@ -68,6 +68,9 @@ class ViewSoup extends Component {
                 name: staff_member_id,
                 controls: json,
                 edit: true,
+                date: soupDate,
+                startTime: start_time,
+                search: 'edit=true',
               }}
             >
               <Button btnType="Transparent" clicked={this.handleEdit}>
@@ -75,8 +78,8 @@ class ViewSoup extends Component {
               </Button>
             </NavLink>
 
-            <Button btnType="Transparent">Print(PDF)</Button>
-            <Button>Delete</Button>
+            {/* <Button btnType="Transparent">Print(PDF)</Button>
+            <Button>Delete</Button> */}
           </div>
           <header>
             <div>
