@@ -24,6 +24,7 @@ class ViewSoup extends Component {
     let soup = null;
     if (this.props.soup) {
       const {
+        id,
         date,
         start_time,
         end_time,
@@ -70,7 +71,9 @@ class ViewSoup extends Component {
                 edit: true,
                 date: soupDate,
                 startTime: start_time,
+                endTime: end_time,
                 search: 'edit=true',
+                soupId: id,
               }}
             >
               <Button btnType="Transparent" clicked={this.handleEdit}>

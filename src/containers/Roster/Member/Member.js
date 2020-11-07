@@ -93,7 +93,10 @@ class Member extends Component {
                   pathname: '/soupervision/' + this.props.memberId,
                   name: this.props.name,
                 }}
-              ></NavLink>
+              >
+                <span></span>
+                Add Soup
+              </NavLink>
             </span>
           </div>
           <NavLink

@@ -17,6 +17,10 @@
   width: 100%;
   z-index: 500;
 }
+.AddMember form span {
+  margin: auto 0;
+  margin-left: 5px;
+}
 .AddMember input {
   background-color: transparent;
   border: 0;

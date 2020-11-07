@@ -87,24 +87,43 @@
 }
 .Member .AddBtn a {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 115px;
   border: 1px solid #fff;
-  margin-bottom: 0;
   padding: 0;
 }
 
-.Member .AddBtn a::before {
+.Member .AddBtn a span {
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+  width: 40px;
+  height: 40px;
+  transition: all 1s ease-in-out;
+}
+.Member .AddBtn a:focus span::before {
+  transform: rotate(90deg);
+  transition-duration: 0.3s;
+}
+
+.Member .AddBtn a span::before {
+  position: absolute;
   content: '';
+  top: 0;
+  left: 17.5px;
   width: 5px;
   height: 40px;
   background-color: #fff;
   border-radius: var(--border-radius);
 }
-.Member .AddBtn a::after {
+.Member .AddBtn a span::after {
   position: absolute;
   content: '';
+  left: 0;
+  top: 17.5px;
+
   width: 40px;
   height: 5px;
   background-color: #fff;

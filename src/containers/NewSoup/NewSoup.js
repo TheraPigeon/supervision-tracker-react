@@ -10,6 +10,8 @@ import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/checkValidity';
 import { updateObject } from '../../store/utility';
+
+import { formatToTimeZone } from 'date-fns-timezone';
 class NewSoup extends Component {
   state = initialState;
 
@@ -17,20 +19,32 @@ class NewSoup extends Component {
     console.log('[NewSoup.js componentDidMount');
 
     if (this.props.location.edit) {
-      this.setState({ controls: cloneDeep(this.props.location.controls) });
-      console.log(this.props.location.startTime);
-
+      const fetchedControls = cloneDeep(this.props.location.controls);
+      const date = new Date(this.props.location.date);
+      console.log(date);
+      const startTime = new Date(this.props.location.startTime);
+      startTime.setTime(
+        startTime.getTime() + startTime.getTimezoneOffset() * 60 * 1000
+      );
+      const endTime = new Date(this.props.location.endTime);
+      endTime.setTime(
+        endTime.getTime() + endTime.getTimezoneOffset() * 60 * 1000
+      );
       let updatedControls = {
-        ...this.state.controls,
+        ...fetchedControls,
         setup: {
-          ...this.state.controls.setup,
+          ...fetchedControls.setup,
           ['0']: {
-            ...this.state.controls.setup['0'],
-            value: this.props.location.date,
+            ...fetchedControls.setup['0'],
+            value: date,
           },
           ['1']: {
             ...this.state.controls.setup['1'],
-            value: this.props.location.startTime,
+            value: startTime,
+          },
+          ['2']: {
+            ...this.state.controls.setup['2'],
+            value: endTime,
           },
         },
       };
@@ -174,19 +188,20 @@ class NewSoup extends Component {
     if (this.props.location.edit) {
       console.log('Edit sent');
       console.log(parse);
-      // axios
-      //   .patch(url, parse, {
-      //     headers: {
-      //       Authorization: 'Token ' + this.props.token,
-      //     },
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //     this.props.history.push('/soupervision/' + );
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      axios
+        .patch(url + '/' + this.props.location.soupId, parse, {
+          headers: {
+            Authorization: 'Token ' + this.props.token,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          this.props.history.goBack();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
       e.preventDefault();
     } else {
       axios
@@ -209,8 +224,6 @@ class NewSoup extends Component {
     console.log('adding note');
   };
   handleModal = (category, questionId, noteValue) => {
-    console.log(category);
-    console.log(questionId);
     if (!this.state.addingNote) {
       //fetch one soup
       this.setState((prevState) => {

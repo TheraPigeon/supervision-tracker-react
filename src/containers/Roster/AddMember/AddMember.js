@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import Button from '../../../components/UI/Button/Button';
 import * as actions from '../../../store/actions/index';
-import { conforms } from 'lodash';
 const AddMember = (props) => {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState('');
@@ -81,7 +80,7 @@ const AddMember = (props) => {
         <select value={hours} onChange={(e) => setHours(e.target.value)}>
           {hoursSelection}
         </select>
-        <span>/week</span>
+        <span>/ week</span>
         <Button>{props.editing ? 'Save' : 'Add'}</Button>
         <Button type="button" clicked={() => resetForm()} btnType="NoBg">
           Cancel
