@@ -126,21 +126,23 @@ class History extends Component {
           show={this.state.deletingSoup}
           modalClosed={() => this.handleDeleteModal()}
         >
-          <div>
+          <div className={classes.DeleteSoup}>
             <p>
               Are you sure you want to delete supervision which was created on{' '}
               {this.state.soupDate}?
             </p>
-            <Button type="button" clicked={this.handleSoupDeletion}>
-              Yes
-            </Button>
-            <Button
-              type="button"
-              btnType="Transparent"
-              clicked={this.handleDeleteModal}
-            >
-              Cancel
-            </Button>
+            <div>
+              <Button type="button" clicked={this.handleSoupDeletion}>
+                Yes
+              </Button>
+              <Button
+                type="button"
+                btnType="Transparent"
+                clicked={this.handleDeleteModal}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         </Modal>
 

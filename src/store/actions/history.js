@@ -95,9 +95,6 @@ export const deleteSoupFail = (error) => {
 export const deleteSoup = (soupId) => {
   return (dispatch) => {
     dispatch(deleteSoupStart());
-
-    dispatch(deleteSoupSuccess(soupId));
-
     let url = 'api/supervisions/';
     axios
       .delete(url + soupId)

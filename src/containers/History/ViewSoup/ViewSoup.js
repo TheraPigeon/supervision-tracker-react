@@ -74,11 +74,15 @@ class ViewSoup extends Component {
                 endTime: end_time,
                 search: 'edit=true',
                 soupId: id,
+                userId: this.props.userId,
+                creatorId: supervisor_id,
               }}
             >
-              <Button btnType="Transparent" clicked={this.handleEdit}>
-                Edit
-              </Button>
+              {parseInt(this.props.userId) === supervisor_id ? (
+                <Button btnType="Transparent" clicked={this.handleEdit}>
+                  Edit
+                </Button>
+              ) : null}
             </NavLink>
 
             {/* <Button btnType="Transparent">Print(PDF)</Button>
@@ -113,6 +117,7 @@ class ViewSoup extends Component {
 const mapStateToProps = (state) => {
   return {
     soup: state.history.soup,
+    userId: state.auth.userId,
   };
 };
 

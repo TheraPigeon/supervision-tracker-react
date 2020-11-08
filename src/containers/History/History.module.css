@@ -28,6 +28,20 @@
 .Alternate {
   background-color: rgb(109, 87, 46);
 }
+
+.DeleteSoup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+.DeleteSoup div {
+  margin: 20px;
+}
+.DeleteSoup button {
+  margin: 0 20px;
+  width: 100px;
+}
 /* 
 .History button {
   background: none;

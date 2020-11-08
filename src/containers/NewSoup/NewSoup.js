@@ -19,6 +19,11 @@ class NewSoup extends Component {
     console.log('[NewSoup.js componentDidMount');
 
     if (this.props.location.edit) {
+      if (
+        parseInt(this.props.location.userId) !== this.props.location.creatorId
+      ) {
+        this.props.history.goBack();
+      }
       const fetchedControls = cloneDeep(this.props.location.controls);
       const date = new Date(this.props.location.date);
       console.log(date);
@@ -168,7 +173,7 @@ class NewSoup extends Component {
         supervisor_id: this.props.staffId,
         start_time: adjustTimeZone(this.state.controls.setup['1'].value),
         end_time: adjustTimeZone(this.state.controls.setup['2'].value),
-        date: adjustTimeZone(this.state.controls.setup['0'].value),
+        date: this.state.controls.setup['0'].value,
         group: this.state.controls.setup['4'].value === 'group',
         telehealth: this.state.controls.setup['3'].value === 'telehealth',
         starting: calculatedScores.starting,
