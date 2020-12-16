@@ -18,6 +18,12 @@
 }
 
 /* Request Feature */
+.NavigationItem:nth-last-child(3) {
+  position: absolute;
+  bottom: 162px;
+  width: 100%;
+}
+/* Request Feature */
 .NavigationItem:nth-last-child(2) {
   position: absolute;
   bottom: 106px;

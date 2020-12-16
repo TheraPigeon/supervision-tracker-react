@@ -17,6 +17,7 @@ import NewPassword from '../containers/Login/Reset/NewPassword/NewPassword';
 
 //For beta testing only
 import NewFeature from '../components/Beta/NewFeature/NewFeature';
+import BugReport from '../components/Beta/BugReport/BugReport';
 // Date pickers
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // Date management
@@ -63,6 +64,11 @@ class App extends Component {
             auth={this.props.isAuthorized}
             path="/new_feature"
             component={NewFeature}
+          />
+          <PrivateRoute
+            auth={this.props.isAuthorized}
+            path="/bug_report"
+            component={BugReport}
           />
           <PrivateRoute
             auth={this.props.isAuthorized}
