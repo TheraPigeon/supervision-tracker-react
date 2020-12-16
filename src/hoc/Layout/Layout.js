@@ -25,7 +25,12 @@ const Layout = (props) => {
         expandMenu={handleSideDrawerToggle}
         isExpanded={expandedMenu}
       />
-      {props.isAuthorized ? <SideDrawer showMenu={expandedMenu} /> : null}
+      {props.isAuthorized ? (
+        <SideDrawer
+          showMenu={expandedMenu}
+          closeBackdrop={() => setExpandMenu(false)}
+        />
+      ) : null}
       <main
         style={!props.isAuthorized ? style : styleAuthed}
         className={classes.Content}
