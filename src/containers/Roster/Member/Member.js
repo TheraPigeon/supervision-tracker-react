@@ -22,7 +22,7 @@ class Member extends Component {
       this.props.memberId
     ].supervisions.filter((soup) => {
       const currDate = new Date();
-      currDate.setHours(23);
+      currDate.setHours(1);
       currDate.setMinutes(0);
       const first = currDate.getDate() - currDate.getDay();
       const firstday = new Date(currDate.setDate(first)).toUTCString();
