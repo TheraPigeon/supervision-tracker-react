@@ -16,6 +16,15 @@
   background-color: #f42;
   pointer-events: none;
 }
+
+/* Request Feature */
+.NavigationItem:nth-last-child(2) {
+  position: absolute;
+  bottom: 106px;
+  width: 100%;
+}
+
+/* Logout */
 .NavigationItem:last-child {
   position: absolute;
   bottom: 50px;
