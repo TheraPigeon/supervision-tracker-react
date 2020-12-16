@@ -62,7 +62,7 @@ class NewFeature extends Component {
     e.preventDefault();
     axios
       .post(
-        'http://therapigeonbugreporterms-env.eba-cpajmpju.us-east-1.elasticbeanstalk.com/soup/?bug=' +
+        'https://therapigeonbugreporterms-env.eba-cpajmpju.us-east-1.elasticbeanstalk.com/soup/?bug=' +
           this.state.controls.suggestion['0'].value
       )
       .then((response) => {
