@@ -1,11 +1,14 @@
 .Layout {
   display: grid;
   grid-template-columns: auto 1fr;
+
 }
 .Content {
   /* grid-column: 1 / -1; */
   height: calc(100vh - 50px);
   background-color: var(--grey-background);
+  overflow-y: scroll !important;
+
 }
 
 @media screen and (max-width: 768px) {

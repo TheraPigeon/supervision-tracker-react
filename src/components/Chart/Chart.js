@@ -2,7 +2,7 @@ import React from 'react'
 import { Line } from 'react-chartjs-2'
 import { cloneDeep } from 'lodash';
 
-
+import classes from './Chart.module.css'
 
 export default class Chart extends React.Component {
     state = {
@@ -66,6 +66,7 @@ export default class Chart extends React.Component {
                 display: true,
                 text:'Soup Scores Over Time'
             },
+            maintainAspectRation: false,
             scales: {
                 yAxes: [{
                     display: true,
@@ -90,12 +91,27 @@ export default class Chart extends React.Component {
     componentDidMount(){
         this.updateChart();
     }
-    componentDidUpdate(prevProps){
-        if(this.props.soups !== prevProps.soups){
-            this.updateChart();
+    // shouldComponentUpdate(nextProps, prevState){
+    //     console.log('[Chart.js] - shouldComponentUpdate')
+    //     console.log(this.props.soups)
+    //     if(this.props.soups !== nextProps.soups && this.state.loading){
+    //         this.updateChart();
+    //     }
+    // }
+    shouldComponentUpdate = (nextState) => {
+        if (this.state.soups === nextState.soups) {
+          return false;
         }
-    }
+        this.updateChart();
+
+        return true;
+      };
+    // componentWillUnmount() {
+    //     console.log('[Chart.js] - componentWillUnmount')
+    //     this.setState({loading: true, chartData: null})
+    // }
     updateChart() {
+        console.log(this.state.loading)
         const isDenomZero = (datapoint) => {
             const denom = datapoint.split('/')[1]
             return denom === '0' ? true : false
@@ -157,7 +173,7 @@ export default class Chart extends React.Component {
    
     render() {
         return(
-            <div className='chart-container'>
+            <div className={classes.Chart}>
                 {!this.state.loading ?(
                     <Line 
                     data={this.state.chartData}
