@@ -111,6 +111,7 @@ class NewSoup extends Component {
           ...this.state.controls[category][controlName],
           noteValue: event.target.value,
         },
+
       },
     };
     this.setState({ controls: updatedControls });

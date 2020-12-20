@@ -8,6 +8,8 @@ import ViewSoup from './ViewSoup/ViewSoup';
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import classes from './History.module.css';
+import Chart from '../../components/Chart/Chart'
+
 
 class History extends Component {
   state = {
@@ -150,6 +152,12 @@ class History extends Component {
           <header>
             <h1>History</h1>
           </header>
+          {this.props.supervisions ? (
+
+            <Chart soups={this.props.supervisions}/>
+            
+            ): null}
+
           <table>
             <thead>
               <tr>

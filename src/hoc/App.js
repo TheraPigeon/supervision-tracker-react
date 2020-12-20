@@ -42,7 +42,7 @@ class App extends Component {
         <Switch>
           {/* Public routes */}
           <Route path="/logout" component={Logout} />
-          {/* Hitory Route */}
+          {/* History Route */}
           <Route path="/history/:id" component={History} />
           {/* Authorization required */}
           <PrivateRoute
