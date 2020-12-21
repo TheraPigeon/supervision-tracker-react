@@ -8,26 +8,30 @@ import ViewSoup from './ViewSoup/ViewSoup';
 import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import classes from './History.module.css';
-import Chart from '../../components/Chart/Chart'
-
+import Chart from '../../components/Chart/Chart';
 
 class History extends Component {
-  state = {
-    viewingSoup: false,
-    deletingSoup: false,
-    deleteSoupId: null,
-    soupDate: null,
-    soupId: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewingSoup: false,
+      deletingSoup: false,
+      deleteSoupId: null,
+      soupDate: null,
+      soupId: null,
+    };
+  }
   componentDidMount() {
     this.props.fetchSupervisions(this.props.match.params.id, this.props.token);
   }
-  shouldComponentUpdate = (nextState) => {
-    if (this.state.soupId === nextState.soupId) {
-      return false;
-    }
-    return true;
-  };
+  // componentDidUpdate(prevProps) {
+  //   // only do a review if a book is already available
+  //   if (!prevProps.supervisions && this.props.supervisions) {
+  //     // do a review mutation
+  //     // client.mutate(...)
+  //     this.forceUpdate();
+  //   }
+  // }
   handleModal = (soupId) => {
     if (!this.state.viewingSoup) {
       //fetch one soup
@@ -60,6 +64,7 @@ class History extends Component {
     this.props.onSoupDelete(this.state.deleteSoupId);
     this.handleDeleteModal();
   };
+
   render() {
     let soups = null;
     if (this.props.supervisions) {
@@ -153,10 +158,8 @@ class History extends Component {
             <h1>History</h1>
           </header>
           {this.props.supervisions ? (
-
-            <Chart soups={this.props.supervisions}/>
-            
-            ): null}
+            <Chart soups={this.props.supervisions} />
+          ) : null}
 
           <table>
             <thead>

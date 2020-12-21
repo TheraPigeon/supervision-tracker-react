@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { format } from 'date-fns';
 import { NavLink } from 'react-router-dom';
 
 import { formatToTimeZone } from 'date-fns-timezone';

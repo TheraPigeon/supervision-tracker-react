@@ -75,7 +75,6 @@ export const editStaff = (userData, token) => {
         },
       })
       .then((res) => {
-        const id = res.data.staff_member.id;
         const staffData = {
           name: res.data.staff_member.name,
           hours: res.data.staff_member.hours,

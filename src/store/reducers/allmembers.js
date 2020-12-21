@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 import { cloneDeep } from 'lodash';
-import { deleteSoupStart } from '../actions/history';
 const initialState = {
   members: [],
   loading: false,

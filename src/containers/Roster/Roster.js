@@ -13,9 +13,6 @@ class Roster extends Component {
   state = {
     managingStaff: false,
   };
-  componentDidMount = () => {
-    console.log('[Roster.js] componentDidMount');
-  };
 
   handleModal = () => {
     if (!this.state.managingStaff) {
@@ -31,7 +28,6 @@ class Roster extends Component {
   render() {
     let roster = null;
     if (this.props.roster) {
-      console.log(this.props.roster);
       roster = Object.keys(this.props.roster).map((member) => {
         const { name } = this.props.roster[member];
         const { hours } = this.props.roster[member];

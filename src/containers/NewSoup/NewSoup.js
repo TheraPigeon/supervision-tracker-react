@@ -9,9 +9,7 @@ import { initialState } from './initialState';
 import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/checkValidity';
-import { updateObject } from '../../store/utility';
 
-import { formatToTimeZone } from 'date-fns-timezone';
 class NewSoup extends Component {
   state = initialState;
 
@@ -39,15 +37,15 @@ class NewSoup extends Component {
         ...fetchedControls,
         setup: {
           ...fetchedControls.setup,
-          ['0']: {
+          0: {
             ...fetchedControls.setup['0'],
             value: date,
           },
-          ['1']: {
+          1: {
             ...this.state.controls.setup['1'],
             value: startTime,
           },
-          ['2']: {
+          2: {
             ...this.state.controls.setup['2'],
             value: endTime,
           },
@@ -111,7 +109,6 @@ class NewSoup extends Component {
           ...this.state.controls[category][controlName],
           noteValue: event.target.value,
         },
-
       },
     };
     this.setState({ controls: updatedControls });
