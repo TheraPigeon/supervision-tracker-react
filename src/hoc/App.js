@@ -22,19 +22,25 @@ import BugReport from '../components/Beta/BugReport/BugReport';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // Date management
 import DateFnsUtils from '@date-io/date-fns';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends Component {
   componentDidMount = () => {
     this.props.onAutoSignin();
+    const { user, isAuthorized } = this.props.auth0;
+    console.log(this.props.auth0);
+    console.log(user);
+    console.log(isAuthorized);
+    console.log(this.props.auth0.getIdTokenClaims());
   };
   render() {
     let routes = (
       <Switch>
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/authorize" component={Login} />
         <Route path="/history/:id" component={History} />
         <Route path="/reset_password" component={Reset} />
         <Route path="/new_password" component={NewPassword} />
-        <Redirect from="/" to="/login" />
+        <Redirect from="/" to="/authorize" />
       </Switch>
     );
     if (this.props.isAuthorized) {
@@ -100,4 +106,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(withAuth0(App))
+);

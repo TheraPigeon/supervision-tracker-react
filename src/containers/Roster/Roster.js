@@ -8,7 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import AddMember from './AddMember/AddMember';
 import StaffCard from '../../components/StaffCard/StaffCard';
-
+import { withAuth0 } from '@auth0/auth0-react';
 class Roster extends Component {
   state = {
     managingStaff: false,
@@ -129,4 +129,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Roster);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth0(Roster));

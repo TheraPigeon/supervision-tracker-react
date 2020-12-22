@@ -5,11 +5,14 @@ import { NavLink, Redirect } from 'react-router-dom';
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import LoginButton from '../../../components/UI/LoginButton/LoginButton';
+import LogoutButton from '../../../components/UI/LogoutButton/LogoutButton';
 
 import classes from './Auth.module.css';
 import * as actions from '../../../store/actions/index';
 import { checkValidity } from '../../../shared/checkValidity';
 
+import { withAuth0 } from '@auth0/auth0-react';
 class Auth extends Component {
   state = {
     controls: {
@@ -86,7 +89,16 @@ class Auth extends Component {
     },
     isSignup: false,
   };
-
+  componentDidMount() {
+    console.log('[Auth.js] - componentDidMount');
+    const { user, getIdTokenClaims } = this.props.auth0;
+    const req = async () => {
+      await getIdTokenClaims().then((token) => {
+        this.props.onAuth(token.__raw);
+      });
+    };
+    req();
+  }
   inputChangedHandler = (event, controlName) => {
     const updatedControls = {
       ...this.state.controls,
@@ -107,17 +119,17 @@ class Auth extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
-    const fullname = [
-      this.state.controls.name.value,
-      this.state.controls.initial.value,
-    ].join(' ');
-    this.props.onAuth(
-      this.state.controls.email.value,
-      this.state.controls.password.value,
-      this.state.isSignup,
-      this.state.controls.intern.checked,
-      fullname
-    );
+    // const fullname = [
+    //   this.state.controls.name.value,
+    //   this.state.controls.initial.value,
+    // ].join(' ');
+    // this.props.onAuth(
+    //   this.state.controls.email.value,
+    //   this.state.controls.password.value,
+    //   this.state.isSignup,
+    //   this.state.controls.intern.checked,
+    //   fullname
+    // );
   };
   switchAuthModeHandler = () => {
     this.setState((prevState) => {
@@ -209,6 +221,8 @@ class Auth extends Component {
           </Button>
           {switchAuthModeMessage}
         </form>
+        <LoginButton />
+        <LogoutButton />
       </div>
     );
   }
@@ -224,9 +238,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password, isSignup, isIntern, name) =>
-      dispatch(actions.auth(email, password, isSignup, isIntern, name)),
+    onAuth: (token) => dispatch(actions.auth(token)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuth0(Auth));

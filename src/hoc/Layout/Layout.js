@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import classes from './Layout.module.css';
+import { useAuth0 } from '@auth0/auth0-react';
 const Layout = (props) => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(user);
   const style = {
     gridColumn: '1 / -1',
   };

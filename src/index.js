@@ -14,6 +14,10 @@ import newClinicReducer from './store/reducers/newclinic';
 import rosterReducer from './store/reducers/roster';
 import historyReducer from './store/reducers/history';
 
+import { Auth0Provider } from '@auth0/auth0-react';
+
+require('dotenv').config();
+
 const rootReducer = combineReducers({
   auth: authReducer,
   allmembers: allMembersReducer,
@@ -21,7 +25,8 @@ const rootReducer = combineReducers({
   roster: rosterReducer,
   history: historyReducer,
 });
-
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -33,7 +38,15 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Auth0Provider
+          domain={domain}
+          clientId={clientId}
+          redirectUri={`${window.location.origin}/authorize`}
+          scope="openid profile email"
+          cacheLocation="localstorage"
+        >
+          <App />
+        </Auth0Provider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
