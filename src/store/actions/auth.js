@@ -61,52 +61,50 @@ export const setAuthRedirectPath = (path) => {
   };
 };
 
-export const auth = (email, password, isSignup, isIntern, name) => {
+export const auth = (token) => {
   return (dispatch) => {
     dispatch(authStart());
-    let url = 'api/users/login/';
+    let url = 'api/authenticate/';
     let authData = {
-      user: {
-        email: email,
-        password: password,
-      },
+      id_token: token,
     };
-    if (isSignup) {
-      url = 'api/users/';
-      authData = {
-        user: {
-          name: name,
-          email: email,
-          password: password,
-          intern: isIntern,
-        },
-      };
-    }
+    // if (isSignup) {
+    //   url = 'api/users/';
+    //   authData = {
+    //     user: {
+    //       name: name,
+    //       email: email,
+    //       password: password,
+    //       intern: isIntern,
+    //     },
+    //   };
+    // }
     axios
       .post(url, authData)
       .then((res) => {
         console.log(res);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('userId', res.data.id);
-        dispatch(
-          authSuccess(
-            res.data.token,
-            res.data.id,
-            res.data.name,
-            res.data.roster_members,
-            res.data.clinics,
-            res.data.intern
-          )
-        );
+
+        // dispatch(
+        //   authSuccess(
+        //     res.data.token,
+        //     res.data.id,
+        //     res.data.name,
+        //     res.data.roster_members,
+        //     res.data.clinics,
+        //     res.data.intern
+        //   )
+        //);
         const currentClinic = localStorage.getItem('currentClinic');
-        const inClinic = res.data.clinics.filter((a) => {
-          return a.id === parseInt(currentClinic);
-        });
-        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
-          dispatch(setCurrentClinic(parseInt(currentClinic)));
-        } else if (res.data.clinics.length !== 0) {
-          dispatch(setCurrentClinic(res.data.clinics[0].id));
-        }
+        // const inClinic = res.data.clinics.filter((a) => {
+        //   return a.id === parseInt(currentClinic);
+        // });
+        // if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
+        //   dispatch(setCurrentClinic(parseInt(currentClinic)));
+        // } else if (res.data.clinics.length !== 0) {
+        //   dispatch(setCurrentClinic(res.data.clinics[0].id));
+        // }
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
         //dispatch(checkAuthTimeout(res.data.expiresIn)); NEED expiresIn from Server Response
