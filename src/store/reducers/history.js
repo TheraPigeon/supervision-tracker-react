@@ -38,13 +38,11 @@ const deleteSoupStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const deleteSoupSuccess = (state, action) => {
-  // console.log(action.soupId);
   const updatedSupervisions = cloneDeep(state.supervisions);
   const index = updatedSupervisions.findIndex((soup) => {
     return soup.id === action.soupId;
   });
   updatedSupervisions.splice(index, 1);
-  console.log(updatedSupervisions);
   return updateObject(state, {
     supervisions: updatedSupervisions,
     loading: false,

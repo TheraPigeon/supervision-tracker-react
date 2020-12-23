@@ -26,12 +26,7 @@ import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends Component {
   componentDidMount = () => {
-    this.props.onAutoSignin();
-    const { user, isAuthorized } = this.props.auth0;
-    console.log(this.props.auth0);
-    console.log(user);
-    console.log(isAuthorized);
-    console.log(this.props.auth0.getIdTokenClaims());
+    // this.props.onAutoSignin();
   };
   render() {
     let routes = (

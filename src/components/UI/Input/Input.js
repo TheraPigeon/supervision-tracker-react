@@ -44,10 +44,6 @@ const input = (props) => {
   const hideClass = !props.registring ? classes.Hide : null;
   const inputClasses = [classes.InputElement, hideClass];
   const textareaClasses = [classes.InputElement, classes.Textarea];
-  // console.log(props.invalid);
-  // console.log(props.shouldValidate);
-  // console.log(props.touched);
-  // console.log(props.registring);
   if (
     props.invalid &&
     props.shouldValidate &&
@@ -109,7 +105,6 @@ const input = (props) => {
     inputClasses.push(classes.Radio);
     const question = props.elementConfig.question;
     const noteAdded = props.noteAdded ? classes.NoteAdded : null;
-    console.log(props.noteAdded);
     render = (
       <fieldset className={[classes.Fieldset, noteAdded].join(' ')}>
         <h3>{question}</h3>

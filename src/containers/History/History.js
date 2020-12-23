@@ -68,7 +68,6 @@ class History extends Component {
   render() {
     let soups = null;
     if (this.props.supervisions) {
-      console.log(this.props.supervisions);
       soups = this.props.supervisions.map((soup, index) => {
         const duration = differenceInMilliseconds(
           new Date(soup.end_time),

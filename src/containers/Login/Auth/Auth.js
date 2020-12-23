@@ -6,7 +6,6 @@ import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import LoginButton from '../../../components/UI/LoginButton/LoginButton';
-import LogoutButton from '../../../components/UI/LogoutButton/LogoutButton';
 
 import classes from './Auth.module.css';
 import * as actions from '../../../store/actions/index';
@@ -89,16 +88,6 @@ class Auth extends Component {
     },
     isSignup: false,
   };
-  componentDidMount() {
-    console.log('[Auth.js] - componentDidMount');
-    const { user, getIdTokenClaims } = this.props.auth0;
-    const req = async () => {
-      await getIdTokenClaims().then((token) => {
-        this.props.onAuth(token.__raw);
-      });
-    };
-    req();
-  }
   inputChangedHandler = (event, controlName) => {
     const updatedControls = {
       ...this.state.controls,
@@ -204,7 +193,7 @@ class Auth extends Component {
         {/* {errorMessage} */}
         <form onSubmit={this.submitHandler}>
           <h2>{this.state.isSignup ? 'Join Soup' : 'Login to Soup'}</h2>
-          {form}
+          {/* {form}
           {!this.state.isSignup ? (
             <NavLink to="/reset_password">Forgot password?</NavLink>
           ) : null}
@@ -219,10 +208,9 @@ class Auth extends Component {
               <Spinner />
             )}
           </Button>
-          {switchAuthModeMessage}
+          {switchAuthModeMessage} */}
+          <LoginButton btnType="Login" />
         </form>
-        <LoginButton />
-        <LogoutButton />
       </div>
     );
   }
