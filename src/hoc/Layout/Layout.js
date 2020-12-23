@@ -5,9 +5,22 @@ import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import classes from './Layout.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
+import * as actions from '../../store/actions/index';
+
 const Layout = (props) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log(user);
+  const { isAuthenticated, getIdTokenClaims } = useAuth0();
+  const [authed, setAuthed] = useState(false);
+  if (isAuthenticated && !authed) {
+    const req = async () => {
+      await getIdTokenClaims().then((token) => {
+        if (token) {
+          props.onAuth(token.__raw);
+        }
+      });
+    };
+    req();
+    setAuthed(true);
+  }
   const style = {
     gridColumn: '1 / -1',
   };
@@ -22,7 +35,6 @@ const Layout = (props) => {
   };
   return (
     <div className={classes.Layout}>
-      {/* Toolbar, Sidebar, Backdrop */}
       <Toolbar
         isAuth={props.isAuthorized}
         expandMenu={handleSideDrawerToggle}
@@ -49,4 +61,9 @@ const mapStateToProps = (state) => {
     isAuthorized: state.auth.token !== null,
   };
 };
-export default connect(mapStateToProps)(Layout);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuth: (token) => dispatch(actions.auth(token)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
