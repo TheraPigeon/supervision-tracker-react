@@ -13,11 +13,30 @@ const initialState = {
   roster: [],
   clinics: [],
   currentClinic: null,
-  isIntern: null,
+  isIntern: false,
 };
 
 const setCurrectClinic = (state, action) => {
   return updateObject(state, { currentClinic: action.currentClinic });
+};
+
+const fetchUserStart = (state, action) => {
+  return updateObject(state, { error: null, loading: true });
+};
+const fetchUserSuccess = (state, action) => {
+  return updateObject(state, {
+    roster: action.roster,
+    clinics: action.clinics,
+    isIntern: action.isIntern,
+    loading: false,
+    error: null,
+  });
+};
+const fetchUserFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    loading: false,
+  });
 };
 const authStart = (state, action) => {
   return updateObject(state, { error: null, loading: true });
@@ -27,12 +46,12 @@ const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.idToken,
     userId: action.userId,
+    name: action.name,
+    email: action.email,
+    emailIsVerified: action.emailIsVerified,
+    isNewUser: action.isNewUser,
     error: null,
     loading: false,
-    roster: action.roster,
-    clinics: action.clinics,
-    isIntern: action.isIntern,
-    name: action.name,
   });
 };
 
@@ -44,9 +63,9 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
-  localStorage.removeItem('currentClinic');
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('userId');
+  // localStorage.removeItem('currentClinic');
   return updateObject(state, { token: null, userId: null });
 };
 const setAuthRedirectPath = (state, action) => {
@@ -101,6 +120,12 @@ const reducer = (state = initialState, action) => {
       return authSuccess(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
+    case actionTypes.FETCH_USER_START:
+      return fetchUserStart(state, action);
+    case actionTypes.FETCH_USER_SUCCESS:
+      return fetchUserSuccess(state, action);
+    case actionTypes.FETCH_USER_FAIL:
+      return fetchUserFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
@@ -127,7 +152,6 @@ const reducer = (state = initialState, action) => {
       return createStaffSuccess(state, action);
     case actionTypes.CREATE_STAFF_FAIL:
       return createStaffFail(state, action);
-
     default:
       return state;
   }

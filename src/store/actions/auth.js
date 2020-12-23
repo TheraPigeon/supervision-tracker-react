@@ -13,22 +13,28 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId, name, roster, clinics, isIntern) => {
+export const authSuccess = ({
+  token,
+  userId,
+  name,
+  email,
+  emailIsVerified,
+  isNewUser,
+}) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId,
     name,
-    roster,
-    clinics,
-    isIntern,
+    email,
+    emailIsVerified,
+    isNewUser,
   };
 };
 export const setCurrentClinic = (clinicId) => {
   if (typeof clinicId === 'number') {
     localStorage.setItem('currentClinic', clinicId);
   }
-
   return {
     type: actionTypes.SET_CURRENT_CLINIC,
     currentClinic: clinicId,
@@ -61,6 +67,59 @@ export const setAuthRedirectPath = (path) => {
   };
 };
 
+export const fetchUserStart = () => {
+  return {
+    type: actionTypes.FETCH_SUPERVISIONS_START,
+  };
+};
+export const fetchUserSuccess = ({ roster, clinics, isIntern }) => {
+  return {
+    type: actionTypes.FETCH_SUPERVISIONS_SUCCESS,
+    roster,
+    clinics,
+    isIntern,
+  };
+};
+export const fetchUserFail = (error) => {
+  return {
+    type: actionTypes.FETCH_SUPERVISIONS_FAIL,
+    error,
+  };
+};
+export const fetchUser = (token, userId) => {
+  return (dispatch) => {
+    dispatch(fetchUserStart());
+    const url = `api/user_data?user_id=${+userId}`;
+    axios
+      .post(url, null, {
+        headers: {
+          Authorization: 'Token ' + token,
+        },
+      })
+      .then((res) => {
+        dispatch(
+          fetchUserSuccess({
+            roster: res.data.roster,
+            clinics: res.data.clinics,
+            isIntern: res.data.intern,
+          })
+        );
+        const currentClinic = localStorage.getItem('currentClinic');
+        const inClinic = res.data.clinics.filter((a) => {
+          return a.id === parseInt(currentClinic);
+        });
+        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
+          dispatch(setCurrentClinic(parseInt(currentClinic)));
+        } else if (res.data.clinics.length !== 0) {
+          dispatch(setCurrentClinic(res.data.clinics[0].id));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(fetchUserFail(err));
+      });
+  };
+};
 export const auth = (token) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -81,37 +140,43 @@ export const auth = (token) => {
     // }
     axios
       .post(url, authData)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('userId', res.data.id);
+      .then(({ data }) => {
+        console.log(data);
+        // localStorage.setItem('token', data.token);
+        // localStorage.setItem('userId', data.id);
 
         // dispatch(
         //   authSuccess(
-        //     res.data.token,
-        //     res.data.id,
-        //     res.data.name,
-        //     res.data.roster_members,
-        //     res.data.clinics,
-        //     res.data.intern
+        //     data.token,
+        //     data.id,
+        //     data.name,
+        //     data.roster_members,
+        //     data.clinics,
+        //     data.intern
         //   )
-        //);
-        const currentClinic = localStorage.getItem('currentClinic');
-        // const inClinic = res.data.clinics.filter((a) => {
-        //   return a.id === parseInt(currentClinic);
-        // });
-        // if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
-        //   dispatch(setCurrentClinic(parseInt(currentClinic)));
-        // } else if (res.data.clinics.length !== 0) {
-        //   dispatch(setCurrentClinic(res.data.clinics[0].id));
-        // }
+        // );
+
+        // Auth0
+        dispatch(
+          authSuccess({
+            token: data.token,
+            userId: data.id,
+            name: data.name,
+            email: data.email,
+            emailIsVerified: data.email_verified,
+            isNewUser: data.is_new_user,
+          })
+        );
+
+        dispatch(fetchUser(data.token, data.id));
+
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));
-        //dispatch(checkAuthTimeout(res.data.expiresIn)); NEED expiresIn from Server Response
+        //dispatch(checkAuthTimeout(data.expiresIn)); NEED expiresIn from Server Response
       })
       .catch((err) => {
         console.log(err);
-        dispatch(authFail(err.response.data.error));
+        dispatch(authFail(err.message));
       });
   };
 };
@@ -125,26 +190,25 @@ export const authCheckState = () => {
       const userId = localStorage.getItem('userId');
       const url = 'api/user_data?user_id=' + userId;
       const headers = {};
-      axios.post(url, null, headers).then((res) => {
-        console.log(res);
+      axios.post(url, null, headers).then(({ data }) => {
+        console.log(data);
         dispatch(
-          authSuccess(
-            token,
+          authSuccess({
+            token: data.token,
             userId,
-            res.data.name,
-            res.data.roster_members,
-            res.data.clinics,
-            res.data.intern
-          )
+            roster: data.roster_members,
+            clinics: data.clinics,
+            isIntern: data.intern,
+          })
         );
         const currentClinic = localStorage.getItem('currentClinic');
-        const inClinic = res.data.clinics.filter((a) => {
+        const inClinic = data.clinics.filter((a) => {
           return a.id === parseInt(currentClinic);
         });
-        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
+        if (currentClinic && data.clinics.length !== 0 && inClinic.length) {
           dispatch(setCurrentClinic(parseInt(currentClinic)));
-        } else if (res.data.clinics.length !== 0) {
-          dispatch(setCurrentClinic(res.data.clinics[0].id));
+        } else if (data.clinics.length !== 0) {
+          dispatch(setCurrentClinic(data.clinics[0].id));
         }
       });
     }
