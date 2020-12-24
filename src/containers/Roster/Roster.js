@@ -9,9 +9,11 @@ import Button from '../../components/UI/Button/Button';
 import AddMember from './AddMember/AddMember';
 import StaffCard from '../../components/StaffCard/StaffCard';
 import { withAuth0 } from '@auth0/auth0-react';
+import Signup from '../Login/Signup/Signup';
 class Roster extends Component {
   state = {
     managingStaff: false,
+    profileCompleted: false,
   };
 
   handleModal = () => {
@@ -75,9 +77,9 @@ class Roster extends Component {
         );
       });
     }
-    if (!this.props.clinics.length) {
-      this.props.history.push('/join');
-    }
+    // if (!this.props.clinics.length) {
+    //   this.props.history.push('/join');
+    // }
     const currentClinicData = this.props.clinics.filter((clinic) => {
       return clinic.id === this.props.clinicId;
     });
@@ -90,6 +92,9 @@ class Roster extends Component {
         <Modal show={this.state.managingStaff} modalClosed={this.handleModal}>
           <AddMember />
           {listOfUsers}
+        </Modal>
+        <Modal show={!this.state.profileCompleted} noscroll>
+          <Signup />
         </Modal>
         <div className={classes.Roster}>
           <header>
