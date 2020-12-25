@@ -11,11 +11,13 @@ class Modal extends Component {
     );
   }
   render() {
+    const scroll = this.props.noscroll ? classes.NoScroll : null;
+    const modalClasses = [classes.Modal, scroll].join(' ');
     return (
       <React.Fragment>
         <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
         <div
-          className={classes.Modal}
+          className={modalClasses}
           style={{
             transform: this.props.show ? 'translateY(0)' : 'translateY(-150vh)',
             opacity: this.props.show ? '1' : '0',
