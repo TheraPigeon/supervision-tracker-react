@@ -10,6 +10,8 @@ import LoginButton from '../../../components/UI/LoginButton/LoginButton';
 import classes from './Auth.module.css';
 import * as actions from '../../../store/actions/index';
 import { checkValidity } from '../../../shared/checkValidity';
+import { buildForm } from '../../../shared/buildForm';
+import { inputHandler } from '../../../shared/inputHandler';
 
 import { withAuth0 } from '@auth0/auth0-react';
 class Auth extends Component {
@@ -88,22 +90,27 @@ class Auth extends Component {
     },
     isSignup: false,
   };
-  inputChangedHandler = (event, controlName) => {
-    const updatedControls = {
-      ...this.state.controls,
-      [controlName]: {
-        ...this.state.controls[controlName],
-        value: event.target.value,
-        valid: checkValidity(
-          event.target.value,
-          this.state.controls[controlName].validation
-        ),
-        touched: true,
-      },
-    };
-    if (controlName === 'intern') {
-      updatedControls[controlName].checked = event.target.checked;
-    }
+  inputChangedHandler = ({ event, controlName }) => {
+    // const updatedControls = {
+    //   ...this.state.controls,
+    //   [controlName]: {
+    //     ...this.state.controls[controlName],
+    //     value: event.target.value,
+    //     valid: checkValidity(
+    //       event.target.value,
+    //       this.state.controls[controlName].validation
+    //     ),
+    //     touched: true,
+    //   },
+    // };
+    // if (controlName === 'intern') {
+    //   updatedControls[controlName].checked = event.target.checked;
+    // }
+
+    const updatedControls = inputHandler(
+      { event, controlName },
+      this.state.controls
+    );
     this.setState({ controls: updatedControls });
   };
   submitHandler = (e) => {
@@ -126,73 +133,76 @@ class Auth extends Component {
     });
   };
   render() {
-    const formElementArray = [];
-    for (let key in this.state.controls) {
-      if (!this.state.isSignup && (key === 'name' || key === 'initial')) {
-      } else {
-        formElementArray.push({
-          id: key,
-          config: this.state.controls[key],
-        });
-      }
-    }
+    const form = buildForm(this.state.controls, this.inputChangedHandler);
 
-    let form = formElementArray.map((formElement) => {
-      if (
-        !this.state.isSignup &&
-        formElement.config.elementConfig['data-attr'] === 'intern-login'
-      ) {
-        return false;
-      }
-      return (
-        <Input
-          key={formElement.id}
-          elementType={formElement.config.elementType}
-          elementConfig={formElement.config.elementConfig}
-          value={formElement.config.value}
-          changed={(e) => this.inputChangedHandler(e, formElement.id)}
-          shouldValidate={formElement.config.validation}
-          invalid={!formElement.config.valid}
-          touched={formElement.config.touched}
-          label={formElement.config.label}
-          registring={this.state.isSignup}
-        />
-      );
-    });
+    // const formElementArray = [];
+    // for (let key in this.state.controls) {
+    //   if (!this.state.isSignup && (key === 'name' || key === 'initial')) {
+    //   } else {
+    //     formElementArray.push({
+    //       id: key,
+    //       config: this.state.controls[key],
+    //     });
+    //   }
+    // }
+
+    // let form = formElementArray.map((formElement) => {
+    //   if (
+    //     !this.state.isSignup &&
+    //     formElement.config.elementConfig['data-attr'] === 'intern-login'
+    //   ) {
+    //     return false;
+    //   }
+    //   return (
+    //     <Input
+    //       key={formElement.id}
+    //       elementType={formElement.config.elementType}
+    //       elementConfig={formElement.config.elementConfig}
+    //       value={formElement.config.value}
+    //       changed={(e) => this.inputChangedHandler(e, formElement.id)}
+    //       shouldValidate={formElement.config.validation}
+    //       invalid={!formElement.config.valid}
+    //       touched={formElement.config.touched}
+    //       label={formElement.config.label}
+    //       registring={this.state.isSignup}
+    //     />
+    //   );
+    // });
     let authRedirect = null;
-    if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to="/roster" />;
-    }
-    let switchAuthModeMessage = (
-      <p>
-        Not a member?
-        <span
-          onClick={this.switchAuthModeHandler}
-          className={classes.SignupBtn}
-        >
-          Join Soup
-        </span>
-      </p>
-    );
-    if (this.state.isSignup) {
-      switchAuthModeMessage = (
-        <p>
-          Already a member?
-          <span
-            onClick={this.switchAuthModeHandler}
-            className={classes.SignupBtn}
-          >
-            Log in
-          </span>
-        </p>
-      );
-    }
+    // if (this.props.isAuthenticated) {
+    //   authRedirect = <Redirect to="/roster" />;
+    // }
+    // let switchAuthModeMessage = (
+    //   <p>
+    //     Not a member?
+    //     <span
+    //       onClick={this.switchAuthModeHandler}
+    //       className={classes.SignupBtn}
+    //     >
+    //       Join Soup
+    //     </span>
+    //   </p>
+    // );
+    // if (this.state.isSignup) {
+    //   switchAuthModeMessage = (
+    //     <p>
+    //       Already a member?
+    //       <span
+    //         onClick={this.switchAuthModeHandler}
+    //         className={classes.SignupBtn}
+    //       >
+    //         Log in
+    //       </span>
+    //     </p>
+    //   );
+    // }
     return (
       <div className={classes.Auth}>
         {authRedirect}
         {/* {errorMessage} */}
         <form onSubmit={this.submitHandler}>
           <h2>{this.state.isSignup ? 'Join Soup' : 'Login to Soup'}</h2>
+
           {/* {form}
           {!this.state.isSignup ? (
             <NavLink to="/reset_password">Forgot password?</NavLink>

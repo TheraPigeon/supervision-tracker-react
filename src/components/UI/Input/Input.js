@@ -41,8 +41,8 @@ const defaultMaterialTheme = createMuiTheme({
 });
 const input = (props) => {
   let inputElement = null;
-  const hideClass = !props.registring ? classes.Hide : null;
-  const inputClasses = [classes.InputElement, hideClass];
+  // const hideClass = !props.registring ? classes.Hide : null;
+  const inputClasses = [classes.InputElement];
   const textareaClasses = [classes.InputElement, classes.Textarea];
   if (
     props.invalid &&
@@ -64,7 +64,6 @@ const input = (props) => {
         />
       );
       break;
-
     case 'textarea':
       inputElement = (
         <textarea

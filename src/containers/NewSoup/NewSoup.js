@@ -9,6 +9,7 @@ import { initialState } from './initialState';
 import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/checkValidity';
+import { validateForm } from '../../shared/validateForm';
 
 class NewSoup extends Component {
   state = initialState;
@@ -24,7 +25,6 @@ class NewSoup extends Component {
       }
       const fetchedControls = cloneDeep(this.props.location.controls);
       const date = new Date(this.props.location.date);
-      console.log(date);
       const startTime = new Date(this.props.location.startTime);
       startTime.setTime(
         startTime.getTime() + startTime.getTimezoneOffset() * 60 * 1000
@@ -51,22 +51,21 @@ class NewSoup extends Component {
           },
         },
       };
-      console.log(updatedControls);
       this.setState({ controls: updatedControls });
     }
   }
-  validateForm = (controls) => {
-    for (let section in controls) {
-      for (let question in controls[section]) {
-        const isValid = controls[section][question].valid;
-        if (!isValid) {
-          this.setState({ formIsValid: false });
-          return false;
-        }
-      }
-    }
-    this.setState({ formIsValid: true });
-  };
+  // validateForm = (controls) => {
+  //   for (let section in controls) {
+  //     for (let question in controls[section]) {
+  //       const isValid = controls[section][question].valid;
+  //       if (!isValid) {
+  //         this.setState({ formIsValid: false });
+  //         return false;
+  //       }
+  //     }
+  //   }
+  //   this.setState({ formIsValid: true });
+  // };
   inputChangedHandler = (event, category, controlName) => {
     let updatedControls = null;
     if (event instanceof Date) {
@@ -97,7 +96,8 @@ class NewSoup extends Component {
       };
     }
     this.setState({ controls: updatedControls });
-    this.validateForm(updatedControls);
+    const formIsValid = validateForm(updatedControls);
+    this.setState({ formIsValid: formIsValid });
   };
   inputNoteHandler = (event, category, controlName) => {
     let updatedControls = null;
@@ -182,15 +182,11 @@ class NewSoup extends Component {
         json: this.state.controls,
       },
     };
-    console.log(data);
-    console.log(this.state.controls);
     this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
     const strigify = JSON.stringify(data);
     const parse = JSON.parse(strigify);
     const url = 'api/supervisions';
     if (this.props.location.edit) {
-      console.log('Edit sent');
-      console.log(parse);
       axios
         .patch(url + '/' + this.props.location.soupId, parse, {
           headers: {

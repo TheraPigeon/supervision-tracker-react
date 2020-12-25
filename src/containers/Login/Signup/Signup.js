@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { connect } from 'react-redux';
 import { buildForm } from '../../../shared/buildForm';
 import { inputHandler } from '../../../shared/inputHandler';
+import { validateForm } from '../../../shared/validateForm';
 import classes from './Signup.module.css';
 import Button from '../../../components/UI/Button/Button';
+import { cloneDeep } from 'lodash';
 const Signup = (props) => {
   let [formConfig, setFormConfig] = useState({
     name: {
@@ -43,11 +46,12 @@ const Signup = (props) => {
       value: '',
       validation: {},
       valid: true,
-      touched: false,
+      touched: true,
       label: "I'm an intern",
     },
   });
   const [form, setForm] = useState();
+  const [validForm, setValidForm] = useState(false);
 
   const inputChangedHandler = ({ event, controlName }) => {
     const updatedControls = inputHandler({ event, controlName }, formConfig);
@@ -55,21 +59,50 @@ const Signup = (props) => {
     const updatedForm = buildForm(updatedControls, inputChangedHandler);
     setForm(updatedForm);
   };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setValidForm(validateForm({ login: formConfig }));
+    //api call here
+  };
 
   useEffect(() => {
-    const formInit = buildForm(formConfig, inputChangedHandler);
+    const updatedConfig = cloneDeep(formConfig);
+    if (props.email) {
+      delete updatedConfig.email;
+    }
+    const formInit = buildForm(updatedConfig, inputChangedHandler);
     setForm(formInit);
   }, [formConfig]);
+  useEffect(() => {
+    const updatedConfig = cloneDeep(formConfig);
+    if (props.email) {
+      delete updatedConfig.email;
+      setFormConfig(updatedConfig);
+    }
+  }, []);
 
   return (
     <div className={classes.Signup}>
       <h1>Step 2: Please finish signing up</h1>
-      <form>
+      <form onSubmit={(e) => handleFormSubmit(e)}>
         {form}
         <Button>Continue</Button>
       </form>
+      {validForm ? <p>valid</p> : <p>Invalid</p>}
     </div>
   );
 };
 
-export default Signup;
+const mapStateToProps = (state) => {
+  return {
+    email: state.auth.email,
+    emailIsVerified: state.auth.emailIsVerified,
+    isNewUser: state.auth.isNewUser,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

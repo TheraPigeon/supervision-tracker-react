@@ -14,6 +14,10 @@ const initialState = {
   clinics: [],
   currentClinic: null,
   isIntern: false,
+  profileCompleted: null,
+  email: null,
+  emailIsVerified: null,
+  isNewUser: null,
 };
 
 const setCurrectClinic = (state, action) => {
@@ -28,6 +32,7 @@ const fetchUserSuccess = (state, action) => {
     roster: action.roster,
     clinics: action.clinics,
     isIntern: action.isIntern,
+    profileCompleted: action.profileCompleted,
     loading: false,
     error: null,
   });
@@ -44,7 +49,7 @@ const authStart = (state, action) => {
 
 const authSuccess = (state, action) => {
   return updateObject(state, {
-    token: action.idToken,
+    token: action.token,
     userId: action.userId,
     name: action.name,
     email: action.email,

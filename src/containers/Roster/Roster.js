@@ -13,7 +13,6 @@ import Signup from '../Login/Signup/Signup';
 class Roster extends Component {
   state = {
     managingStaff: false,
-    profileCompleted: false,
   };
 
   handleModal = () => {
@@ -93,7 +92,7 @@ class Roster extends Component {
           <AddMember />
           {listOfUsers}
         </Modal>
-        <Modal show={!this.state.profileCompleted} noscroll>
+        <Modal show={!this.props.profileCompleted} noscroll>
           <Signup />
         </Modal>
         <div className={classes.Roster}>
@@ -119,6 +118,7 @@ const mapStateToProps = (state) => {
     clinicId: state.auth.currentClinic,
     token: state.auth.token,
     clinics: state.auth.clinics,
+    profileCompleted: state.auth.profileCompleted,
   };
 };
 

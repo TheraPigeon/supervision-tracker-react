@@ -23,7 +23,7 @@ export const authSuccess = ({
 }) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    idToken: token,
+    token,
     userId,
     name,
     email,
@@ -72,12 +72,18 @@ export const fetchUserStart = () => {
     type: actionTypes.FETCH_SUPERVISIONS_START,
   };
 };
-export const fetchUserSuccess = ({ roster, clinics, isIntern }) => {
+export const fetchUserSuccess = ({
+  roster,
+  clinics,
+  isIntern,
+  profileCompleted,
+}) => {
   return {
     type: actionTypes.FETCH_SUPERVISIONS_SUCCESS,
     roster,
     clinics,
     isIntern,
+    profileCompleted,
   };
 };
 export const fetchUserFail = (error) => {
@@ -102,6 +108,7 @@ export const fetchUser = (token, userId) => {
             roster: res.data.roster,
             clinics: res.data.clinics,
             isIntern: res.data.intern,
+            profileCompleted: res.data.profileCompleted,
           })
         );
         const currentClinic = localStorage.getItem('currentClinic');
