@@ -9,6 +9,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import Button from '../../components/UI/Button/Button';
 import classes from './History.module.css';
 import Chart from '../../components/Chart/Chart';
+import Spinner from '../../components/UI/Spinner/Bar';
 
 class History extends Component {
   constructor(props) {
@@ -24,14 +25,9 @@ class History extends Component {
   componentDidMount() {
     this.props.fetchSupervisions(this.props.match.params.id, this.props.token);
   }
-  // componentDidUpdate(prevProps) {
-  //   // only do a review if a book is already available
-  //   if (!prevProps.supervisions && this.props.supervisions) {
-  //     // do a review mutation
-  //     // client.mutate(...)
-  //     this.forceUpdate();
-  //   }
-  // }
+  componentWillUnmount() {
+    this.props.clearSupervisions();
+  }
   handleModal = (soupId) => {
     if (!this.state.viewingSoup) {
       //fetch one soup
@@ -159,22 +155,25 @@ class History extends Component {
           {this.props.supervisions ? (
             <Chart soups={this.props.supervisions} />
           ) : null}
-
-          <table>
-            <thead>
-              <tr>
-                <td>Date</td>
-                <td>Supervisor</td>
-                <td>Duration</td>
-                <td>Starting</td>
-                <td>Conducting</td>
-                <td>Ending</td>
-                <td>Total</td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>{soups}</tbody>
-          </table>
+          {this.props.loading ? (
+            <Spinner />
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <td>Date</td>
+                  <td>Supervisor</td>
+                  <td>Duration</td>
+                  <td>Starting</td>
+                  <td>Conducting</td>
+                  <td>Ending</td>
+                  <td>Total</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>{soups}</tbody>
+            </table>
+          )}
         </div>
       </React.Fragment>
     );
@@ -185,6 +184,7 @@ const mapStateToProps = (state) => {
     clinicId: state.auth.currentClinic,
     token: state.auth.token,
     supervisions: state.history.supervisions,
+    loading: state.history.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -192,6 +192,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchSupervisions: (staffId) =>
       dispatch(actions.fetchSupervisions(staffId)),
     onSoupDelete: (soupId) => dispatch(actions.deleteSoup(soupId)),
+    clearSupervisions: () => dispatch(actions.clearSupervisions()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(History);

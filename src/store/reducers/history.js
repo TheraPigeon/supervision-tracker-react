@@ -7,7 +7,9 @@ const initialState = {
   error: null,
   soup: null,
 };
-
+const clearSupervisions = (state, action) => {
+  return updateObject(state, { supervisions: null });
+};
 const fetchSupervisionsStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
@@ -73,6 +75,9 @@ const reducer = (state = initialState, action) => {
       return deleteSoupSuccess(state, action);
     case actionTypes.DELETE_SOUP_FAIL:
       return deleteSoupFail(state, action);
+
+    case actionTypes.CLEAR_SUPERVISIONS:
+      return clearSupervisions(state, action);
     default:
       return state;
   }

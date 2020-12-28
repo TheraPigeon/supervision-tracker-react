@@ -1,6 +1,11 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 
+export const clearSupervisions = () => {
+  return {
+    type: actionTypes.CLEAR_SUPERVISIONS,
+  };
+};
 export const fetchSupervisionsStart = () => {
   return {
     type: actionTypes.FETCH_SUPERVISIONS_START,
