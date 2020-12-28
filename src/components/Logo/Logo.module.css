@@ -25,7 +25,7 @@
     var(--orange-background),
     var(--teal-background)
   );
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .Logo img {
