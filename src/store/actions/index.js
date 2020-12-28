@@ -6,6 +6,7 @@ export {
   addClinic,
   authCheckState,
   fetchUser,
+  updateUserProfile,
 } from './auth';
 export { fetchMembers, editStaff, deleteStaff } from './allmembers';
 export { joinClinic } from './newclinic';

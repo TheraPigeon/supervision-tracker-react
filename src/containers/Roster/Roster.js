@@ -118,7 +118,7 @@ const mapStateToProps = (state) => {
     clinicId: state.auth.currentClinic,
     token: state.auth.token,
     clinics: state.auth.clinics,
-    profileCompleted: !state.auth.hasCompletedProfile,
+    profileCompleted: state.auth.hasCompletedProfile,
   };
 };
 

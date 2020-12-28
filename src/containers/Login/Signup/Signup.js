@@ -6,6 +6,7 @@ import { validateForm } from '../../../shared/validateForm';
 import classes from './Signup.module.css';
 import Button from '../../../components/UI/Button/Button';
 import { cloneDeep } from 'lodash';
+import * as actions from '../../../store/actions/index';
 const Signup = (props) => {
   let [formConfig, setFormConfig] = useState({
     name: {
@@ -66,6 +67,9 @@ const Signup = (props) => {
     //api call here
     if (validForm) {
       console.log('SUBMITTED');
+      const name = formConfig.name.value;
+      const intern = formConfig.intern.checked;
+      props.onUpdateUserProfile({ name, intern, token: props.token });
     }
   };
 
@@ -102,11 +106,14 @@ const mapStateToProps = (state) => {
     email: state.auth.email,
     emailIsVerified: state.auth.emailIsVerified,
     isNewUser: state.auth.isNewUser,
+    token: state.auth.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onUpdateUserProfile: (data) => dispatch(actions.updateUserProfile(data)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup);

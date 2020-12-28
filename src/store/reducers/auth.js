@@ -20,6 +20,24 @@ const initialState = {
   isNewUser: null,
 };
 
+const updateUserProfileStart = (state, action) => {
+  return updateObject(state, { loading: action.loading });
+};
+const updateUserProfileSuccess = (state, action) => {
+  return updateObject(state, {
+    loading: action.loading,
+    hasCompletedProfile: true,
+    name: action.name,
+    intern: action.intern,
+  });
+};
+const updateUserProfileFail = (state, action) => {
+  return updateObject(state, {
+    loading: action.loading,
+    error: action.error,
+  });
+};
+
 const setCurrectClinic = (state, action) => {
   return updateObject(state, { currentClinic: action.currentClinic });
 };
@@ -125,7 +143,13 @@ const reducer = (state = initialState, action) => {
       return authSuccess(state, action);
     case actionTypes.AUTH_FAIL:
       return authFail(state, action);
-    case actionTypes.FETCH_USER_START:
+    case actionTypes.UPDATE_USER_PROFILE_START:
+      return updateUserProfileStart(state, action);
+    case actionTypes.UPDATE_USER_PROFILE_SUCCESS:
+      return updateUserProfileSuccess(state, action);
+    case actionTypes.UPDATE_USER_PROFILE_FAIL:
+      return updateUserProfileFail(state, action);
+    case actionTypes.FETCH_USER_FAIL:
       return fetchUserStart(state, action);
     case actionTypes.FETCH_USER_SUCCESS:
       return fetchUserSuccess(state, action);

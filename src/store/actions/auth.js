@@ -1,6 +1,47 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 
+export const updateUserProfile = (data) => {
+  const { name, token, intern } = data;
+  return (dispatch) => {
+    const headers = {
+      Authorization: 'Token ' + token,
+    };
+    const data = {
+      name,
+      intern,
+    };
+    dispatch(updateUserProfileStart());
+    axios
+      .put('api/complete_profile', data, { headers })
+      .then((res) => {
+        dispatch(updateUserProfileSuccess(data));
+      })
+      .catch((err) => dispatch(updateUserProfileFail(err)));
+  };
+};
+export const updateUserProfileStart = () => {
+  return {
+    type: actionTypes.UPDATE_USER_PROFILE_START,
+    loading: true,
+  };
+};
+export const updateUserProfileSuccess = ({ name, intern }) => {
+  return {
+    type: actionTypes.UPDATE_USER_PROFILE_SUCCESS,
+    loading: false,
+    name,
+    intern,
+  };
+};
+export const updateUserProfileFail = (error) => {
+  return {
+    type: actionTypes.UPDATE_USER_PROFILE_FAIL,
+    loading: false,
+    error: error,
+  };
+};
+
 export const addClinic = (newClinic) => {
   return {
     type: actionTypes.ADD_CLINIC,
