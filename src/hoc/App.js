@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/index';
-import PrivateRoute from '../containers/Login/Auth/PrivateRoute/PrivateRoute';
 
 import Layout from './Layout/Layout';
+
+// ROUTES
+import PrivateRoute from '../containers/Login/Auth/PrivateRoute/PrivateRoute';
 import Login from '../containers/Login/Login';
 import Logout from '../containers/Login/Logout/Logout';
 import Roster from '../containers/Roster/Roster';
@@ -22,12 +24,8 @@ import BugReport from '../components/Beta/BugReport/BugReport';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 // Date management
 import DateFnsUtils from '@date-io/date-fns';
-import { withAuth0 } from '@auth0/auth0-react';
 
-class App extends Component {
-  componentDidMount = () => {
-    // this.props.onAutoSignin();
-  };
+class App extends PureComponent {
   render() {
     let routes = (
       <Switch>
@@ -98,9 +96,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAutoSignin: () => dispatch(actions.authCheckState()),
+    onAuth: (token) => dispatch(actions.auth(token)),
   };
 };
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(withAuth0(App))
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

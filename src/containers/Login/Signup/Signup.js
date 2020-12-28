@@ -17,6 +17,7 @@ const Signup = (props) => {
       value: '',
       validation: {
         required: true,
+        minLength: 2,
       },
       valid: false,
       touched: false,
@@ -58,11 +59,14 @@ const Signup = (props) => {
     setFormConfig(updatedControls);
     const updatedForm = buildForm(updatedControls, inputChangedHandler);
     setForm(updatedForm);
+    setValidForm(validateForm({ login: updatedControls }));
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setValidForm(validateForm({ login: formConfig }));
     //api call here
+    if (validForm) {
+      console.log('SUBMITTED');
+    }
   };
 
   useEffect(() => {

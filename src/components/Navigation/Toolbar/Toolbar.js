@@ -31,7 +31,7 @@ const toolbar = (props) => {
             </span>
           </button>
         ) : null}
-        <Logo />
+        <Logo authed={props.isAuthorized} />
         {props.isAuth ? <span>Welcome, {props.name}!</span> : null}
       </header>
     </React.Fragment>

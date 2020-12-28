@@ -6,10 +6,11 @@ import Modal from '../../components/UI/Modal/Modal';
 import Note from './Note/Note';
 import classes from './NewSoup.module.css';
 import { initialState } from './initialState';
-import axios from '../../axios-soup';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/checkValidity';
 import { validateForm } from '../../shared/validateForm';
+
+import * as actions from '../../store/actions/index';
 
 class NewSoup extends Component {
   state = initialState;
@@ -159,7 +160,6 @@ class NewSoup extends Component {
       calculatedScores[section] = sectionScore + '/' + amountOfQuestions;
     }
 
-    this.setState({ scores: calculatedScores });
     const adjustTimeZone = (value) =>
       new Date(
         new Date(value).getTime() - new Date(value).getTimezoneOffset() * 60000
@@ -171,7 +171,7 @@ class NewSoup extends Component {
         supervisor_id: this.props.staffId,
         start_time: adjustTimeZone(this.state.controls.setup['1'].value),
         end_time: adjustTimeZone(this.state.controls.setup['2'].value),
-        date: this.state.controls.setup['0'].value,
+        date: adjustTimeZone(this.state.controls.setup['0'].value),
         group: this.state.controls.setup['4'].value === 'group',
         telehealth: this.state.controls.setup['3'].value === 'telehealth',
         starting: calculatedScores.starting,
@@ -183,40 +183,14 @@ class NewSoup extends Component {
       },
     };
     this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
-    const strigify = JSON.stringify(data);
-    const parse = JSON.parse(strigify);
-    const url = 'api/supervisions';
-    if (this.props.location.edit) {
-      axios
-        .patch(url + '/' + this.props.location.soupId, parse, {
-          headers: {
-            Authorization: 'Token ' + this.props.token,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          this.props.history.goBack();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
 
-      e.preventDefault();
-    } else {
-      axios
-        .post(url, parse, {
-          headers: {
-            Authorization: 'Token ' + this.props.token,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          this.props.history.push('/roster');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    this.props.onAddSoup({
+      soupData: data,
+      soupId: this.props.location.soupId,
+      token: this.props.token,
+      edit: this.props.location.edit,
+    });
+    this.props.history.goBack();
     e.preventDefault();
   };
   handleAddNote = (e) => {
@@ -327,4 +301,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(NewSoup);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddSoup: (data) => dispatch(actions.addSoup(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewSoup);

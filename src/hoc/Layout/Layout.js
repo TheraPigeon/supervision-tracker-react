@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
@@ -9,18 +9,16 @@ import * as actions from '../../store/actions/index';
 
 const Layout = (props) => {
   const { isAuthenticated, getIdTokenClaims } = useAuth0();
-  const [authed, setAuthed] = useState(false);
-  if (isAuthenticated && !authed) {
+  useEffect(() => {
     const req = async () => {
       await getIdTokenClaims().then((token) => {
-        if (token) {
+        if (token && isAuthenticated) {
           props.onAuth(token.__raw);
         }
       });
     };
     req();
-    setAuthed(true);
-  }
+  }, [isAuthenticated]);
   const style = {
     gridColumn: '1 / -1',
   };
