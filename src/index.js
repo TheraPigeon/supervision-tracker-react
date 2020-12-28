@@ -8,14 +8,18 @@ import './reset.css';
 import './index.css';
 import App from './hoc/App';
 import * as serviceWorker from './serviceWorker';
+
+// Reducers
 import authReducer from './store/reducers/auth';
 import allMembersReducer from './store/reducers/allmembers';
 import newClinicReducer from './store/reducers/newclinic';
 import rosterReducer from './store/reducers/roster';
 import historyReducer from './store/reducers/history';
+import newsoupReducer from './store/reducers/newsoup';
 
-import { Auth0Provider } from '@auth0/auth0-react';
+import Auth0ProviderWithHistory from './hoc/auth0providerWithHitory';
 
+// load env file
 require('dotenv').config();
 
 const rootReducer = combineReducers({
@@ -24,9 +28,8 @@ const rootReducer = combineReducers({
   newclinic: newClinicReducer,
   roster: rosterReducer,
   history: historyReducer,
+  newsoup: newsoupReducer,
 });
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -38,15 +41,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Auth0Provider
-          domain={domain}
-          clientId={clientId}
-          redirectUri={`${window.location.origin}/authorize`}
-          scope="openid profile email"
-          cacheLocation="localstorage"
-        >
+        <Auth0ProviderWithHistory>
           <App />
-        </Auth0Provider>
+        </Auth0ProviderWithHistory>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
