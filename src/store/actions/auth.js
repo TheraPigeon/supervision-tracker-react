@@ -19,6 +19,7 @@ export const authSuccess = ({
   name,
   email,
   emailIsVerified,
+  hasCompletedProfile,
   isNewUser,
 }) => {
   return {
@@ -28,6 +29,7 @@ export const authSuccess = ({
     name,
     email,
     emailIsVerified,
+    hasCompletedProfile,
     isNewUser,
   };
 };
@@ -69,7 +71,7 @@ export const setAuthRedirectPath = (path) => {
 
 export const fetchUserStart = () => {
   return {
-    type: actionTypes.FETCH_SUPERVISIONS_START,
+    type: actionTypes.FETCH_USER_START,
   };
 };
 export const fetchUserSuccess = ({
@@ -79,7 +81,7 @@ export const fetchUserSuccess = ({
   profileCompleted,
 }) => {
   return {
-    type: actionTypes.FETCH_SUPERVISIONS_SUCCESS,
+    type: actionTypes.FETCH_USER_SUCCESS,
     roster,
     clinics,
     isIntern,
@@ -88,27 +90,27 @@ export const fetchUserSuccess = ({
 };
 export const fetchUserFail = (error) => {
   return {
-    type: actionTypes.FETCH_SUPERVISIONS_FAIL,
+    type: actionTypes.FETCH_USER_FAIL,
     error,
   };
 };
-export const fetchUser = (token, userId) => {
+export const fetchUser = (token) => {
   return (dispatch) => {
     dispatch(fetchUserStart());
-    const url = `api/user_data?user_id=${+userId}`;
+    const url = `api/user_data`;
     axios
-      .post(url, null, {
+      .get(url, {
         headers: {
           Authorization: 'Token ' + token,
         },
       })
       .then((res) => {
+        console.log(res.data);
         dispatch(
           fetchUserSuccess({
-            roster: res.data.roster,
+            roster: res.data.roster_members,
             clinics: res.data.clinics,
             isIntern: res.data.intern,
-            profileCompleted: res.data.profileCompleted,
           })
         );
         const currentClinic = localStorage.getItem('currentClinic');
@@ -171,6 +173,7 @@ export const auth = (token) => {
             name: data.name,
             email: data.email,
             emailIsVerified: data.email_verified,
+            hasCompletedProfile: data.has_completed_profile,
             isNewUser: data.is_new_user,
           })
         );

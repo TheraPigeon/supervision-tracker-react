@@ -9,12 +9,12 @@ const initialState = {
   error: null,
   name: null,
   loading: false,
-  authRedirectPath: '/',
+  authRedirectPath: '/roster',
   roster: [],
   clinics: [],
   currentClinic: null,
   isIntern: false,
-  profileCompleted: null,
+  hasCompletedProfile: null,
   email: null,
   emailIsVerified: null,
   isNewUser: null,
@@ -32,7 +32,6 @@ const fetchUserSuccess = (state, action) => {
     roster: action.roster,
     clinics: action.clinics,
     isIntern: action.isIntern,
-    profileCompleted: action.profileCompleted,
     loading: false,
     error: null,
   });
@@ -54,6 +53,7 @@ const authSuccess = (state, action) => {
     name: action.name,
     email: action.email,
     emailIsVerified: action.emailIsVerified,
+    hasCompletedProfile: action.hasCompletedProfile,
     isNewUser: action.isNewUser,
     error: null,
     loading: false,
@@ -71,7 +71,7 @@ const authLogout = (state, action) => {
   // localStorage.removeItem('token');
   // localStorage.removeItem('userId');
   // localStorage.removeItem('currentClinic');
-  return updateObject(state, { token: null, userId: null });
+  return updateObject(state, { token: 'null', userId: 'null' });
 };
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });

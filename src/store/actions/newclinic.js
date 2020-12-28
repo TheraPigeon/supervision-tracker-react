@@ -26,7 +26,7 @@ export const joinClinic = (isJoin, clinicData, token) => {
     if (isJoin) {
       url = 'api/clinics/' + clinicData + '/join';
       axios
-        .get(url, {
+        .post(url, null, {
           headers: {
             Authorization: 'Token ' + token,
           },

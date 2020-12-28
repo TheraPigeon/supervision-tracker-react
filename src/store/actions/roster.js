@@ -24,7 +24,7 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
     dispatch(createStaffStart());
     let authData = {
       staff: { name: name, clinic_id: clinicId, hours: hours },
-      roster_add: true,
+      roster_add: isFollow,
     };
     axios
       .post('api/staff_members', authData, {
