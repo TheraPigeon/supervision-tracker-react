@@ -5,7 +5,6 @@ import { Auth0Provider } from '@auth0/auth0-react';
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const returnTo = process.env.REACT_APP_AUTH0_RETURN_TO;
 
   // const history = useHistory();
 
@@ -21,7 +20,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
       //   onRedirectCallback={onRedirectCallback}
       scope="openid profile email"
       cacheLocation="localstorage"
-      returnTo={returnTo}
     >
       {children}
     </Auth0Provider>
