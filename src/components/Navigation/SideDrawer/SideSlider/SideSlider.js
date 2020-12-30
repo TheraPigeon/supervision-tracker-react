@@ -20,7 +20,7 @@ const sideslider = (props) => {
     <div className={classes.SideSlider}>
       <section>{clinicLinks}</section>
       <span>
-        <NavLink to="join">
+        <NavLink to="/join">
           <i className="fa fa-plus"></i>
         </NavLink>
       </span>
