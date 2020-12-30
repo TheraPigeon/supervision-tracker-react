@@ -61,12 +61,12 @@ class NewFeature extends Component {
   formSubmitHandler = (e) => {
     e.preventDefault();
 
-    const data = { text: this.state.controls.suggestion['0'].value };
+    const data = {
+      text: this.state.controls.suggestion['0'].value,
+      type: 'BUG',
+    };
     axios
-      .post(
-        'https://hooks.slack.com/services/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',
-        JSON.stringify(data)
-      )
+      .post('https://immense-falls-88506.herokuapp.com/', data)
       .then((response) => {
         this.props.history.goBack();
       })

@@ -63,6 +63,7 @@ class NewFeature extends Component {
     axios
       .post('https://immense-falls-88506.herokuapp.com/', {
         text: this.state.controls.suggestion['0'].value,
+        type: 'FEATURE',
       })
       .then((response) => {
         this.props.history.goBack();
