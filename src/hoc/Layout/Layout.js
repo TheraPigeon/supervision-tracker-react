@@ -9,16 +9,17 @@ import * as actions from '../../store/actions/index';
 
 const Layout = (props) => {
   const { isAuthenticated, getIdTokenClaims } = useAuth0();
+  const { onAuth } = props;
   useEffect(() => {
     const req = async () => {
       await getIdTokenClaims().then((token) => {
         if (token && isAuthenticated) {
-          props.onAuth(token.__raw);
+          onAuth(token.__raw);
         }
       });
     };
     req();
-  }, [isAuthenticated]);
+  }, [isAuthenticated, getIdTokenClaims, onAuth]);
   const style = {
     gridColumn: '1 / -1',
   };

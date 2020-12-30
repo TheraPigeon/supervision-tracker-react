@@ -9,7 +9,7 @@ export const updateUserProfile = (data) => {
     };
     const data = {
       name,
-      intern,
+      intern: intern || false,
     };
     dispatch(updateUserProfileStart());
     axios
@@ -177,35 +177,14 @@ export const auth = (token) => {
     let authData = {
       id_token: token,
     };
-    // if (isSignup) {
-    //   url = 'api/users/';
-    //   authData = {
-    //     user: {
-    //       name: name,
-    //       email: email,
-    //       password: password,
-    //       intern: isIntern,
-    //     },
-    //   };
-    // }
     axios
       .post(url, authData)
       .then(({ data }) => {
         console.log(data);
-        // localStorage.setItem('token', data.token);
-        // localStorage.setItem('userId', data.id);
-
-        // dispatch(
-        //   authSuccess(
-        //     data.token,
-        //     data.id,
-        //     data.name,
-        //     data.roster_members,
-        //     data.clinics,
-        //     data.intern
-        //   )
-        // );
-
+        const currentClinic = localStorage.getItem('currentClinic');
+        if (currentClinic) {
+          dispatch(setCurrentClinic(parseInt(currentClinic)));
+        }
         // Auth0
         dispatch(
           authSuccess({
@@ -218,8 +197,7 @@ export const auth = (token) => {
             isNewUser: data.is_new_user,
           })
         );
-
-        dispatch(fetchUser(data.token, data.id));
+        dispatch(fetchUser(data.token));
 
         const expiresIn = 36000;
         dispatch(checkAuthTimeout(expiresIn));

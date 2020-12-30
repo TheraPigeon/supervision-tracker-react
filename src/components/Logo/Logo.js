@@ -9,7 +9,7 @@ const logo = (props) => {
   const style = props.authed
     ? {
         color: '#777',
-        webkitTextFillColor: 'unset',
+        WebkitTextFillColor: 'unset',
         background: 'transparent',
       }
     : null;

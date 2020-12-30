@@ -32,7 +32,9 @@ const toolbar = (props) => {
           </button>
         ) : null}
         <Logo authed={props.isAuthorized} />
-        {props.isAuth ? <span>Welcome, {props.name}!</span> : null}
+        {props.isAuth && props.profileCompleted ? (
+          <span>Welcome, {props.name}!</span>
+        ) : null}
       </header>
     </React.Fragment>
   );
@@ -42,6 +44,7 @@ const mapStateToProps = (state) => {
   return {
     isAuthorized: state.auth.token !== null,
     name: state.auth.name,
+    profileCompleted: state.auth.hasCompletedProfile,
   };
 };
 

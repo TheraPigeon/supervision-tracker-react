@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
 
-import Input from '../../../components/UI/Input/Input';
-import Button from '../../../components/UI/Button/Button';
-import Spinner from '../../../components/UI/Spinner/Spinner';
 import LoginButton from '../../../components/UI/LoginButton/LoginButton';
 
 import classes from './Auth.module.css';
 import * as actions from '../../../store/actions/index';
-import { checkValidity } from '../../../shared/checkValidity';
 import { buildForm } from '../../../shared/buildForm';
 import { inputHandler } from '../../../shared/inputHandler';
 

@@ -72,7 +72,7 @@ export const initialState = {
           options: cloneDeep(setupSessionType),
           question: 'Type of session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
@@ -87,7 +87,7 @@ export const initialState = {
           options: cloneDeep(setupSessionArrangement),
           question: 'Type of Session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
@@ -104,13 +104,13 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Arrived on time / followed late arrival protocol',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
 
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       s1: {
         elementType: 'input',
@@ -120,12 +120,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Set up materials/curriculum/data sheets for session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       s2: {
         elementType: 'input',
@@ -136,12 +136,12 @@ export const initialState = {
           question:
             'Informed care givers of programming session items\n-shared if new programs will be run or anticipate problem behavior during the session and plan of action\n-inquired if there is anything special going on at home or session needed to end early',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       s3: {
         elementType: 'input',
@@ -151,12 +151,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Reviewed data from previous day',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
     },
     main: {
@@ -168,12 +168,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Set up materials/curriculum/data sheets for session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m1: {
         elementType: 'input',
@@ -183,12 +183,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Used antecedent procedures as outlined in the BIP',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m2: {
         elementType: 'input',
@@ -198,12 +198,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Accurately implemented BIP intervention procedures',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m3: {
         elementType: 'input',
@@ -213,12 +213,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Used transition warnings if necessary',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m4: {
         elementType: 'input',
@@ -228,12 +228,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Used environmental arrangement/set-up',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m5: {
         elementType: 'input',
@@ -244,12 +244,12 @@ export const initialState = {
           question:
             'Identified in the moment MO and used it to reward/shape behavior',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m6: {
         elementType: 'input',
@@ -259,12 +259,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Identified potential setting events',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m7: {
         elementType: 'input',
@@ -274,12 +274,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Took data throughout session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m8: {
         elementType: 'input',
@@ -289,12 +289,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Interspersed targets within programs and across programs',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m9: {
         elementType: 'input',
@@ -304,12 +304,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Conducted DT in various locations when applicable',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m10: {
         elementType: 'input',
@@ -320,12 +320,12 @@ export const initialState = {
           question:
             "Varied pacing as necessary to shape behaviour and learner's attention/interest",
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m11: {
         elementType: 'input',
@@ -335,12 +335,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Delivered clear Sds',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m13: {
         elementType: 'input',
@@ -351,12 +351,12 @@ export const initialState = {
           question:
             'Taught and shaped all skill acquisition programs and accurately implemented teaching procedures as written within programs',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m14: {
         elementType: 'input',
@@ -367,12 +367,12 @@ export const initialState = {
           question:
             'Identified the difference between shaping skills within a session and the necessity of implementing a skill acquisition program',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m15: {
         elementType: 'input',
@@ -383,12 +383,12 @@ export const initialState = {
           question:
             'Demonstrated awareness of clinical skill limitation and requested assistance when necessary',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m16: {
         elementType: 'input',
@@ -399,12 +399,12 @@ export const initialState = {
           question:
             "Used familiar teaching procedures to ensure the learner's success in other activities/environments",
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m17: {
         elementType: 'input',
@@ -415,12 +415,12 @@ export const initialState = {
           question:
             'Provided adequate number of verbal models and shaped novel language acquisition',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m18: {
         elementType: 'input',
@@ -430,12 +430,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Contrived manding opportunities',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m19: {
         elementType: 'input',
@@ -445,12 +445,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Taught social competence skills',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m20: {
         elementType: 'input',
@@ -461,12 +461,12 @@ export const initialState = {
           question:
             'Delivered more rewards/praise statements vs. prompts throughout the session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m21: {
         elementType: 'input',
@@ -476,12 +476,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Delivered effective prompts',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m22: {
         elementType: 'input',
@@ -491,12 +491,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Faded manual prompts when necessary',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m23: {
         elementType: 'input',
@@ -506,12 +506,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Implemented error correction procedures effectively',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m24: {
         elementType: 'input',
@@ -522,12 +522,12 @@ export const initialState = {
           question:
             "Learner's engagement was at 80% or greater during various activities",
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m25: {
         elementType: 'input',
@@ -538,12 +538,12 @@ export const initialState = {
           question:
             'Provided real life rationales throughout session as appropriate',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m26: {
         elementType: 'input',
@@ -553,12 +553,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Followed the center schedule',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m27: {
         elementType: 'input',
@@ -568,12 +568,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Voice tone varied regarding activity',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       m28: {
         elementType: 'input',
@@ -583,12 +583,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Modeled language through play/throughout activities',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
     },
     ending: {
@@ -600,12 +600,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Graphed data / wrote session note within session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       e1: {
         elementType: 'input',
@@ -616,12 +616,12 @@ export const initialState = {
           question:
             'Communicated necessary info to next therapist working with learner',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       e2: {
         elementType: 'input',
@@ -631,12 +631,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Cleaned up materials / curriculum',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       e3: {
         elementType: 'input',
@@ -646,12 +646,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Provided summary to parents / caregivers',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       e4: {
         elementType: 'input',
@@ -661,12 +661,12 @@ export const initialState = {
           options: cloneDeep(mainSelection),
           question: 'Checked in with BCBA at end of session',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
     },
     additional: {
@@ -679,12 +679,12 @@ export const initialState = {
           question:
             'Professionalism (i.e., used client first language, communicated with parents/staff, followed schedule, responded to emails within 24/48 hours)',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       a1: {
         elementType: 'input',
@@ -695,12 +695,12 @@ export const initialState = {
           question:
             'Session notes (i.e., used appropriate vocabulary, summarized data, noted anything novel in session) AND Data Sheet loaded to the drive',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       // a2: {
       //   elementType: 'input',
@@ -711,12 +711,12 @@ export const initialState = {
       //     question:
       //       'Rendering / NPA Appointments (i.e., communicated appointment modifications, added notes, rendered withindate)',
       //   },
-      //   value: '',
+      //   value: 'NA',
       //   noteValue: '',
       //   validation: {
       //     required: true,
       //   },
-      //   valid: false,
+      //   valid: true,
       // },
       a3: {
         elementType: 'input',
@@ -727,12 +727,12 @@ export const initialState = {
           question:
             'Rapport Building / Enthusiasm / FUN in session (i.e., made learning fun, age appropriate jokes, spoke in positive/up beat voice tone)',
         },
-        value: '',
+        value: 'NA',
         noteValue: '',
         validation: {
           required: true,
         },
-        valid: false,
+        valid: true,
       },
       a4: {
         elementType: 'textarea',

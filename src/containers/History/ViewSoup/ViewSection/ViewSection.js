@@ -32,8 +32,12 @@ const viewSection = (props) => {
       case 'NI':
         answer = 'Needs improvement';
         break;
-      default:
+      case '':
+      case 'NA':
         answer = 'N/A';
+        break;
+      default:
+        answer = value;
     }
     return (
       <tr key={soupElement.id}>

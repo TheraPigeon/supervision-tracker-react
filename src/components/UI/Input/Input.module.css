@@ -97,9 +97,13 @@
   height: 0;
   width: 0;
 }
+.Fieldset input[value='NA']:checked ~ span {
+  background-color: #777;
+}
 .Fieldset input:checked ~ span {
   background-color: var(--orange-background);
 }
+
 .Fieldset label {
   display: block;
   position: relative;
@@ -114,6 +118,7 @@
   user-select: none;
   border: 1px solid beige;
 }
+
 .Fieldset span {
   display: flex;
   align-items: center;

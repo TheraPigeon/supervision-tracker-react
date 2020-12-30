@@ -28,6 +28,18 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+@media screen and (max-width: 768px) {
+  .Logo {
+    width: 100%;
+  }
+  .Logo h1 {
+    margin: 0 auto;
+  }
+  .Logo h1 span {
+    display: none;
+  }
+}
+
 .Logo img {
   height: 100%;
   border-radius: 8px;

@@ -41,8 +41,7 @@ class App extends PureComponent {
         <Switch>
           {/* Public routes */}
           <Route path="/logout" component={Logout} />
-          {/* History Route */}
-          <Route path="/history/:id" component={History} />
+
           {/* Authorization required */}
           <PrivateRoute
             auth={this.props.isAuthorized}
@@ -57,6 +56,7 @@ class App extends PureComponent {
           <PrivateRoute
             auth={this.props.isAuthorized}
             path="/join"
+            exact
             component={NewClinic}
           />
           <PrivateRoute
@@ -74,6 +74,8 @@ class App extends PureComponent {
             path="/soupervision/:id"
             component={NewSoup}
           />
+          {/* History Route */}
+          <Route path="/history/:id" component={History} />
           <Redirect to="/roster" />
         </Switch>
       );

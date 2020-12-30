@@ -149,7 +149,7 @@ const reducer = (state = initialState, action) => {
       return updateUserProfileSuccess(state, action);
     case actionTypes.UPDATE_USER_PROFILE_FAIL:
       return updateUserProfileFail(state, action);
-    case actionTypes.FETCH_USER_FAIL:
+    case actionTypes.FETCH_USER_START:
       return fetchUserStart(state, action);
     case actionTypes.FETCH_USER_SUCCESS:
       return fetchUserSuccess(state, action);

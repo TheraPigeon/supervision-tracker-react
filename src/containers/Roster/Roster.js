@@ -76,9 +76,10 @@ class Roster extends Component {
         );
       });
     }
-    // if (!this.props.clinics.length) {
-    //   this.props.history.push('/join');
-    // }
+    if (!this.props.currentClinic) {
+      console.log(this.props.currentClinic);
+      this.props.history.push('/join');
+    }
     const currentClinicData = this.props.clinics.filter((clinic) => {
       return clinic.id === this.props.clinicId;
     });
@@ -116,6 +117,7 @@ const mapStateToProps = (state) => {
     roster: state.auth.roster,
     members: state.allmembers.members,
     clinicId: state.auth.currentClinic,
+    currentClinic: state.auth.currentClinic,
     token: state.auth.token,
     clinics: state.auth.clinics,
     profileCompleted: state.auth.hasCompletedProfile,

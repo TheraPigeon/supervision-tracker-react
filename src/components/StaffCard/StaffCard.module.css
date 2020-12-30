@@ -11,7 +11,5 @@
 .StaffCard button {
   width: 120px;
   background: none;
-}
-.StaffCard button:last-of-type {
-  text-align: end;
+  margin: 0 5px;
 }

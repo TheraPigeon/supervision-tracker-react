@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { buildForm } from '../../../shared/buildForm';
 import { inputHandler } from '../../../shared/inputHandler';
@@ -54,49 +55,50 @@ const Signup = (props) => {
   });
   const [form, setForm] = useState();
   const [validForm, setValidForm] = useState(false);
+  const history = useHistory();
 
-  const inputChangedHandler = ({ event, controlName }) => {
-    const updatedControls = inputHandler({ event, controlName }, formConfig);
-    setFormConfig(updatedControls);
-    const updatedForm = buildForm(updatedControls, inputChangedHandler);
-    setForm(updatedForm);
-    setValidForm(validateForm({ login: updatedControls }));
-  };
   const handleFormSubmit = (e) => {
     e.preventDefault();
     //api call here
     if (validForm) {
-      console.log('SUBMITTED');
       const name = formConfig.name.value;
       const intern = formConfig.intern.checked;
       props.onUpdateUserProfile({ name, intern, token: props.token });
+      history.push('/join');
     }
   };
-
+  const { email } = props;
   useEffect(() => {
+    const inputChangedHandler = ({ event, controlName }) => {
+      const updatedControls = inputHandler({ event, controlName }, formConfig);
+      setFormConfig(updatedControls);
+      const updatedForm = buildForm(updatedControls, inputChangedHandler);
+      setForm(updatedForm);
+      setValidForm(validateForm({ login: updatedControls }));
+    };
     const updatedConfig = cloneDeep(formConfig);
-    if (props.email) {
+    if (email) {
       delete updatedConfig.email;
     }
     const formInit = buildForm(updatedConfig, inputChangedHandler);
     setForm(formInit);
-  }, [formConfig]);
+  }, [formConfig, email]);
   useEffect(() => {
     const updatedConfig = cloneDeep(formConfig);
-    if (props.email) {
+    if (email) {
       delete updatedConfig.email;
       setFormConfig(updatedConfig);
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [email]);
 
   return (
     <div className={classes.Signup}>
       <h1>Step 2: Please finish signing up</h1>
       <form onSubmit={(e) => handleFormSubmit(e)}>
         {form}
-        <Button>Continue</Button>
+        <Button>finish</Button>
       </form>
-      {validForm ? <p>valid</p> : <p>Invalid</p>}
     </div>
   );
 };

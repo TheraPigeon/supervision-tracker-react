@@ -54,6 +54,8 @@ class AllMembers extends Component {
               name={member.config.name || member.config.email}
               inRoster={member.inRoster}
               staffId={member.staffId}
+              token={this.props.token}
+              deleteMember={this.props.onDeleteStaff}
               handleFollow={() =>
                 this.handleRoster(member.staffId, member.inRoster)
               }
@@ -87,6 +89,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.fetchMembers(clinicId, token)),
     addToRoster: (staffId, token, isFollowing) =>
       dispatch(actions.addStaff(staffId, token, isFollowing)),
+    onDeleteStaff: (staffId, token) =>
+      dispatch(actions.deleteStaff(staffId, token)),
   };
 };
 

@@ -61,6 +61,7 @@ export const editStaffFail = (error) => {
 
 export const editStaff = (userData, token) => {
   return (dispatch) => {
+    dispatch(editStaffStart());
     const { name, hours, staffId } = userData;
     const updatedStaff = {
       staff: {
