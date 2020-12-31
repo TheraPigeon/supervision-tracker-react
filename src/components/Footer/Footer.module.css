@@ -1,0 +1,41 @@
+.Footer {
+  position: absolute;
+  bottom: 0;
+  color: orange;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.Footer > * {
+  padding: 8px 5px;
+}
+.Footer a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.Terms div {
+  color: #fff;
+  padding: 20px;
+  text-align: start;
+}
+.Terms h1 {
+  font-size: 2rem;
+  /* color: var(--orange-background); */
+}
+.Terms h2 {
+  font-size: 1.8rem !important;
+  border: none !important;
+  padding: 15px 0 !important;
+}
+.Terms h3 {
+  font-size: 1.5rem;
+}
+.Terms strong {
+  font-weight: bold;
+}
+.Terms * {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  line-height: 2rem;
+}

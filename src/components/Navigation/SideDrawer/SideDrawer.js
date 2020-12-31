@@ -1,6 +1,7 @@
 import React from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import SideSlider from './SideSlider/SideSlider';
+import Footer from '../../Footer/Footer';
 import classes from './SideDrawer.module.css';
 
 const sidedrawer = (props) => {
@@ -15,9 +16,9 @@ const sidedrawer = (props) => {
         {/* <h2>Clinic Name</h2> */}
         <nav>
           <NavigationItems />
+          <Footer />
         </nav>
       </div>
-      
     </div>
   );
 };
