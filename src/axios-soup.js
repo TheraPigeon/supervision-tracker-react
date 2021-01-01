@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const instance = axios.create({
-  baseURL: 'https://abasoup.herokuapp.com/',
+  baseURL: backendUrl,
 });
 
 export default instance;
