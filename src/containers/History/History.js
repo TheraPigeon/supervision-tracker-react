@@ -102,14 +102,16 @@ class History extends Component {
               </Button>
             </td>
             <td>
-              <Button
-                type="button"
-                clicked={() =>
-                  this.handleDeleteModal({ soupId: soupId, date: soup.date })
-                }
-              >
-                Delete
-              </Button>
+              {this.props.token ? (
+                <Button
+                  type="button"
+                  clicked={() =>
+                    this.handleDeleteModal({ soupId: soupId, date: soup.date })
+                  }
+                >
+                  Delete
+                </Button>
+              ) : null}
             </td>
           </tr>
         );
