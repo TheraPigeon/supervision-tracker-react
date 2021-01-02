@@ -14,15 +14,7 @@ const privacyPolicy = (props) => {
       <p>
         We use Your Personal data to provide and improve the Service. By using
         the Service, You agree to the collection and use of information in
-        accordance with this Privacy Policy. This Privacy Policy has been
-        created with the help of the{' '}
-        <a
-          href="https://www.termsfeed.com/privacy-policy-generator/"
-          target="_blank"
-        >
-          Privacy Policy Generator
-        </a>
-        .
+        accordance with this Privacy Policy.
       </p>
       <h1>Interpretation and Definitions</h1>
       <h2>Interpretation</h2>
@@ -107,7 +99,7 @@ const privacyPolicy = (props) => {
             <strong>Website</strong> refers to TheraPigeon, accessible from{' '}
             <a
               href="https://www.therapigeon.com/"
-              rel="external nofollow noopener"
+              rel="external nofollow noopener noreferrer"
               target="_blank"
             >
               https://www.therapigeon.com/
@@ -190,7 +182,7 @@ const privacyPolicy = (props) => {
           disabling, or deleting local shared objects?&quot; available at{' '}
           <a
             href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
-            rel="external nofollow noopener"
+            rel="external nofollow noopener noreferrer"
             target="_blank"
           >
             Adobe help
@@ -210,11 +202,7 @@ const privacyPolicy = (props) => {
         Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies.
         Persistent Cookies remain on Your personal computer or mobile device
         when You go offline, while Session Cookies are deleted as soon as You
-        close Your web browser. You can learn more about cookies here:{' '}
-        <a href="https://www.termsfeed.com/blog/cookies/" target="_blank">
-          All About Cookies by TermsFeed
-        </a>
-        .
+        close Your web browser.
       </p>
       <p>
         We use both Session and Persistent Cookies for the purposes set out

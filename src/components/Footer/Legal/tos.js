@@ -57,15 +57,7 @@ const tos = (props) => {
             <strong>Terms and Conditions</strong> (also referred as
             &quot;Terms&quot;) mean these Terms and Conditions that form the
             entire agreement between You and the Company regarding the use of
-            the Service. This Terms and Conditions agreement has been created
-            with the help of the{' '}
-            <a
-              href="https://www.termsfeed.com/terms-conditions-generator/"
-              target="_blank"
-            >
-              Terms and Conditions Generator
-            </a>
-            .
+            the Service.
           </p>
         </li>
         <li>
@@ -81,8 +73,8 @@ const tos = (props) => {
             <strong>Website</strong> refers to TheraPigeon, accessible from{' '}
             <a
               href="https://www.therapigeon.com/"
-              rel="external nofollow noopener"
               target="_blank"
+              rel="external nofollow noopener noreferrer"
             >
               https://www.therapigeon.com/
             </a>
