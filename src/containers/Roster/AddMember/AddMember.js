@@ -69,14 +69,17 @@ const AddMember = (props) => {
           onChange={(e) => setInit(e.target.value)}
           placeholder="Init"
         />
-        <label>
-          Follow?
-          <input
-            checked={follow}
-            onChange={(e) => setFollow(e.target.checked)}
-            type="checkbox"
-          />
-        </label>
+        {!props.editing ? (
+          <label>
+            Follow?
+            <input
+              checked={follow}
+              onChange={(e) => setFollow(e.target.checked)}
+              type="checkbox"
+            />
+          </label>
+        ) : null}
+
         <select value={hours} onChange={(e) => setHours(e.target.value)}>
           {hoursSelection}
         </select>
