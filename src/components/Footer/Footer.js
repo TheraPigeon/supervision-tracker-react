@@ -9,7 +9,7 @@ const Footer = (props) => {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   return (
-    <div className={classes.Footer}>
+    <React.Fragment>
       <div className={classes.Terms}>
         <Modal show={showTerms} modalClosed={() => setShowTerms(!showTerms)}>
           <Tos />
@@ -21,15 +21,28 @@ const Footer = (props) => {
           <PrivacyPolicy />
         </Modal>
       </div>
-      <a onClick={() => setShowPrivacy(!showPrivacy)}>Privacy Policy</a>
-      <a onClick={() => setShowTerms(!showPrivacy)}>Terms of Service</a>
-      <div class="footerContent">
-        &copy; 2020 - 2021 Made with love by{' '}
-        <a href="http://www.therapigeon.com" target="_blank">
-          TheraPigeon
-        </a>
+      <div className={classes.Footer}>
+        <button onClick={() => setShowPrivacy(!showPrivacy)}>
+          Privacy Policy
+        </button>
+        <button onClick={() => setShowTerms(!showPrivacy)}>
+          Terms of Service
+        </button>
+
+        <p>Copyright &copy; 2021</p>
+        {/* <br /> */}
+        <p>
+          Made with love by{' '}
+          <a
+            href="http://www.therapigeon.com"
+            target="_blank"
+            rel="external noreferrer nofollow noopener"
+          >
+            TheraPigeon
+          </a>
+        </p>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
