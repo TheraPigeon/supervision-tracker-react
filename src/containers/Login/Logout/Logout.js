@@ -10,7 +10,7 @@ const Logout = (props) => {
     props.onLogout();
     logout({ returnTo });
   }, [props, logout, returnTo]);
-  return <div>Loging out</div>;
+  return <div></div>;
 };
 const mapDispatchToProps = (dispatch) => {
   return {
