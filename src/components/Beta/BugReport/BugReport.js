@@ -68,12 +68,13 @@ class NewFeature extends Component {
     axios
       .post('https://immense-falls-88506.herokuapp.com/', data)
       .then((response) => {
-        this.props.history.goBack();
+        // this.props.history.goBack();
       })
       .catch((err) => {
-        this.props.history.goBack();
+        // this.props.history.goBack();
         console.log(err);
       });
+    this.props.history.push('/roster');
   };
   render() {
     return (

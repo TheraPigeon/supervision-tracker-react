@@ -66,9 +66,10 @@ class NewFeature extends Component {
         type: 'FEATURE',
       })
       .then((response) => {
-        this.props.history.goBack();
+        // this.props.history.goBack();
       })
       .catch((err) => console.log(err));
+    this.props.history.push('/roster');
   };
   render() {
     return (
