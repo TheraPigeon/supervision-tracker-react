@@ -128,8 +128,12 @@ const createStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const createStaffSuccess = (state, action) => {
-  const updatedRoster = merge({}, state.roster, action.newStaff);
-  return updateObject(state, { loading: false, roster: updatedRoster });
+  if (action.isFollow) {
+    const updatedRoster = merge({}, state.roster, action.newStaff);
+    return updateObject(state, { loading: false, roster: updatedRoster });
+  } else {
+    return updateObject(state, { loading: false });
+  }
 };
 const createStaffFail = (state, action) => {
   return updateObject(state, { loading: false, error: action.error });

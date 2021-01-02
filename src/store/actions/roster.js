@@ -6,10 +6,11 @@ export const createStaffStart = () => {
     type: actionTypes.CREATE_STAFF_START,
   };
 };
-export const createStaffSuccess = (newStaff) => {
+export const createStaffSuccess = ({ newStaff, isFollow }) => {
   return {
     type: actionTypes.CREATE_STAFF_SUCCESS,
-    newStaff: newStaff,
+    newStaff,
+    isFollow,
   };
 };
 export const createStaffFail = (error) => {
@@ -42,7 +43,7 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
             supervisions: [{}],
           },
         };
-        dispatch(createStaffSuccess(data));
+        dispatch(createStaffSuccess({ newStaff: data, isFollow }));
       })
       .catch((err) => {
         console.log(err);
