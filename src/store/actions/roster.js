@@ -34,6 +34,7 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         const id = res.data.staff_member.id;
         const data = {
           [id]: {

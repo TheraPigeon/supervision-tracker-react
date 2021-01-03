@@ -5,6 +5,22 @@ const initialState = {
   members: [],
   loading: false,
 };
+
+const createStaffStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+const createStaffSuccess = (state, action) => {
+  const staffId = Object.keys(action.newStaff)[0];
+  const formattedMember = cloneDeep(action.newStaff[staffId.toString()]);
+  Object.assign(formattedMember, { id: staffId });
+  const updatedMembers = cloneDeep(state.members);
+  updatedMembers.staff_members.push(formattedMember);
+  return updateObject(state, { loading: false, members: updatedMembers });
+};
+const createStaffFail = (state, action) => {
+  return updateObject(state, { loading: false, error: action.error });
+};
+
 const fetchMembersStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
@@ -77,6 +93,13 @@ const reducer = (state = initialState, action) => {
       return deleteStaffSuccess(state, action);
     case actionTypes.DELETE_STAFF_FAIL:
       return deleteStaffFail(state, action);
+
+    case actionTypes.CREATE_STAFF_START:
+      return createStaffStart(state, action);
+    case actionTypes.CREATE_STAFF_SUCCESS:
+      return createStaffSuccess(state, action);
+    case actionTypes.CREATE_STAFF_FAIL:
+      return createStaffFail(state, action);
     default:
       return state;
   }
