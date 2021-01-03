@@ -58,6 +58,7 @@ class Roster extends Component {
           config: this.props.members.staff_members[key],
         });
       }
+      console.log(this.props.members);
       listOfUsers = userListArray.map((member) => {
         return (
           <StaffCard

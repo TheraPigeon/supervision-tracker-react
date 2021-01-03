@@ -7,9 +7,9 @@ const StaffCard = (props) => {
   const [editing, setEditing] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  const handleStaffDelete = (staffId) => {
-    props.deleteMember(staffId, props.token);
-    // setDeleting(false);
+  const handleStaffDelete = async (staffId) => {
+    const res = await props.deleteMember(staffId, props.token);
+    if (props.loading) setDeleting(false);
   };
   return (
     <div className={classes.StaffCard}>
@@ -66,5 +66,9 @@ const StaffCard = (props) => {
     </div>
   );
 };
-
+const mapStateToProps = (state) => {
+  return {
+    loading: state.allmembers.loading,
+  };
+};
 export default StaffCard;
