@@ -17,9 +17,6 @@ const toolbar = (props) => {
         style={{ zIndex: '100' }}
       />
       <header className={classes.Toolbar}>
-        {/* <div style={{ zIndex: '100000' }} >
-      <img src={menuSVG} alt="hamburger menu" />
-    </div> */}
         {props.isAuthorized ? (
           <button
             className={buttonStyle.join(' ')}
