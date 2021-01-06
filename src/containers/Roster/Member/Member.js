@@ -82,6 +82,40 @@ class Member extends Component {
         ? classes.Yellow
         : null;
     const styleClasses = [classes.Member, cardBgColor].join(' ');
+    const circleItemsConfig = [
+      {
+        type: 'goal',
+        content: `${this.state.weeklyPercentage}%`,
+        hintMessage: 'Weekly goal',
+      },
+      {
+        type: 'intern',
+        content: `${this.state.internMin}m%`,
+        hintMessage: 'Supervision time conducted by an intern',
+      },
+      {
+        type: 'total',
+        content: this.state.latestScore,
+        hintMessage: 'Total score on the latest supervision',
+      },
+    ];
+    const circleItems = circleItemsConfig.map((circle, i) => {
+      return (
+        <span
+          key={circle.type + i}
+          onMouseEnter={() => this.handleHover(circle.type)}
+          onMouseOut={this.handleHover}
+        >
+          {circle.content}
+          <HoverHint
+            key={i}
+            show={this.state.showHint === circle.type}
+            message={circle.hintMessage}
+          />
+        </span>
+      );
+    });
+
     return (
       <section className={styleClasses}>
         <main>
@@ -113,38 +147,7 @@ class Member extends Component {
           </NavLink>
         </section>
 
-        <aside>
-          <span
-            onMouseEnter={() => this.handleHover('goal')}
-            onMouseOut={this.handleHover}
-          >
-            {this.state.weeklyPercentage}%
-            <HoverHint
-              show={this.state.showHint === 'goal'}
-              message={'Weekly goal'}
-            />
-          </span>
-          <span
-            onMouseEnter={() => this.handleHover('intern')}
-            onMouseOut={this.handleHover}
-          >
-            {this.state.internMin}m
-            <HoverHint
-              show={this.state.showHint === 'intern'}
-              message={'Supervision time conducted by an intern'}
-            />
-          </span>
-          <span
-            onMouseEnter={() => this.handleHover('total')}
-            onMouseOut={this.handleHover}
-          >
-            {this.state.latestScore}
-            <HoverHint
-              show={this.state.showHint === 'total'}
-              message={'Total score on the latest supervision'}
-            />
-          </span>
-        </aside>
+        <aside>{circleItems}</aside>
       </section>
     );
   }
