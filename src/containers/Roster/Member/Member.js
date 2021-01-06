@@ -3,17 +3,21 @@ import { connect } from 'react-redux';
 import { differenceInMilliseconds, differenceInMinutes } from 'date-fns';
 import classes from './Member.module.css';
 import { NavLink } from 'react-router-dom';
-
+import HoverHint from '../../../components/UI/HoverHint/HoverHint';
 class Member extends Component {
   state = {
     weeklyPercentage: 0,
     internMin: 0,
     latestScore: 'N/A',
+    showHint: false,
   };
   componentDidMount = () => {
     if (this.props.roster[this.props.memberId].supervisions) {
       this.updateCircleItems();
     }
+  };
+  handleHover = (category) => {
+    this.setState({ showHint: category });
   };
 
   updateCircleItems() {
@@ -44,7 +48,7 @@ class Member extends Component {
         new Date(soup.end_time),
         new Date(soup.start_time)
       );
-
+      console.log(soup);
       if (soup.intern) {
         internMinutes += diff;
       } else {
@@ -110,9 +114,36 @@ class Member extends Component {
         </section>
 
         <aside>
-          <span>{this.state.weeklyPercentage}%</span>
-          <span>{this.state.internMin}m</span>
-          <span>{this.state.latestScore}</span>
+          <span
+            onMouseEnter={() => this.handleHover('goal')}
+            onMouseOut={this.handleHover}
+          >
+            {this.state.weeklyPercentage}%
+            <HoverHint
+              show={this.state.showHint === 'goal'}
+              message={'Weekly goal'}
+            />
+          </span>
+          <span
+            onMouseEnter={() => this.handleHover('intern')}
+            onMouseOut={this.handleHover}
+          >
+            {this.state.internMin}m
+            <HoverHint
+              show={this.state.showHint === 'intern'}
+              message={'Supervision time conducted by an intern'}
+            />
+          </span>
+          <span
+            onMouseEnter={() => this.handleHover('total')}
+            onMouseOut={this.handleHover}
+          >
+            {this.state.latestScore}
+            <HoverHint
+              show={this.state.showHint === 'total'}
+              message={'Total score on the latest supervision'}
+            />
+          </span>
         </aside>
       </section>
     );

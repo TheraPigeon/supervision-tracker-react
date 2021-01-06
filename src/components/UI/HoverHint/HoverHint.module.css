@@ -1,0 +1,11 @@
+.HoverHint {
+  position: absolute;
+  bottom: -60px;
+  right: 0;
+  width: 250px;
+  height: 50px;
+  padding: 10px;
+  background-color: var(--grey-background);
+  opacity: 0.95;
+  z-index: 10;
+}
