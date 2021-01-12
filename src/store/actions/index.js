@@ -18,3 +18,5 @@ export {
   clearSupervisions,
 } from './history';
 export { addSoup } from './newsoup';
+
+export { requestStatusClear } from './requeststatus';

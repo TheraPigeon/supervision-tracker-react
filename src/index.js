@@ -16,6 +16,7 @@ import newClinicReducer from './store/reducers/newclinic';
 import rosterReducer from './store/reducers/roster';
 import historyReducer from './store/reducers/history';
 import newsoupReducer from './store/reducers/newsoup';
+import requeststatusReducer from './store/reducers/requeststatus';
 
 import Auth0ProviderWithHistory from './hoc/auth0providerWithHitory';
 
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   roster: rosterReducer,
   history: historyReducer,
   newsoup: newsoupReducer,
+  requeststatus: requeststatusReducer,
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
