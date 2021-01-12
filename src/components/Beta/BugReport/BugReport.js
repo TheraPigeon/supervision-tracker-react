@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Input from '../../UI/Input/Input';
 import { checkValidity } from '../../../shared/checkValidity';
 import Button from '../../UI/Button/Button';
 
 import axios from 'axios';
+import {
+  requestStatusSuccess,
+  requestStatusFailure,
+} from '../../../store/actions/requeststatus';
 
 class NewFeature extends Component {
   state = {
@@ -69,10 +74,12 @@ class NewFeature extends Component {
       .post('https://immense-falls-88506.herokuapp.com/', data)
       .then((response) => {
         // this.props.history.goBack();
+        this.props.onSuccessMessage();
       })
       .catch((err) => {
         // this.props.history.goBack();
         console.log(err);
+        this.props.onFailedMessage();
       });
     this.props.history.push('/roster');
   };
@@ -98,4 +105,11 @@ class NewFeature extends Component {
   }
 }
 
-export default NewFeature;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSuccessMessage: () => dispatch(requestStatusSuccess('Success')),
+    onFailedMessage: () => dispatch(requestStatusFailure('Failed')),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewFeature);

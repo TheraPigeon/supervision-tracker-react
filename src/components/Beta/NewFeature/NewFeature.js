@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Input from '../../UI/Input/Input';
 import { checkValidity } from '../../../shared/checkValidity';
 import Button from '../../UI/Button/Button';
 
 import axios from 'axios';
-
+import {
+  requestStatusSuccess,
+  requestStatusFailure,
+} from '../../../store/actions/requeststatus';
 class NewFeature extends Component {
   state = {
     controls: {
@@ -67,8 +71,12 @@ class NewFeature extends Component {
       })
       .then((response) => {
         // this.props.history.goBack();
+        this.props.onSuccessMessage();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.props.onFailedMessage();
+        console.log(err);
+      });
     this.props.history.push('/roster');
   };
   render() {
@@ -93,4 +101,11 @@ class NewFeature extends Component {
   }
 }
 
-export default NewFeature;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSuccessMessage: () => dispatch(requestStatusSuccess('Success')),
+    onFailedMessage: () => dispatch(requestStatusFailure('Failed')),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(NewFeature);

@@ -1,5 +1,6 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
+import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
 
 export const clearSupervisions = () => {
   return {
@@ -97,18 +98,24 @@ export const deleteSoupFail = (error) => {
   };
 };
 
-export const deleteSoup = (soupId) => {
+export const deleteSoup = (soupId, token) => {
   return (dispatch) => {
     dispatch(deleteSoupStart());
     let url = 'api/supervisions/';
     axios
-      .delete(url + soupId)
+      .delete(url + soupId, {
+        headers: {
+          Authorization: 'Token ' + token,
+        },
+      })
       .then((res) => {
         console.log(res);
+        dispatch(requestStatusSuccess('Success'));
         dispatch(deleteSoupSuccess(soupId));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(requestStatusFailure('Failed'));
         dispatch(deleteSoupFail(err));
       });
   };
