@@ -90,7 +90,7 @@ class Member extends Component {
       },
       {
         type: 'intern',
-        content: `${this.state.internMin}m%`,
+        content: `${this.state.internMin}m`,
         hintMessage: 'Supervision time conducted by an intern',
       },
       {
