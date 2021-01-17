@@ -11,12 +11,11 @@ const sidedrawer = (props) => {
   }
   return (
     <div className={styleClasses.join(' ')}>
-      <SideSlider />
+      <SideSlider toggleMenu={props.closeBackdrop} />
       <div>
-        {/* <h2>Clinic Name</h2> */}
         <nav>
-          <NavigationItems />
-          <Footer />
+          <NavigationItems toggleMenu={props.closeBackdrop} />
+          <Footer toggleMenu={props.closeBackdrop} />
         </nav>
       </div>
     </div>

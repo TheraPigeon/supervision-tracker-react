@@ -180,6 +180,7 @@ class NewSoup extends Component {
         additional: calculatedScores.additional,
         total: totalSectionScore + '/' + totalQuestions,
         json: this.state.controls,
+        intern: this.props.isIntern,
       },
     };
     this.props.roster[this.props.match.params.id].supervisions.push(data.soup);

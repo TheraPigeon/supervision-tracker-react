@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-soup';
+import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
 
 export const fetchMembersStart = () => {
   return {
@@ -80,10 +81,12 @@ export const editStaff = (userData, token) => {
           name: res.data.staff_member.name,
           hours: res.data.staff_member.hours,
         };
+        dispatch(requestStatusSuccess('Success'));
         dispatch(editStaffSuccess(staffData, staffId));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(requestStatusFailure('Failed'));
         dispatch(editStaffFail(err));
       });
   };
@@ -119,10 +122,13 @@ export const deleteStaff = (staffId, token) => {
       })
       .then((res) => {
         console.log(res.data);
+        dispatch(requestStatusSuccess('Success'));
+
         dispatch(deleteStaffSuccess(staffId));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(requestStatusFailure('Failed'));
         dispatch(deleteStaffFail(err));
       });
   };

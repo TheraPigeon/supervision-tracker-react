@@ -1,5 +1,6 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
+import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
 
 export const updateUserProfile = (data) => {
   const { name, token, intern } = data;
@@ -15,9 +16,13 @@ export const updateUserProfile = (data) => {
     axios
       .put('api/complete_profile', data, { headers })
       .then((res) => {
+        dispatch(requestStatusSuccess('Success'));
         dispatch(updateUserProfileSuccess(data));
       })
-      .catch((err) => dispatch(updateUserProfileFail(err)));
+      .catch((err) => {
+        dispatch(requestStatusFailure('Failed'));
+        dispatch(updateUserProfileFail(err));
+      });
   };
 };
 export const updateUserProfileStart = () => {

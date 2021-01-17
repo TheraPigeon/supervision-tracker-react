@@ -22,10 +22,20 @@ const Footer = (props) => {
         </Modal>
       </div>
       <div className={classes.Footer}>
-        <button onClick={() => setShowPrivacy(!showPrivacy)}>
+        <button
+          onClick={() => {
+            setShowPrivacy(!showPrivacy);
+            props.toggleMenu();
+          }}
+        >
           Privacy Policy
         </button>
-        <button onClick={() => setShowTerms(!showPrivacy)}>
+        <button
+          onClick={() => {
+            setShowTerms(!showPrivacy);
+            props.toggleMenu();
+          }}
+        >
           Terms of Service
         </button>
 

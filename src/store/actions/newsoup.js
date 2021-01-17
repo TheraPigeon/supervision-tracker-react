@@ -1,6 +1,6 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
-
+import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
 export const addSoup = ({ soupData, token, edit, soupId }) => {
   return (dispatch) => {
     dispatch(addSoupStart());
@@ -13,9 +13,11 @@ export const addSoup = ({ soupData, token, edit, soupId }) => {
       .then((res) => {
         console.log(res);
         dispatch(addSoupSuccess());
+        dispatch(requestStatusSuccess('Success'));
       })
       .catch((err) => {
         console.log(err);
+        dispatch(requestStatusFailure('Failed'));
         dispatch(addSoupFail(err));
       });
   };

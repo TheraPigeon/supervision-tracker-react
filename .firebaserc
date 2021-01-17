@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "abasoup"
+  },
+  "targets": {
+    "abasoup": {
+      "hosting": {
+        "prod": [
+          "abasoup"
+        ],
+        "staging": [
+          "abasoup-staging"
+        ]
+      }
+    }
   }
 }

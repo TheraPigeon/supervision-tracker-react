@@ -57,7 +57,7 @@ class History extends Component {
     }
   };
   handleSoupDeletion = () => {
-    this.props.onSoupDelete(this.state.deleteSoupId);
+    this.props.onSoupDelete(this.state.deleteSoupId, this.props.token);
     this.handleDeleteModal();
   };
 
@@ -80,6 +80,7 @@ class History extends Component {
           { format: ['hours', 'minutes'] }
         );
         let soupId = soup.id;
+        console.log(soupId);
         return (
           <tr
             key={soup.id + index}
@@ -102,7 +103,7 @@ class History extends Component {
               </Button>
             </td>
             <td>
-              {this.props.token ? (
+              {parseInt(this.props.userId) === soup.supervisor.id ? (
                 <Button
                   type="button"
                   clicked={() =>
@@ -185,6 +186,7 @@ const mapStateToProps = (state) => {
   return {
     clinicId: state.auth.currentClinic,
     token: state.auth.token,
+    userId: state.auth.userId,
     supervisions: state.history.supervisions,
     loading: state.history.loading,
   };
@@ -193,7 +195,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSupervisions: (staffId) =>
       dispatch(actions.fetchSupervisions(staffId)),
-    onSoupDelete: (soupId) => dispatch(actions.deleteSoup(soupId)),
+    onSoupDelete: (soupId, token) =>
+      dispatch(actions.deleteSoup(soupId, token)),
     clearSupervisions: () => dispatch(actions.clearSupervisions()),
   };
 };

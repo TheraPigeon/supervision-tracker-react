@@ -3,17 +3,21 @@ import { connect } from 'react-redux';
 import { differenceInMilliseconds, differenceInMinutes } from 'date-fns';
 import classes from './Member.module.css';
 import { NavLink } from 'react-router-dom';
-
+import HoverHint from '../../../components/UI/HoverHint/HoverHint';
 class Member extends Component {
   state = {
     weeklyPercentage: 0,
     internMin: 0,
     latestScore: 'N/A',
+    showHint: false,
   };
   componentDidMount = () => {
     if (this.props.roster[this.props.memberId].supervisions) {
       this.updateCircleItems();
     }
+  };
+  handleHover = (category) => {
+    this.setState({ showHint: category });
   };
 
   updateCircleItems() {
@@ -44,7 +48,7 @@ class Member extends Component {
         new Date(soup.end_time),
         new Date(soup.start_time)
       );
-
+      console.log(soup);
       if (soup.intern) {
         internMinutes += diff;
       } else {
@@ -78,6 +82,40 @@ class Member extends Component {
         ? classes.Yellow
         : null;
     const styleClasses = [classes.Member, cardBgColor].join(' ');
+    const circleItemsConfig = [
+      {
+        type: 'goal',
+        content: `${this.state.weeklyPercentage}%`,
+        hintMessage: 'Weekly goal',
+      },
+      {
+        type: 'intern',
+        content: `${this.state.internMin}m`,
+        hintMessage: 'Supervision time conducted by an intern',
+      },
+      {
+        type: 'total',
+        content: this.state.latestScore,
+        hintMessage: 'Total score on the latest supervision',
+      },
+    ];
+    const circleItems = circleItemsConfig.map((circle, i) => {
+      return (
+        <span
+          key={circle.type + i}
+          onMouseEnter={() => this.handleHover(circle.type)}
+          onMouseOut={this.handleHover}
+        >
+          {circle.content}
+          <HoverHint
+            key={i}
+            show={this.state.showHint === circle.type}
+            message={circle.hintMessage}
+          />
+        </span>
+      );
+    });
+
     return (
       <section className={styleClasses}>
         <main>
@@ -109,11 +147,7 @@ class Member extends Component {
           </NavLink>
         </section>
 
-        <aside>
-          <span>{this.state.weeklyPercentage}%</span>
-          <span>{this.state.internMin}m</span>
-          <span>{this.state.latestScore}</span>
-        </aside>
+        <aside>{circleItems}</aside>
       </section>
     );
   }

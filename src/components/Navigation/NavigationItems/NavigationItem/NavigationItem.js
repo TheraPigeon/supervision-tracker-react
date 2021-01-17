@@ -16,6 +16,7 @@ const navigationItem = (props) => {
         exact={props.exact}
         activeClassName={classes.active}
         to={props.link}
+        onClick={props.toggleMenu}
       >
         {props.children}
       </NavLink>

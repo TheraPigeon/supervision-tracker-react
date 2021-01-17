@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-soup';
 import * as actions from './index';
+import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
 
 export const joinClinicStart = () => {
   return {
@@ -33,6 +34,7 @@ export const joinClinic = (isJoin, clinicData, token) => {
         })
         .then((res) => {
           if (res.status === 200) {
+            dispatch(requestStatusSuccess('Success'));
             dispatch(joinClinicSuccess());
             dispatch(actions.addClinic({ ...res.data }));
             dispatch(actions.setCurrentClinic(res.data.id));
@@ -41,6 +43,7 @@ export const joinClinic = (isJoin, clinicData, token) => {
           console.log(res);
         })
         .catch((err) => {
+          dispatch(requestStatusFailure('Failed'));
           dispatch(joinClinicFail(err));
           console.log(err);
         });
@@ -58,11 +61,14 @@ export const joinClinic = (isJoin, clinicData, token) => {
         })
         .then((res) => {
           console.log(res);
+          dispatch(requestStatusSuccess('Success'));
+
           dispatch(joinClinicSuccess);
           dispatch(actions.addClinic({ ...res.data }));
           dispatch(actions.setCurrentClinic(res.data.id));
         })
         .catch((err) => {
+          dispatch(requestStatusFailure('Failed'));
           console.log(err);
         });
     }

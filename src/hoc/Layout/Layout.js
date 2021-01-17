@@ -7,6 +7,9 @@ import classes from './Layout.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import * as actions from '../../store/actions/index';
 
+//Request Status Feedback
+import RequestStatus from '../../components/RequestStatus/RequestStatus';
+
 const Layout = (props) => {
   const { isAuthenticated, getIdTokenClaims } = useAuth0();
   const { onAuth } = props;
@@ -50,6 +53,7 @@ const Layout = (props) => {
         className={classes.Content}
       >
         {props.children}
+        <RequestStatus />
       </main>
     </div>
   );

@@ -1,0 +1,29 @@
+.RequestStatus {
+  display: flex;
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  height: 50px;
+  width: 380px;
+  align-items: center;
+  background-color: var(--black-background);
+  padding-left: 10px;
+  border-radius: var(--border-radius);
+  z-index: 600;
+}
+.RequestStatus button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  outline: none;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.Success {
+  border: 1px solid rgb(11, 240, 11);
+}
+.Failure {
+  border: 1px solid rgb(240, 11, 11);
+}
