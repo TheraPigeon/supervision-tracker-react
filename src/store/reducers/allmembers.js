@@ -6,6 +6,16 @@ const initialState = {
   loading: false,
 };
 
+const addSoupSuccess = (state, action) => {
+  const memberId = action.memberId;
+  const soup = action.soupData;
+  const thisMemberIndex = state.members.staff_members.findIndex(
+    (member) => member.id === parseInt(memberId)
+  );
+  const updatedMembers = cloneDeep(state.members);
+  updatedMembers.staff_members[thisMemberIndex].supervisions.push(soup);
+  return updateObject(state, { members: updatedMembers });
+};
 const createStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
@@ -100,6 +110,10 @@ const reducer = (state = initialState, action) => {
       return createStaffSuccess(state, action);
     case actionTypes.CREATE_STAFF_FAIL:
       return createStaffFail(state, action);
+
+    // Adds new soup to member's supervision array
+    case actionTypes.ADD_SOUP_SUCCESS:
+      return addSoupSuccess(state, action);
     default:
       return state;
   }
