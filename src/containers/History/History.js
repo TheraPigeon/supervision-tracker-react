@@ -80,12 +80,8 @@ class History extends Component {
           { format: ['hours', 'minutes'] }
         );
         let soupId = soup.id;
-        console.log(soupId);
         return (
-          <tr
-            key={soup.id + index}
-            className={index % 2 !== 0 ? classes.Alternate : null}
-          >
+          <tr className={index % 2 !== 0 ? classes.Alternate : null}>
             <td>{soup.date}</td>
             <td>{soup.supervisor.name}</td>
             <td>{durOutput}</td>
@@ -95,6 +91,7 @@ class History extends Component {
             <td>{soup.total}</td>
             <td>
               <Button
+                key={'viewButton' + soupId}
                 type="button"
                 btnType="Transparent"
                 clicked={() => this.handleModal(soupId)}

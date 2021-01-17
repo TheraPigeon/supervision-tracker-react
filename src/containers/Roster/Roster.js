@@ -28,27 +28,31 @@ class Roster extends Component {
   };
   render() {
     let roster = null;
-    if (this.props.roster) {
-      roster = Object.keys(this.props.roster).map((member) => {
-        const { name } = this.props.roster[member];
-        const { hours } = this.props.roster[member];
-        return (
-          <Member
-            key={member}
-            memberId={member}
-            name={name}
-            weeklyHours={hours}
-          />
-        );
+    // FIX HERE
+    if (this.props.members.length !== 0 && this.props.roster) {
+      console.log(this.props.roster);
+      roster = this.props.members.staff_members.map((member, index) => {
+        const memberInRoster = this.props.roster.includes(member.id);
+        if (memberInRoster) {
+          const { name, hours, id } = member;
+          console.log(member);
+          return (
+            <Member
+              key={id}
+              memberId={id}
+              memberIndex={index}
+              name={name}
+              weeklyHours={hours}
+            />
+          );
+        }
       });
+      console.log(roster);
     }
     let listOfUsers = null;
     let userListArray = [];
     if (this.props.members.staff_members) {
-      let roster = [];
-      if (this.props.roster) {
-        roster = Object.keys(this.props.roster);
-      }
+      let roster = [...this.props.roster];
       for (let key in this.props.members.staff_members) {
         let userId = this.props.members.staff_members[key].id;
         userListArray.push({

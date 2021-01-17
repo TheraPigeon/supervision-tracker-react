@@ -183,13 +183,14 @@ class NewSoup extends Component {
         intern: this.props.isIntern,
       },
     };
-    this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
+    // this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
 
     this.props.onAddSoup({
       soupData: data,
       soupId: this.props.location.soupId,
       token: this.props.token,
       edit: this.props.location.edit,
+      memberId: this.props.match.params.id,
     });
     this.props.history.goBack();
     e.preventDefault();
@@ -299,6 +300,7 @@ const mapStateToProps = (state) => {
     staffId: state.auth.userId,
     isIntern: state.auth.isIntern,
     roster: state.auth.roster,
+    members: state.allmembers.members,
   };
 };
 

@@ -12,7 +12,7 @@ class Member extends Component {
     showHint: false,
   };
   componentDidMount = () => {
-    if (this.props.roster[this.props.memberId].supervisions) {
+    if (this.props.members.staff_members[this.props.memberIndex].supervisions) {
       this.updateCircleItems();
     }
   };
@@ -22,9 +22,8 @@ class Member extends Component {
 
   updateCircleItems() {
     const WEEKLY_GOAL = this.props.weeklyHours * 0.05 * 60; // = 5% of weekly hours
-    const currentWeekSoups = this.props.roster[
-      this.props.memberId
-    ].supervisions.filter((soup) => {
+    const thisMember = this.props.members.staff_members[this.props.memberIndex];
+    const currentWeekSoups = thisMember.supervisions.filter((soup) => {
       const currDate = new Date();
       currDate.setHours(1);
       currDate.setMinutes(0);
@@ -156,6 +155,7 @@ class Member extends Component {
 const mapStateToProps = (state) => {
   return {
     roster: state.auth.roster,
+    members: state.allmembers.members,
   };
 };
 export default connect(mapStateToProps)(Member);

@@ -37,12 +37,11 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
         console.log(res.data);
         const id = res.data.staff_member.id;
         const data = {
-          [id]: {
-            clinic_id: res.data.staff_member.clinic.id,
-            name: res.data.staff_member.name,
-            hours: res.data.staff_member.hours,
-            supervisions: [{}],
-          },
+          id: id,
+          clinic_id: res.data.staff_member.clinic.id,
+          name: res.data.staff_member.name,
+          hours: res.data.staff_member.hours,
+          supervisions: [{}],
         };
         dispatch(createStaffSuccess({ newStaff: data, isFollow }));
       })
@@ -50,9 +49,6 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
         console.log(err);
         dispatch(createStaffFail(err));
       });
-    if (isFollow) {
-      //add to roster action
-    }
   };
 };
 

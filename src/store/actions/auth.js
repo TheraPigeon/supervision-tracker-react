@@ -1,7 +1,7 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
-
+import * as actions from './index';
 export const updateUserProfile = (data) => {
   const { name, token, intern } = data;
   return (dispatch) => {
@@ -152,6 +152,23 @@ export const fetchUser = (token) => {
       })
       .then((res) => {
         console.log(res.data);
+
+        const currentClinic = localStorage.getItem('currentClinic');
+        const inClinic = res.data.clinics.filter((a) => {
+          return a.id === parseInt(currentClinic);
+        });
+        let currClinicId = null;
+        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
+          currClinicId = currentClinic;
+          dispatch(setCurrentClinic(parseInt(currentClinic)));
+        } else if (res.data.clinics.length !== 0) {
+          currClinicId = res.data.clinics[0].id;
+          dispatch(setCurrentClinic(res.data.clinics[0].id));
+        }
+        if (currClinicId) {
+          console.log('HERE');
+          dispatch(actions.fetchMembers(currClinicId, token));
+        }
         dispatch(
           fetchUserSuccess({
             roster: res.data.roster_members,
@@ -159,15 +176,6 @@ export const fetchUser = (token) => {
             isIntern: res.data.intern,
           })
         );
-        const currentClinic = localStorage.getItem('currentClinic');
-        const inClinic = res.data.clinics.filter((a) => {
-          return a.id === parseInt(currentClinic);
-        });
-        if (currentClinic && res.data.clinics.length !== 0 && inClinic.length) {
-          dispatch(setCurrentClinic(parseInt(currentClinic)));
-        } else if (res.data.clinics.length !== 0) {
-          dispatch(setCurrentClinic(res.data.clinics[0].id));
-        }
       })
       .catch((err) => {
         console.log(err);
