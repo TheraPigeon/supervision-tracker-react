@@ -111,7 +111,7 @@ export const addStaff = (staffId, token, isFollowing) => {
         if (isFollowing) {
           dispatch(kickStaffSuccess(staffId));
         } else {
-          dispatch(addStaffSuccess(res.data.added_members));
+          dispatch(addStaffSuccess(staffId));
         }
       })
       .catch((err) => {

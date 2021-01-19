@@ -27,25 +27,26 @@ class Roster extends Component {
     this.props.addToRoster(staffId, this.props.token, isFollow);
   };
   render() {
-    let roster = null;
-    // FIX HERE
+    let roster = [];
     if (this.props.members.length !== 0 && this.props.roster) {
       console.log(this.props.roster);
-      roster = this.props.members.staff_members.map((member, index) => {
+      this.props.members.staff_members.forEach((member, index) => {
         const memberInRoster = this.props.roster.includes(member.id);
         if (memberInRoster) {
           const { name, hours, id } = member;
-          console.log(member);
-          return (
+          // TEMP
+          let tempHoursREMOVE = 40;
+          roster.push(
             <Member
               key={id}
               memberId={id}
               memberIndex={index}
               name={name}
-              weeklyHours={hours}
+              weeklyHours={tempHoursREMOVE}
             />
           );
         }
+        return true;
       });
       console.log(roster);
     }
@@ -58,7 +59,7 @@ class Roster extends Component {
         userListArray.push({
           id: key,
           staffId: userId,
-          inRoster: roster.includes(userId.toString()),
+          inRoster: roster.includes(userId),
           config: this.props.members.staff_members[key],
         });
       }

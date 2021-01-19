@@ -32,6 +32,7 @@ const AddMember = (props) => {
         name: fullName,
         hours: hours,
         staffId: props.staffId,
+        // supervisions: supervisions,
       };
       props.onEditStaff(staffData, props.token);
     } else {

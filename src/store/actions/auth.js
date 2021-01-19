@@ -166,7 +166,6 @@ export const fetchUser = (token) => {
           dispatch(setCurrentClinic(res.data.clinics[0].id));
         }
         if (currClinicId) {
-          console.log('HERE');
           dispatch(actions.fetchMembers(currClinicId, token));
         }
         dispatch(
