@@ -20,11 +20,8 @@ const createStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const createStaffSuccess = (state, action) => {
-  const staffId = Object.keys(action.newStaff)[0];
-  const formattedMember = cloneDeep(action.newStaff[staffId.toString()]);
-  Object.assign(formattedMember, { id: staffId });
   const updatedMembers = cloneDeep(state.members);
-  updatedMembers.staff_members.push(formattedMember);
+  updatedMembers.staff_members.push(action.newStaff);
   return updateObject(state, { loading: false, members: updatedMembers });
 };
 const createStaffFail = (state, action) => {
@@ -110,7 +107,13 @@ const reducer = (state = initialState, action) => {
       return createStaffSuccess(state, action);
     case actionTypes.CREATE_STAFF_FAIL:
       return createStaffFail(state, action);
-
+    // Adds new member
+    case actionTypes.CREATE_STAFF_START:
+      return createStaffStart(state, action);
+    case actionTypes.CREATE_STAFF_SUCCESS:
+      return createStaffSuccess(state, action);
+    case actionTypes.CREATE_STAFF_FAIL:
+      return createStaffFail(state, action);
     // Adds new soup to member's supervision array
     case actionTypes.ADD_SOUP_SUCCESS:
       return addSoupSuccess(state, action);
