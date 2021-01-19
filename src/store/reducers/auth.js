@@ -103,7 +103,8 @@ const addStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const addStaffSuccess = (state, action) => {
-  const updatedRoster = merge({}, state.roster, action.staffData);
+  const updatedRoster = [...state.roster];
+  updatedRoster.push(action.staffData);
   return updateObject(state, { loading: false, roster: updatedRoster });
 };
 const addStaffFail = (state, action) => {
@@ -114,28 +115,14 @@ const kickStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const kickStaffSuccess = (state, action) => {
-  //action.staffID
-
-  const updatedRoster = cloneDeep(state.roster);
-  delete updatedRoster[action.staffId];
+  const staffIndex = state.roster.findIndex(
+    (staffId) => staffId === action.staffId
+  );
+  const updatedRoster = [...state.roster];
+  updatedRoster.splice(staffIndex, 1);
   return updateObject(state, { loading: false, roster: updatedRoster });
 };
 const kickStaffFail = (state, action) => {
-  return updateObject(state, { loading: false, error: action.error });
-};
-
-const createStaffStart = (state, action) => {
-  return updateObject(state, { loading: true });
-};
-const createStaffSuccess = (state, action) => {
-  if (action.isFollow) {
-    const updatedRoster = merge({}, state.roster, action.newStaff);
-    return updateObject(state, { loading: false, roster: updatedRoster });
-  } else {
-    return updateObject(state, { loading: false });
-  }
-};
-const createStaffFail = (state, action) => {
   return updateObject(state, { loading: false, error: action.error });
 };
 
@@ -179,12 +166,7 @@ const reducer = (state = initialState, action) => {
       return kickStaffSuccess(state, action);
     case actionTypes.KICK_STAFF_FAIL:
       return kickStaffFail(state, action);
-    case actionTypes.CREATE_STAFF_START:
-      return createStaffStart(state, action);
-    case actionTypes.CREATE_STAFF_SUCCESS:
-      return createStaffSuccess(state, action);
-    case actionTypes.CREATE_STAFF_FAIL:
-      return createStaffFail(state, action);
+
     default:
       return state;
   }
