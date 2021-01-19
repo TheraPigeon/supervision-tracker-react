@@ -16,6 +16,14 @@ class Member extends Component {
       this.updateCircleItems();
     }
   };
+  componentDidUpdate = (prevProps) => {
+    if (
+      this.props.members.staff_members[this.props.memberIndex].supervisions !==
+      prevProps.members.staff_members[prevProps.memberIndex].supervisions
+    ) {
+      this.updateCircleItems();
+    }
+  };
   handleHover = (category) => {
     this.setState({ showHint: category });
   };
@@ -23,6 +31,8 @@ class Member extends Component {
   updateCircleItems() {
     const WEEKLY_GOAL = this.props.weeklyHours * 0.05 * 60; // = 5% of weekly hours
     const thisMember = this.props.members.staff_members[this.props.memberIndex];
+    console.log(thisMember);
+    console.log(WEEKLY_GOAL);
     const currentWeekSoups = thisMember.supervisions.filter((soup) => {
       const currDate = new Date();
       currDate.setHours(1);
@@ -56,7 +66,10 @@ class Member extends Component {
       return true;
     });
     if (currentWeekSoups.length) {
-      this.setState({ latestScore: currentWeekSoups[0].total });
+      console.log(currentWeekSoups);
+      //TEMP
+      let score = '32/45' || currentWeekSoups[0].total;
+      this.setState({ latestScore: score });
     }
     let percentage = (completedMinutes / WEEKLY_GOAL) * 100;
     if (percentage > 100) {
