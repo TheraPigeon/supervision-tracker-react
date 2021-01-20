@@ -167,7 +167,7 @@ class NewSoup extends Component {
 
     const data = {
       soup: {
-        staff_member_id: this.props.match.params.id,
+        staff_member_id: parseInt(this.props.match.params.id),
         supervisor_id: this.props.staffId,
         start_time: adjustTimeZone(this.state.controls.setup['1'].value),
         end_time: adjustTimeZone(this.state.controls.setup['2'].value),

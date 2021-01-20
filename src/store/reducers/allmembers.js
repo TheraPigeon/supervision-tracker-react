@@ -6,15 +6,44 @@ const initialState = {
   loading: false,
 };
 
+//ADD SOUP
+const addSoupStart = (state, action) => {
+  return updateObject(state, {
+    loading: action.loading,
+    error: null,
+  });
+};
 const addSoupSuccess = (state, action) => {
-  const memberId = action.memberId;
+  const memberId = parseInt(action.memberId);
   const soup = action.soupData;
+  const soupId = action.soupId;
   const thisMemberIndex = state.members.staff_members.findIndex(
-    (member) => member.id === parseInt(memberId)
+    (member) => member.id === memberId
   );
   const updatedMembers = cloneDeep(state.members);
-  updatedMembers.staff_members[thisMemberIndex].supervisions.push(soup);
+  console.log(updatedMembers);
+  if (soupId) {
+    const soupIndex = updatedMembers.staff_members[
+      thisMemberIndex
+    ].supervisions.findIndex((soup) => soup.id === soupId);
+    console.log('EDIT SOUP');
+    updatedMembers.staff_members[thisMemberIndex].supervisions.splice(
+      soupIndex,
+      1,
+      soup
+    );
+  } else {
+    updatedMembers.staff_members[thisMemberIndex].supervisions.push(soup);
+  }
+  console.log(updatedMembers);
+
   return updateObject(state, { members: updatedMembers });
+};
+const addSoupFail = (state, action) => {
+  return updateObject(state, {
+    loading: action.loading,
+    error: action.error,
+  });
 };
 const createStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
@@ -114,9 +143,14 @@ const reducer = (state = initialState, action) => {
       return createStaffSuccess(state, action);
     case actionTypes.CREATE_STAFF_FAIL:
       return createStaffFail(state, action);
+
     // Adds new soup to member's supervision array
+    case actionTypes.ADD_SOUP_START:
+      return addSoupStart(state, action);
     case actionTypes.ADD_SOUP_SUCCESS:
       return addSoupSuccess(state, action);
+    case actionTypes.ADD_SOUP_FAIL:
+      return addSoupFail(state, action);
     default:
       return state;
   }

@@ -12,7 +12,7 @@ export const addSoup = ({ soupData, token, edit, soupId, memberId }) => {
     axios({ method, url, data: soupData, headers })
       .then((res) => {
         console.log(res);
-        dispatch(addSoupSuccess(soupData.soup, memberId));
+        dispatch(addSoupSuccess({ soupData: soupData.soup, memberId, soupId }));
         dispatch(requestStatusSuccess('Success'));
       })
       .catch((err) => {
@@ -29,12 +29,13 @@ export const addSoupStart = () => {
     loading: true,
   };
 };
-export const addSoupSuccess = (soupData, memberId) => {
+export const addSoupSuccess = ({ soupData, memberId, soupId }) => {
   return {
     type: actionTypes.ADD_SOUP_SUCCESS,
     loading: false,
     soupData,
     memberId,
+    soupId,
   };
 };
 
