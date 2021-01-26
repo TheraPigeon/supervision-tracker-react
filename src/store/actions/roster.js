@@ -19,7 +19,12 @@ export const createStaffFail = (error) => {
     error: error,
   };
 };
-
+export const updateRoster = ({ staffId }) => {
+  return {
+    type: actionTypes.UPDATE_ROSTER,
+    staffId,
+  };
+};
 export const createStaff = (name, isFollow, clinicId, hours, token) => {
   return (dispatch) => {
     dispatch(createStaffStart());
@@ -44,6 +49,9 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
           supervisions: [{}],
         };
         dispatch(createStaffSuccess({ newStaff: data, isFollow }));
+        if (isFollow) {
+          dispatch(updateRoster({ staffId: id }));
+        }
       })
       .catch((err) => {
         console.log(err);

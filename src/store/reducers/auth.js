@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../utility';
 
-import { merge, cloneDeep } from 'lodash';
+import { merge, cloneDeep, update } from 'lodash';
 
 const initialState = {
   token: null,
@@ -18,6 +18,12 @@ const initialState = {
   email: null,
   emailIsVerified: null,
   isNewUser: null,
+};
+
+const updatedRoster = (state, action) => {
+  const updatedRoster = [...state.roster];
+  updatedRoster.push(action.staffId);
+  return updateObject(state, { roster: updatedRoster });
 };
 
 const updateUserProfileStart = (state, action) => {
@@ -167,6 +173,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.KICK_STAFF_FAIL:
       return kickStaffFail(state, action);
 
+    //update roster on Add Staff
+    case actionTypes.UPDATE_ROSTER:
+      return updatedRoster(state, action);
     default:
       return state;
   }
