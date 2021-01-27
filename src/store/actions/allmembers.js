@@ -114,6 +114,7 @@ export const deleteStaffFail = (error) => {
 
 export const deleteStaff = (staffId, token) => {
   return (dispatch) => {
+    dispatch(deleteStaffStart());
     axios
       .delete('api/staff_members/' + staffId, {
         headers: {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import Button from '../UI/Button/Button';
 import classes from './StaffCard.module.css';
 
@@ -8,9 +9,14 @@ const StaffCard = (props) => {
   const [deleting, setDeleting] = useState(false);
 
   const handleStaffDelete = async (staffId) => {
-    const res = await props.deleteMember(staffId, props.token);
-    if (props.loading) setDeleting(false);
+    props.deleteMember(staffId, props.token);
   };
+  const loading = props.loading;
+  useEffect(() => {
+    if (!loading) {
+      setDeleting(false);
+    }
+  }, [loading]);
   return (
     <div className={classes.StaffCard}>
       {editing ? (
@@ -71,4 +77,4 @@ const mapStateToProps = (state) => {
     loading: state.allmembers.loading,
   };
 };
-export default StaffCard;
+export default connect(mapStateToProps)(StaffCard);
