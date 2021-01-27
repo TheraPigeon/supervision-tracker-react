@@ -25,6 +25,14 @@ class History extends Component {
   componentDidMount() {
     this.props.fetchSupervisions(this.props.match.params.id, this.props.token);
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.members !== prevProps.members) {
+      this.props.fetchSupervisions(
+        this.props.match.params.id,
+        this.props.token
+      );
+    }
+  }
   componentWillUnmount() {
     this.props.clearSupervisions();
   }
@@ -186,6 +194,7 @@ const mapStateToProps = (state) => {
     userId: state.auth.userId,
     supervisions: state.history.supervisions,
     loading: state.history.loading,
+    members: state.allmembers.members,
   };
 };
 const mapDispatchToProps = (dispatch) => {

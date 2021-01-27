@@ -34,15 +34,13 @@ class Roster extends Component {
         const memberInRoster = this.props.roster.includes(member.id);
         if (memberInRoster) {
           const { name, hours, id } = member;
-          // TEMP
-          let tempHoursREMOVE = 40;
           roster.push(
             <Member
               key={id}
               memberId={id}
               memberIndex={index}
               name={name}
-              weeklyHours={tempHoursREMOVE}
+              weeklyHours={hours}
             />
           );
         }

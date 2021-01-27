@@ -67,8 +67,7 @@ class Member extends Component {
     });
     if (currentWeekSoups.length) {
       console.log(currentWeekSoups);
-      //TEMP
-      let score = '32/45' || currentWeekSoups[0].total;
+      const score = currentWeekSoups[0].total;
       this.setState({ latestScore: score });
     }
     let percentage = (completedMinutes / WEEKLY_GOAL) * 100;

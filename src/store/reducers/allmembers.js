@@ -23,6 +23,7 @@ const addSoupSuccess = (state, action) => {
   const updatedMembers = cloneDeep(state.members);
   console.log(updatedMembers);
   if (soupId) {
+    //editing soup
     const soupIndex = updatedMembers.staff_members[
       thisMemberIndex
     ].supervisions.findIndex((soup) => soup.id === soupId);
