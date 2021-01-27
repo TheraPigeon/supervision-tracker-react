@@ -21,13 +21,11 @@ const addSoupSuccess = (state, action) => {
     (member) => member.id === memberId
   );
   const updatedMembers = cloneDeep(state.members);
-  console.log(updatedMembers);
   if (soupId) {
     //editing soup
     const soupIndex = updatedMembers.staff_members[
       thisMemberIndex
     ].supervisions.findIndex((soup) => soup.id === soupId);
-    console.log('EDIT SOUP');
     updatedMembers.staff_members[thisMemberIndex].supervisions.splice(
       soupIndex,
       1,
@@ -36,8 +34,6 @@ const addSoupSuccess = (state, action) => {
   } else {
     updatedMembers.staff_members[thisMemberIndex].supervisions.push(soup);
   }
-  console.log(updatedMembers);
-
   return updateObject(state, { members: updatedMembers });
 };
 const addSoupFail = (state, action) => {

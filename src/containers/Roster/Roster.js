@@ -29,7 +29,6 @@ class Roster extends Component {
   render() {
     let roster = [];
     if (this.props.members.length !== 0 && this.props.roster) {
-      console.log(this.props.roster);
       this.props.members.staff_members.forEach((member, index) => {
         const memberInRoster = this.props.roster.includes(member.id);
         if (memberInRoster) {
@@ -46,7 +45,6 @@ class Roster extends Component {
         }
         return true;
       });
-      console.log(roster);
     }
     let listOfUsers = null;
     let userListArray = [];
@@ -61,7 +59,6 @@ class Roster extends Component {
           config: this.props.members.staff_members[key],
         });
       }
-      console.log(this.props.members);
       listOfUsers = userListArray.map((member) => {
         return (
           <StaffCard
@@ -81,7 +78,6 @@ class Roster extends Component {
       });
     }
     if (!this.props.currentClinic) {
-      console.log(this.props.currentClinic);
       this.props.history.push('/join');
     }
     const currentClinicData = this.props.clinics.filter((clinic) => {

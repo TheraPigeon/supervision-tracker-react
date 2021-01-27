@@ -31,8 +31,6 @@ class Member extends Component {
   updateCircleItems() {
     const WEEKLY_GOAL = this.props.weeklyHours * 0.05 * 60; // = 5% of weekly hours
     const thisMember = this.props.members.staff_members[this.props.memberIndex];
-    console.log(thisMember);
-    console.log(WEEKLY_GOAL);
     const currentWeekSoups = thisMember.supervisions.filter((soup) => {
       const currDate = new Date();
       currDate.setHours(1);
@@ -57,7 +55,6 @@ class Member extends Component {
         new Date(soup.end_time),
         new Date(soup.start_time)
       );
-      console.log(soup);
       if (soup.intern) {
         internMinutes += diff;
       } else {
@@ -66,7 +63,6 @@ class Member extends Component {
       return true;
     });
     if (currentWeekSoups.length) {
-      console.log(currentWeekSoups);
       const score = currentWeekSoups[0].total;
       this.setState({ latestScore: score });
     }
