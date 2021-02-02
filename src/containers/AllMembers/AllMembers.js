@@ -22,10 +22,6 @@ class AllMembers extends Component {
     let allMembers = null;
     if (this.props.members) {
       categories.forEach((category) => {
-        let roster = [];
-        if (this.props.roster) {
-          roster = Object.keys(this.props.roster);
-        }
         userListArray.push({
           category: category,
         });
@@ -34,7 +30,7 @@ class AllMembers extends Component {
           userListArray.push({
             id: key,
             staffId: userId,
-            inRoster: roster.includes(userId.toString()),
+            inRoster: this.props.roster.includes(userId),
             rbt: category === 'staff_members' ? 1 : 0,
             config: this.props.members[category][key],
           });
