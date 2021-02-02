@@ -209,15 +209,22 @@ class NewSoup extends Component {
     });
     const formattedNotes = notes.map((note) => {
       note = note.trim().split('');
-      console.log(note);
       if (note[note.length - 1] !== '.') {
         note.push('.');
       }
-
-      return note.join('').capita;
+      note[0] = note[0].toUpperCase();
+      return note.join('');
     });
-    formattedNotes.join(' ');
-    console.log(formattedNotes);
+    const finalNote = formattedNotes.join(' ');
+    this.inputChangedHandler(
+      {
+        target: {
+          value: finalNote,
+        },
+      },
+      'note',
+      'n0'
+    );
   };
   handleAddNote = () => {
     this.generateNote();

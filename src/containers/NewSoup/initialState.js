@@ -789,6 +789,7 @@ export const initialState = {
         elementConfig: {
           type: 'text',
           name: 'n0',
+          disabled: true,
           question: 'Session Note Generated from individual notes:',
         },
         value: '',
@@ -810,4 +811,5 @@ export const initialState = {
   questionId: null,
   questionCategory: null,
   noteValue: '',
+  generatedNote: '',
 };
