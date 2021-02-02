@@ -183,7 +183,6 @@ class NewSoup extends Component {
         intern: this.props.isIntern,
       },
     };
-    // this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
 
     this.props.onAddSoup({
       soupData: data,
