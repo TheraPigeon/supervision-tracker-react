@@ -6,15 +6,48 @@ const initialState = {
   loading: false,
 };
 
+//ADD SOUP
+const addSoupStart = (state, action) => {
+  return updateObject(state, {
+    loading: action.loading,
+    error: null,
+  });
+};
+const addSoupSuccess = (state, action) => {
+  const memberId = parseInt(action.memberId);
+  const soup = action.soupData;
+  const soupId = action.soupId;
+  const thisMemberIndex = state.members.staff_members.findIndex(
+    (member) => member.id === memberId
+  );
+  const updatedMembers = cloneDeep(state.members);
+  if (soupId) {
+    //editing soup
+    const soupIndex = updatedMembers.staff_members[
+      thisMemberIndex
+    ].supervisions.findIndex((soup) => soup.id === soupId);
+    updatedMembers.staff_members[thisMemberIndex].supervisions.splice(
+      soupIndex,
+      1,
+      soup
+    );
+  } else {
+    updatedMembers.staff_members[thisMemberIndex].supervisions.push(soup);
+  }
+  return updateObject(state, { members: updatedMembers });
+};
+const addSoupFail = (state, action) => {
+  return updateObject(state, {
+    loading: action.loading,
+    error: action.error,
+  });
+};
 const createStaffStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const createStaffSuccess = (state, action) => {
-  const staffId = Object.keys(action.newStaff)[0];
-  const formattedMember = cloneDeep(action.newStaff[staffId.toString()]);
-  Object.assign(formattedMember, { id: staffId });
   const updatedMembers = cloneDeep(state.members);
-  updatedMembers.staff_members.push(formattedMember);
+  updatedMembers.staff_members.push(action.newStaff);
   return updateObject(state, { loading: false, members: updatedMembers });
 };
 const createStaffFail = (state, action) => {
@@ -100,6 +133,21 @@ const reducer = (state = initialState, action) => {
       return createStaffSuccess(state, action);
     case actionTypes.CREATE_STAFF_FAIL:
       return createStaffFail(state, action);
+    // Adds new member
+    case actionTypes.CREATE_STAFF_START:
+      return createStaffStart(state, action);
+    case actionTypes.CREATE_STAFF_SUCCESS:
+      return createStaffSuccess(state, action);
+    case actionTypes.CREATE_STAFF_FAIL:
+      return createStaffFail(state, action);
+
+    // Adds new soup to member's supervision array
+    case actionTypes.ADD_SOUP_START:
+      return addSoupStart(state, action);
+    case actionTypes.ADD_SOUP_SUCCESS:
+      return addSoupSuccess(state, action);
+    case actionTypes.ADD_SOUP_FAIL:
+      return addSoupFail(state, action);
     default:
       return state;
   }

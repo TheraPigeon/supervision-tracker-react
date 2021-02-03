@@ -783,6 +783,21 @@ export const initialState = {
         valid: true,
       },
     },
+    note: {
+      n0: {
+        elementType: 'textarea',
+        elementConfig: {
+          type: 'text',
+          name: 'n0',
+          disabled: true,
+          question: 'Session Note Generated from individual notes:',
+        },
+        value: '',
+        noteValue: '',
+        validation: {},
+        valid: true,
+      },
+    },
   },
   scores: {
     start: null,
@@ -796,4 +811,5 @@ export const initialState = {
   questionId: null,
   questionCategory: null,
   noteValue: '',
+  generatedNote: '',
 };

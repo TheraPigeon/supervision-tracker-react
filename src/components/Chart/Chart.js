@@ -105,7 +105,7 @@ class Chart extends Component {
       ending: [],
       labels: [],
     };
-    this.props.soups.map((soup) => {
+    this.props.soups.reverse().map((soup) => {
       // If the data is not a valid fraction - don't render this point
       if (isDenomZero(soup.total)) {
         console.log('Skipping this one.');

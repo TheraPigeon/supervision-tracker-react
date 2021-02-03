@@ -167,7 +167,7 @@ class NewSoup extends Component {
 
     const data = {
       soup: {
-        staff_member_id: this.props.match.params.id,
+        staff_member_id: parseInt(this.props.match.params.id),
         supervisor_id: this.props.staffId,
         start_time: adjustTimeZone(this.state.controls.setup['1'].value),
         end_time: adjustTimeZone(this.state.controls.setup['2'].value),
@@ -183,19 +183,51 @@ class NewSoup extends Component {
         intern: this.props.isIntern,
       },
     };
-    this.props.roster[this.props.match.params.id].supervisions.push(data.soup);
 
     this.props.onAddSoup({
       soupData: data,
       soupId: this.props.location.soupId,
       token: this.props.token,
       edit: this.props.location.edit,
+      memberId: this.props.match.params.id,
     });
     this.props.history.goBack();
     e.preventDefault();
   };
-  handleAddNote = (e) => {
+  generateNote = (e) => {
     console.log('adding note');
+    const notes = [];
+    console.log(this.state);
+    Object.keys(this.state.controls).map((category) => {
+      Object.keys(this.state.controls[category]).map((question) => {
+        const note = this.state.controls[category][question].noteValue;
+        if (note) {
+          notes.push(note);
+        }
+      });
+    });
+    const formattedNotes = notes.map((note) => {
+      note = note.trim().split('');
+      if (note[note.length - 1] !== '.') {
+        note.push('.');
+      }
+      note[0] = note[0].toUpperCase();
+      return note.join('');
+    });
+    const finalNote = formattedNotes.join(' ');
+    this.inputChangedHandler(
+      {
+        target: {
+          value: finalNote,
+        },
+      },
+      'note',
+      'n0'
+    );
+  };
+  handleAddNote = () => {
+    this.generateNote();
+    this.handleModal();
   };
   handleModal = (category, questionId, noteValue) => {
     if (!this.state.addingNote) {
@@ -239,6 +271,7 @@ class NewSoup extends Component {
       ['main', 'Conducting the session'],
       ['ending', 'Ending the session'],
       ['additional', 'Additional Metrics'],
+      ['note', 'Session Note'],
     ];
     const formSections = formOrder.map(([category, sectionLabel], i) => {
       return (
@@ -263,7 +296,7 @@ class NewSoup extends Component {
             questionId={this.state.questionId}
             questionCategory={this.state.questionCategory}
             changed={this.inputNoteHandler}
-            saveClicked={() => this.handleModal()}
+            saveClicked={() => this.handleAddNote()}
             deleteClicked={this.handleNoteDelete}
             value={
               this.state.questionId
@@ -299,6 +332,7 @@ const mapStateToProps = (state) => {
     staffId: state.auth.userId,
     isIntern: state.auth.isIntern,
     roster: state.auth.roster,
+    members: state.allmembers.members,
   };
 };
 

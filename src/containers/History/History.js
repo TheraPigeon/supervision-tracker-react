@@ -25,6 +25,14 @@ class History extends Component {
   componentDidMount() {
     this.props.fetchSupervisions(this.props.match.params.id, this.props.token);
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.members !== prevProps.members) {
+      this.props.fetchSupervisions(
+        this.props.match.params.id,
+        this.props.token
+      );
+    }
+  }
   componentWillUnmount() {
     this.props.clearSupervisions();
   }
@@ -80,12 +88,8 @@ class History extends Component {
           { format: ['hours', 'minutes'] }
         );
         let soupId = soup.id;
-        console.log(soupId);
         return (
-          <tr
-            key={soup.id + index}
-            className={index % 2 !== 0 ? classes.Alternate : null}
-          >
+          <tr className={index % 2 !== 0 ? classes.Alternate : null}>
             <td>{soup.date}</td>
             <td>{soup.supervisor.name}</td>
             <td>{durOutput}</td>
@@ -95,6 +99,7 @@ class History extends Component {
             <td>{soup.total}</td>
             <td>
               <Button
+                key={'viewButton' + soupId}
                 type="button"
                 btnType="Transparent"
                 clicked={() => this.handleModal(soupId)}
@@ -189,6 +194,7 @@ const mapStateToProps = (state) => {
     userId: state.auth.userId,
     supervisions: state.history.supervisions,
     loading: state.history.loading,
+    members: state.allmembers.members,
   };
 };
 const mapDispatchToProps = (dispatch) => {

@@ -8,7 +8,7 @@ const AddMember = (props) => {
   const [adding, setAdding] = useState(false);
   const [name, setName] = useState('');
   const [init, setInit] = useState('');
-  const [follow, setFollow] = useState(false);
+  const [follow, setFollow] = useState(true);
   const [hours, setHours] = useState(40);
   if (props.editing && !adding) {
     const { name, hours, follow } = props.memberData;
@@ -32,6 +32,7 @@ const AddMember = (props) => {
         name: fullName,
         hours: hours,
         staffId: props.staffId,
+        // supervisions: supervisions,
       };
       props.onEditStaff(staffData, props.token);
     } else {
@@ -46,7 +47,7 @@ const AddMember = (props) => {
     setAdding(false);
     setName('');
     setInit('');
-    setFollow(false);
+    setFollow(true);
   };
   const hoursSelection = [];
   for (let i = 0; i <= 100; i++) {

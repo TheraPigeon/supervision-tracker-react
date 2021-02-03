@@ -12,7 +12,15 @@ class Member extends Component {
     showHint: false,
   };
   componentDidMount = () => {
-    if (this.props.roster[this.props.memberId].supervisions) {
+    if (this.props.members.staff_members[this.props.memberIndex].supervisions) {
+      this.updateCircleItems();
+    }
+  };
+  componentDidUpdate = (prevProps) => {
+    if (
+      this.props.members.staff_members[this.props.memberIndex].supervisions !==
+      prevProps.members.staff_members[prevProps.memberIndex].supervisions
+    ) {
       this.updateCircleItems();
     }
   };
@@ -22,9 +30,8 @@ class Member extends Component {
 
   updateCircleItems() {
     const WEEKLY_GOAL = this.props.weeklyHours * 0.05 * 60; // = 5% of weekly hours
-    const currentWeekSoups = this.props.roster[
-      this.props.memberId
-    ].supervisions.filter((soup) => {
+    const thisMember = this.props.members.staff_members[this.props.memberIndex];
+    const currentWeekSoups = thisMember.supervisions.filter((soup) => {
       const currDate = new Date();
       currDate.setHours(1);
       currDate.setMinutes(0);
@@ -48,7 +55,6 @@ class Member extends Component {
         new Date(soup.end_time),
         new Date(soup.start_time)
       );
-      console.log(soup);
       if (soup.intern) {
         internMinutes += diff;
       } else {
@@ -57,7 +63,8 @@ class Member extends Component {
       return true;
     });
     if (currentWeekSoups.length) {
-      this.setState({ latestScore: currentWeekSoups[0].total });
+      const score = currentWeekSoups[0].total;
+      this.setState({ latestScore: score });
     }
     let percentage = (completedMinutes / WEEKLY_GOAL) * 100;
     if (percentage > 100) {
@@ -156,6 +163,7 @@ class Member extends Component {
 const mapStateToProps = (state) => {
   return {
     roster: state.auth.roster,
+    members: state.allmembers.members,
   };
 };
 export default connect(mapStateToProps)(Member);

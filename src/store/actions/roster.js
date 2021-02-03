@@ -19,7 +19,12 @@ export const createStaffFail = (error) => {
     error: error,
   };
 };
-
+export const updateRoster = ({ staffId }) => {
+  return {
+    type: actionTypes.UPDATE_ROSTER,
+    staffId,
+  };
+};
 export const createStaff = (name, isFollow, clinicId, hours, token) => {
   return (dispatch) => {
     dispatch(createStaffStart());
@@ -37,22 +42,21 @@ export const createStaff = (name, isFollow, clinicId, hours, token) => {
         console.log(res.data);
         const id = res.data.staff_member.id;
         const data = {
-          [id]: {
-            clinic_id: res.data.staff_member.clinic.id,
-            name: res.data.staff_member.name,
-            hours: res.data.staff_member.hours,
-            supervisions: [{}],
-          },
+          id: id,
+          clinic_id: res.data.staff_member.clinic.id,
+          name: res.data.staff_member.name,
+          hours: res.data.staff_member.hours,
+          supervisions: [{}],
         };
         dispatch(createStaffSuccess({ newStaff: data, isFollow }));
+        if (isFollow) {
+          dispatch(updateRoster({ staffId: id }));
+        }
       })
       .catch((err) => {
         console.log(err);
         dispatch(createStaffFail(err));
       });
-    if (isFollow) {
-      //add to roster action
-    }
   };
 };
 
@@ -115,7 +119,7 @@ export const addStaff = (staffId, token, isFollowing) => {
         if (isFollowing) {
           dispatch(kickStaffSuccess(staffId));
         } else {
-          dispatch(addStaffSuccess(res.data.added_members));
+          dispatch(addStaffSuccess(staffId));
         }
       })
       .catch((err) => {

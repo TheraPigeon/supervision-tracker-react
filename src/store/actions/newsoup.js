@@ -1,7 +1,7 @@
 import axios from '../../axios-soup';
 import * as actionTypes from './actionTypes';
 import { requestStatusSuccess, requestStatusFailure } from './requeststatus';
-export const addSoup = ({ soupData, token, edit, soupId }) => {
+export const addSoup = ({ soupData, token, edit, soupId, memberId }) => {
   return (dispatch) => {
     dispatch(addSoupStart());
     const url = edit ? `api/supervisions/${soupId}` : 'api/supervisions';
@@ -12,7 +12,7 @@ export const addSoup = ({ soupData, token, edit, soupId }) => {
     axios({ method, url, data: soupData, headers })
       .then((res) => {
         console.log(res);
-        dispatch(addSoupSuccess());
+        dispatch(addSoupSuccess({ soupData: soupData.soup, memberId, soupId }));
         dispatch(requestStatusSuccess('Success'));
       })
       .catch((err) => {
@@ -29,10 +29,13 @@ export const addSoupStart = () => {
     loading: true,
   };
 };
-export const addSoupSuccess = () => {
+export const addSoupSuccess = ({ soupData, memberId, soupId }) => {
   return {
     type: actionTypes.ADD_SOUP_SUCCESS,
     loading: false,
+    soupData,
+    memberId,
+    soupId,
   };
 };
 

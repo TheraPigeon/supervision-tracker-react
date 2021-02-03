@@ -27,38 +27,38 @@ class Roster extends Component {
     this.props.addToRoster(staffId, this.props.token, isFollow);
   };
   render() {
-    let roster = null;
-    if (this.props.roster) {
-      roster = Object.keys(this.props.roster).map((member) => {
-        const { name } = this.props.roster[member];
-        const { hours } = this.props.roster[member];
-        return (
-          <Member
-            key={member}
-            memberId={member}
-            name={name}
-            weeklyHours={hours}
-          />
-        );
+    let roster = [];
+    if (this.props.members.length !== 0 && this.props.roster) {
+      this.props.members.staff_members.forEach((member, index) => {
+        const memberInRoster = this.props.roster.includes(member.id);
+        if (memberInRoster) {
+          const { name, hours, id } = member;
+          roster.push(
+            <Member
+              key={id}
+              memberId={id}
+              memberIndex={index}
+              name={name}
+              weeklyHours={hours}
+            />
+          );
+        }
+        return true;
       });
     }
     let listOfUsers = null;
     let userListArray = [];
     if (this.props.members.staff_members) {
-      let roster = [];
-      if (this.props.roster) {
-        roster = Object.keys(this.props.roster);
-      }
+      let roster = [...this.props.roster];
       for (let key in this.props.members.staff_members) {
         let userId = this.props.members.staff_members[key].id;
         userListArray.push({
           id: key,
           staffId: userId,
-          inRoster: roster.includes(userId.toString()),
+          inRoster: roster.includes(userId),
           config: this.props.members.staff_members[key],
         });
       }
-      console.log(this.props.members);
       listOfUsers = userListArray.map((member) => {
         return (
           <StaffCard
@@ -78,7 +78,6 @@ class Roster extends Component {
       });
     }
     if (!this.props.currentClinic) {
-      console.log(this.props.currentClinic);
       this.props.history.push('/join');
     }
     const currentClinicData = this.props.clinics.filter((clinic) => {
