@@ -55,18 +55,6 @@ class NewSoup extends Component {
       this.setState({ controls: updatedControls });
     }
   }
-  // validateForm = (controls) => {
-  //   for (let section in controls) {
-  //     for (let question in controls[section]) {
-  //       const isValid = controls[section][question].valid;
-  //       if (!isValid) {
-  //         this.setState({ formIsValid: false });
-  //         return false;
-  //       }
-  //     }
-  //   }
-  //   this.setState({ formIsValid: true });
-  // };
   inputChangedHandler = (event, category, controlName) => {
     let updatedControls = null;
     if (event instanceof Date) {
@@ -115,7 +103,7 @@ class NewSoup extends Component {
     this.setState({ controls: updatedControls });
   };
 
-  formSubmitHandler = (e) => {
+  formSubmitHandler = (e, options) => {
     const updateScore = {
       ...this.state.controls,
     };
@@ -179,8 +167,9 @@ class NewSoup extends Component {
         ending: calculatedScores.ending,
         additional: calculatedScores.additional,
         total: totalSectionScore + '/' + totalQuestions,
-        json: this.state.controls,
         intern: this.props.isIntern,
+        in_progress: options ? options.inProgress : false,
+        json: this.state.controls,
       },
     };
 
@@ -195,9 +184,7 @@ class NewSoup extends Component {
     e.preventDefault();
   };
   generateNote = (e) => {
-    console.log('adding note');
     const notes = [];
-    console.log(this.state);
     Object.keys(this.state.controls).map((category) => {
       Object.keys(this.state.controls[category]).map((question) => {
         const note = this.state.controls[category][question].noteValue;
@@ -264,6 +251,9 @@ class NewSoup extends Component {
     this.setState({ controls: updatedControls });
     this.handleModal();
   };
+  handleSaveProgress = (e) => {
+    this.formSubmitHandler(e, { inProgress: true });
+  };
   render() {
     const formOrder = [
       ['setup', 'Session set-up'],
@@ -317,6 +307,9 @@ class NewSoup extends Component {
           </header>
           <form onSubmit={(e) => this.formSubmitHandler(e)}>
             {formSections}
+            <Button type="button" clicked={(e) => this.handleSaveProgress(e)}>
+              Save&amp;Exit
+            </Button>
             <Button type="submit" disabled={!this.state.formIsValid}>
               Submit
             </Button>
