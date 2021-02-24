@@ -41,7 +41,7 @@ class Member extends Component {
         new Date(soup.date),
         new Date(firstday)
       );
-      return diff > 0;
+      return diff > 0 && !soup.in_progress; //TEST
     });
     currentWeekSoups.sort((a, b) => {
       const dateA = new Date(a.date);

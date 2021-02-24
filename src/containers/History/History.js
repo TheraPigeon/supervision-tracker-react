@@ -73,6 +73,7 @@ class History extends Component {
     let soups = null;
     if (this.props.supervisions) {
       soups = this.props.supervisions.map((soup, index) => {
+        if (soup.in_progress) return; //TEMP replace with request param
         const duration = differenceInMilliseconds(
           new Date(soup.end_time),
           new Date(soup.start_time)
