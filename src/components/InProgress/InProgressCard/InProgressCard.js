@@ -44,7 +44,18 @@ const InProgressCard = (props) => {
       ) : (
         <React.Fragment>
           <span>Are you sure?</span>
-          <Button btnType="NoBg" type="button">
+          <Button
+            btnType="NoBg"
+            type="button"
+            clicked={() =>
+              props.deleteSoup({
+                soupId: props.soup.id,
+                token: props.token,
+                inProgress: true,
+                memberId: props.soup.staff_member_id,
+              })
+            }
+          >
             yes
           </Button>
           <Button

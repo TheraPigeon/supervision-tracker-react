@@ -12,7 +12,14 @@ export const addSoup = ({ soupData, token, edit, soupId, memberId }) => {
     axios({ method, url, data: soupData, headers })
       .then((res) => {
         console.log(res);
-        dispatch(addSoupSuccess({ soupData: soupData.soup, memberId, soupId }));
+        const updatedSoupData = { ...soupData.soup, id: res.data.soup.id };
+        dispatch(
+          addSoupSuccess({
+            soupData: updatedSoupData,
+            memberId,
+            soupId,
+          })
+        );
         dispatch(requestStatusSuccess('Success'));
       })
       .catch((err) => {

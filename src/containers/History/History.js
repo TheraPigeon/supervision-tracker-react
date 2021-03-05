@@ -65,7 +65,12 @@ class History extends Component {
     }
   };
   handleSoupDeletion = () => {
-    this.props.onSoupDelete(this.state.deleteSoupId, this.props.token);
+    this.props.onDeleteSoup({
+      soupId: this.state.deleteSoupId,
+      token: this.props.token,
+      inProgress: false,
+      memberId: parseInt(this.props.match.params.id),
+    });
     this.handleDeleteModal();
   };
 
@@ -73,6 +78,7 @@ class History extends Component {
     let soups = null;
     if (this.props.supervisions) {
       soups = this.props.supervisions.map((soup, index) => {
+        console.log(soup);
         if (soup.in_progress) return; //TEMP replace with request param
         const duration = differenceInMilliseconds(
           new Date(soup.end_time),
@@ -113,7 +119,10 @@ class History extends Component {
                 <Button
                   type="button"
                   clicked={() =>
-                    this.handleDeleteModal({ soupId: soupId, date: soup.date })
+                    this.handleDeleteModal({
+                      soupId: soupId,
+                      date: soup.date,
+                    })
                   }
                 >
                   Delete
@@ -202,8 +211,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSupervisions: (staffId) =>
       dispatch(actions.fetchSupervisions(staffId)),
-    onSoupDelete: (soupId, token) =>
-      dispatch(actions.deleteSoup(soupId, token)),
+    onDeleteSoup: (paramObj) => dispatch(actions.deleteSoup(paramObj)),
     clearSupervisions: () => dispatch(actions.clearSupervisions()),
   };
 };

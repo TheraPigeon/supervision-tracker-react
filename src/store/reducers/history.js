@@ -40,6 +40,7 @@ const deleteSoupStart = (state, action) => {
   return updateObject(state, { loading: true });
 };
 const deleteSoupSuccess = (state, action) => {
+  if (action.inProgress) return updateObject(state, {});
   const updatedSupervisions = cloneDeep(state.supervisions);
   const index = updatedSupervisions.findIndex((soup) => {
     return soup.id === action.soupId;
