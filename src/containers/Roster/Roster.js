@@ -10,6 +10,8 @@ import AddMember from './AddMember/AddMember';
 import StaffCard from '../../components/StaffCard/StaffCard';
 import { withAuth0 } from '@auth0/auth0-react';
 import Signup from '../Login/Signup/Signup';
+import InProgress from '../../components/InProgress/InProgress';
+
 class Roster extends Component {
   state = {
     managingStaff: false,
@@ -105,6 +107,7 @@ class Roster extends Component {
               <i className="fa fa-cog"></i>Manage
             </Button>
           </header>
+          <InProgress />
           {roster}
         </div>
       </React.Fragment>
