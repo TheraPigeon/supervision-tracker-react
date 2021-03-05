@@ -9,6 +9,7 @@ import { initialState } from './initialState';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/checkValidity';
 import { validateForm } from '../../shared/validateForm';
+import { formatToTimeZone } from 'date-fns-timezone';
 
 import * as actions from '../../store/actions/index';
 
@@ -17,44 +18,62 @@ class NewSoup extends Component {
 
   componentDidMount() {
     console.log('[NewSoup.js componentDidMount');
-
-    if (this.props.location.edit) {
-      if (
-        parseInt(this.props.location.userId) !== this.props.location.creatorId
-      ) {
-        this.props.history.goBack();
-      }
-      const fetchedControls = cloneDeep(this.props.location.controls);
-      const date = new Date(this.props.location.date);
-      const startTime = new Date(this.props.location.startTime);
-      startTime.setTime(
-        startTime.getTime() + startTime.getTimezoneOffset() * 60 * 1000
-      );
-      const endTime = new Date(this.props.location.endTime);
-      endTime.setTime(
-        endTime.getTime() + endTime.getTimezoneOffset() * 60 * 1000
-      );
-      let updatedControls = {
-        ...fetchedControls,
-        setup: {
-          ...fetchedControls.setup,
-          0: {
-            ...fetchedControls.setup['0'],
-            value: date,
-          },
-          1: {
-            ...this.state.controls.setup['1'],
-            value: startTime,
-          },
-          2: {
-            ...this.state.controls.setup['2'],
-            value: endTime,
-          },
-        },
-      };
-      this.setState({ controls: updatedControls });
+    if (this.props.location.soupId) {
+      this.props.fetchSoup(this.props.location.soupId);
     }
   }
+  updateForm = () => {
+    const {
+      id,
+      date,
+      start_time,
+      end_time,
+      group,
+      telehealth,
+      supervisor_id,
+      staff_member_id,
+      json,
+    } = this.props.soup;
+
+    const fetchedControls = cloneDeep(json);
+    const soupDate = formatToTimeZone(new Date(date), 'MMM D, YYYY', {
+      timeZone: 'Africa/Conakry',
+    });
+    const startTime = new Date(start_time);
+    startTime.setTime(
+      startTime.getTime() + startTime.getTimezoneOffset() * 60 * 1000
+    );
+    const endTime = new Date(end_time);
+    endTime.setTime(
+      endTime.getTime() + endTime.getTimezoneOffset() * 60 * 1000
+    );
+    let updatedControls = {
+      ...fetchedControls,
+      setup: {
+        ...fetchedControls.setup,
+        0: {
+          ...fetchedControls.setup['0'],
+          value: date,
+        },
+        1: {
+          ...fetchedControls.setup['1'],
+          value: startTime,
+        },
+        2: {
+          ...fetchedControls.setup['2'],
+          value: endTime,
+        },
+      },
+    };
+    this.setState({ controls: updatedControls });
+  };
+  componentDidUpdate = (prevProps) => {
+    console.log('[NewSoup.js componentDidUpdate');
+    if (this.props.soup !== prevProps.soup) {
+      this.updateForm();
+    }
+  };
+
   inputChangedHandler = (event, category, controlName) => {
     let updatedControls = null;
     if (event instanceof Date) {
@@ -300,7 +319,7 @@ class NewSoup extends Component {
         <div className={classes.NewSoup}>
           <header>
             <h1>
-              New Supervision <span>for {this.props.location.name}</span>
+              Supervision <span>for {this.props.location.name}</span>
             </h1>
             {/* span to display completion percentage */}
             <span></span>
@@ -326,12 +345,15 @@ const mapStateToProps = (state) => {
     isIntern: state.auth.isIntern,
     roster: state.auth.roster,
     members: state.allmembers.members,
+
+    soup: state.history.soup,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddSoup: (data) => dispatch(actions.addSoup(data)),
+    fetchSoup: (soupId) => dispatch(actions.fetchSoup(soupId)),
   };
 };
 
