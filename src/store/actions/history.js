@@ -85,10 +85,12 @@ export const deleteSoupStart = () => {
     type: actionTypes.DELETE_SOUP_START,
   };
 };
-export const deleteSoupSuccess = (soupId) => {
+export const deleteSoupSuccess = (soupId, memberId, inProgress) => {
   return {
     type: actionTypes.DELETE_SOUP_SUCCESS,
     soupId: soupId,
+    memberId: memberId,
+    inProgress: inProgress,
   };
 };
 export const deleteSoupFail = (error) => {
@@ -98,7 +100,27 @@ export const deleteSoupFail = (error) => {
   };
 };
 
-export const deleteSoup = (soupId, token) => {
+// Action to delete InProgress soup REVIEW
+export const deleteInProgressSoupStart = () => {
+  return {
+    type: actionTypes.DELETE_IN_PROGRESS_SOUP_START,
+  };
+};
+export const deleteInProgressSoupSuccess = (soupId) => {
+  return {
+    type: actionTypes.DELETE_IN_PROGRESS_SOUP_SUCCESS,
+    soupId: soupId,
+  };
+};
+export const deleteInProgressSoupFail = (error) => {
+  return {
+    type: actionTypes.DELETE_IN_PROGRESS_SOUP_FAIL,
+    error: error,
+  };
+};
+
+export const deleteSoup = (data) => {
+  const { soupId, token, inProgress, memberId } = data;
   return (dispatch) => {
     dispatch(deleteSoupStart());
     let url = 'api/supervisions/';
@@ -111,7 +133,7 @@ export const deleteSoup = (soupId, token) => {
       .then((res) => {
         console.log(res);
         dispatch(requestStatusSuccess('Success'));
-        dispatch(deleteSoupSuccess(soupId));
+        dispatch(deleteSoupSuccess(soupId, memberId, inProgress));
       })
       .catch((err) => {
         console.log(err);
