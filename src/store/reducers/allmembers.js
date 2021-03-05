@@ -106,6 +106,41 @@ const deleteStaffFail = (state, action) => {
   return updateObject(state, { loading: false, error: action.error });
 };
 
+// REDUCER to delete inProgress soups REVIEW
+
+// const deleteInProgressSoupStart = (state, action) => {
+//   return updateObject(state, { loading: true });
+// };
+// const deleteInProgressSoupSuccess = (state, action) => {
+//   console.log('FIND USER AND DELETE SOUP');
+//   return updateObject(state, { loading: false });
+// };
+// const deleteInProgressSoupFail = (state, action) => {
+//   return updateObject(state, { loading: false, error: action.error });
+// };
+
+const deleteSoupSuccess = (state, action) => {
+  //delete soup from member's soup array
+  const updatedMembers = cloneDeep(state.members);
+  const memberId = action.memberId;
+  const soupId = action.soupId;
+  const thisMemberIndex = updatedMembers.staff_members.findIndex(
+    (member) => member.id === memberId
+  );
+  console.log(updatedMembers.staff_members);
+  console.log(thisMemberIndex);
+  console.log(memberId);
+  const soupIndex = updatedMembers.staff_members[
+    thisMemberIndex
+  ].supervisions.findIndex((soup) => soup.id === soupId);
+  updatedMembers.staff_members[thisMemberIndex].supervisions.splice(
+    soupIndex,
+    1
+  );
+  return updateObject(state, {
+    members: updatedMembers,
+  });
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_MEMBERS_START:
@@ -148,6 +183,18 @@ const reducer = (state = initialState, action) => {
       return addSoupSuccess(state, action);
     case actionTypes.ADD_SOUP_FAIL:
       return addSoupFail(state, action);
+
+    // Delete InProgress soup REVIEW
+    // case actionTypes.DELETE_IN_PROGRESS_SOUP_START:
+    //   return deleteInProgressSoupStart(state, action);
+    // case actionTypes.DELETE_IN_PROGRESS_SOUP_SUCCESS:
+    //   return deleteInProgressSoupSuccess(state, action);
+    // case actionTypes.DELETE_IN_PROGRESS_SOUP_FAIL:
+    //   return deleteInProgressSoupFail(state, action);
+
+    case actionTypes.DELETE_SOUP_SUCCESS:
+      return deleteSoupSuccess(state, action);
+
     default:
       return state;
   }
