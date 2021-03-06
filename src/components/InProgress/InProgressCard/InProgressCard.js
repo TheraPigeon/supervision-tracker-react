@@ -18,7 +18,7 @@ const InProgressCard = (props) => {
       {!discarding ? (
         <React.Fragment>
           <span className={classes.Id}>{props.soup.staff_member_id}</span>
-          <span>Last updated: {createdAtTime}</span>
+          <span>Created on: {createdAtTime}</span>
           <NavLink
             to={{
               pathname: `/soupervision/${props.soup.id}`,
@@ -29,13 +29,13 @@ const InProgressCard = (props) => {
               name: props.soup.staff_member_id,
             }}
           >
-            <Button type="button" btnType="Transparent">
+            <Button type="button" btnType="NoBg">
               continue
             </Button>
           </NavLink>
           <Button
             type="button"
-            btnType="NoBg"
+            btnType="Transparent"
             clicked={() => setDiscarding(!discarding)}
           >
             discard

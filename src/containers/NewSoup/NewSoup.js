@@ -189,6 +189,8 @@ class NewSoup extends Component {
         intern: this.props.isIntern,
         in_progress: options ? options.inProgress : false,
         json: this.state.controls,
+
+        created_at: new Date(Date.now()), //REVIEW
       },
     };
 
@@ -326,12 +328,18 @@ class NewSoup extends Component {
           </header>
           <form onSubmit={(e) => this.formSubmitHandler(e)}>
             {formSections}
-            <Button type="button" clicked={(e) => this.handleSaveProgress(e)}>
-              Save&amp;Exit
-            </Button>
-            <Button type="submit" disabled={!this.state.formIsValid}>
-              Submit
-            </Button>
+            <section>
+              <Button
+                type="button"
+                btnType="Transparent"
+                clicked={(e) => this.handleSaveProgress(e)}
+              >
+                Save&amp;Exit
+              </Button>
+              <Button type="submit" disabled={!this.state.formIsValid}>
+                Submit
+              </Button>
+            </section>
           </form>
         </div>
       </React.Fragment>
