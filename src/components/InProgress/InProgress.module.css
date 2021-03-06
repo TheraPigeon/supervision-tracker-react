@@ -1,0 +1,18 @@
+.InProgress {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px dashed #ccc;
+  border-top: 1px dashed #ccc;
+}
+.InProgress h2 {
+  grid-column: 1 / -1;
+  font-size: 1.3em;
+}
+
+@media screen and (max-width: 1140px) {
+  .InProgress {
+    grid-template-columns: 1fr;
+  }
+}

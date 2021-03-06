@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
 import InProgressCard from './InProgressCard/InProgressCard';
 import * as actions from '../../store/actions/index';
+import classes from './InProgress.module.css';
 
 const InProgress = (props) => {
   const [soups, setSoups] = useState([]);
@@ -33,7 +33,16 @@ const InProgress = (props) => {
       );
     });
   }
-  return <div>In Progress{inProgressList}</div>;
+  return (
+    <React.Fragment>
+      {soups.length ? (
+        <div className={classes.InProgress}>
+          <h2>In progress supervisions:</h2>
+          {inProgressList}
+        </div>
+      ) : null}
+    </React.Fragment>
+  );
 };
 const mapStateToProps = (state) => {
   return {
