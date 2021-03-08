@@ -18,7 +18,7 @@ const addSoupSuccess = (state, action) => {
   const soup = action.soupData;
   const soupId = action.soupId;
   const thisMemberIndex = state.members.staff_members.findIndex(
-    (member) => member.id === memberId
+    (member) => parseInt(member.id) === memberId
   );
   const updatedMembers = cloneDeep(state.members);
   if (soupId) {
@@ -127,9 +127,6 @@ const deleteSoupSuccess = (state, action) => {
   const thisMemberIndex = updatedMembers.staff_members.findIndex(
     (member) => member.id === memberId
   );
-  console.log(updatedMembers.staff_members);
-  console.log(thisMemberIndex);
-  console.log(memberId);
   const soupIndex = updatedMembers.staff_members[
     thisMemberIndex
   ].supervisions.findIndex((soup) => soup.id === soupId);

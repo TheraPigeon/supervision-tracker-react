@@ -21,7 +21,7 @@ const InProgressCard = (props) => {
           <span>Created on: {createdAtTime}</span>
           <NavLink
             to={{
-              pathname: `/soupervision/${props.soup.id}`,
+              pathname: `/soupervision/${props.soup.staff_member_id}`,
               search: 'edit=true',
               soupId: props.soup.id,
               edit: true,
