@@ -124,7 +124,6 @@ const ColumnHeadings = () => {
 };
 
 const SoupPDF = ({ soup, start, end }) => {
-  console.log(soup);
   return (
     <Document style={{ paddingBottom: '20px' }}>
       <Page size="A4">
