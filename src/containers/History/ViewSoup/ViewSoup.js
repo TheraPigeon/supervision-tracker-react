@@ -8,6 +8,9 @@ import * as actions from '../../../store/actions/index';
 import classes from './ViewSoup.module.css';
 import ViewSection from './ViewSection/ViewSection';
 import Button from '../../../components/UI/Button/Button';
+
+import SoupPDF from '../PDF/HistoryPDF';
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 class ViewSoup extends Component {
   componentDidUpdate = (prevState) => {
     if (this.props.soupId !== prevState.soupId) {
@@ -62,6 +65,17 @@ class ViewSoup extends Component {
       soup = (
         <div className={classes.ViewSoup}>
           <div className={classes.Controls}>
+            {/* <PDFDownloadLink
+              document={
+                <SoupPDF
+                  soup={this.props.soup}
+                  start={startTime}
+                  end={endTime}
+                />
+              }
+            >
+              <Button type="button">download(PDF)</Button>
+            </PDFDownloadLink> */}
             <NavLink
               to={{
                 pathname: '/soupervision/' + staff_member_id,
@@ -87,6 +101,9 @@ class ViewSoup extends Component {
             {/* <Button btnType="Transparent">Print(PDF)</Button>
             <Button>Delete</Button> */}
           </div>
+          {/* <PDFViewer>
+            <SoupPDF soup={this.props.soup} start={startTime} end={endTime} />
+          </PDFViewer> */}
           <header>
             <div>
               <span>Supervisor: {supervisor_id}</span>

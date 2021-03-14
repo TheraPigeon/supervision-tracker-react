@@ -19,10 +19,11 @@
   z-index: 1;
 }
 
+.NewSoup form > section {
+  display: flex;
+  justify-content: center;
+}
 .NewSoup button {
-  display: block;
-
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  margin: 40px 40px;
+  width: 150px;
 }

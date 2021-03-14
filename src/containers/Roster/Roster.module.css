@@ -9,6 +9,9 @@
   display: flex;
   justify-content: space-between;
 }
+.Roster > div {
+  grid-column: 1 / -1;
+}
 .Roster i {
   margin-right: 5px;
 }
