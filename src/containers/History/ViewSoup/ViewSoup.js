@@ -65,7 +65,7 @@ class ViewSoup extends Component {
       soup = (
         <div className={classes.ViewSoup}>
           <div className={classes.Controls}>
-            <PDFDownloadLink
+            {/* <PDFDownloadLink
               document={
                 <SoupPDF
                   soup={this.props.soup}
@@ -75,7 +75,7 @@ class ViewSoup extends Component {
               }
             >
               <Button type="button">download(PDF)</Button>
-            </PDFDownloadLink>
+            </PDFDownloadLink> */}
             <NavLink
               to={{
                 pathname: '/soupervision/' + staff_member_id,

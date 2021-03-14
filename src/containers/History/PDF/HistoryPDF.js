@@ -31,12 +31,12 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   tableHeading: {
-    fontSize: '13',
+    fontSize: '14',
     fontWeight: 'semibold',
-    borderTop: '1 solid #000',
-    borderBottom: '2 solid #000',
+    borderBottom: '1 solid #000',
     borderRight: '1 solid #000',
     borderLeft: '1 solid #000',
+    padding: '3',
   },
 });
 
