@@ -9,13 +9,13 @@ const styles = StyleSheet.create({
   header: {
     display: 'flex',
     flexDirection: 'row',
+    marginBottom: '20',
   },
   headerData: {
     width: '60%',
   },
   headerLogo: {},
   table: {
-    marginTop: '20',
     borderTop: '1 solid #000',
   },
   tableGroup: {
@@ -37,6 +37,23 @@ const styles = StyleSheet.create({
     borderRight: '1 solid #000',
     borderLeft: '1 solid #000',
     padding: '3',
+  },
+
+  footerGroup: {
+    marginTop: '20',
+  },
+  signatureArea: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  signatureItem: {
+    width: '200',
+    textAlign: 'center',
+    marginTop: '45',
+    marginRight: '50',
+    padding: '5 10 0 10',
+    borderTop: '1 solid #000',
   },
 });
 
@@ -129,6 +146,22 @@ const SoupPDF = ({ soup, start, end }) => {
       </View>
     );
   };
+  const Footer = () => {
+    return (
+      <View style={styles.footerGroup}>
+        <Text>
+          I, hereby certify by signing below the aforementioned scores, data,
+          and preformance was reviewed with me on this date _______________.
+        </Text>
+        <View style={styles.signatureArea}>
+          <Text style={styles.signatureItem}>Therapist's Printed Name</Text>
+          <Text style={styles.signatureItem}>Therapist's Signature</Text>
+          <Text style={styles.signatureItem}>Supervisor's Printed Name</Text>
+          <Text style={styles.signatureItem}>Supervisor's Signature</Text>
+        </View>
+      </View>
+    );
+  };
   const sectionConfig = [
     {
       name: 'starting',
@@ -174,6 +207,30 @@ const SoupPDF = ({ soup, start, end }) => {
                 />
               );
             })}
+            <View style={styles.tableGroup}>
+              <Text
+                style={[
+                  styles.tableCell,
+                  {
+                    width: '55%',
+                    borderLeft: '1 solid #000',
+                    textAlign: 'right',
+                    fontSize: '14',
+                  },
+                ]}
+              >
+                TOTAL
+              </Text>
+              <Text
+                style={[
+                  styles.tableCell,
+                  { width: '15%', textAlign: 'center', fontSize: '14' },
+                ]}
+              >
+                {soup.total}
+              </Text>
+            </View>
+            <Footer />
           </View>
         </View>
       </Page>
