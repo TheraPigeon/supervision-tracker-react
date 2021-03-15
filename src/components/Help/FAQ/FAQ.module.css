@@ -1,0 +1,38 @@
+.FAQ {
+}
+
+.FAQ h1 {
+  font-size: 2em;
+}
+
+.FAQ h2 {
+  font-size: 1.5em;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #fff;
+}
+
+.topicsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20%;
+  margin-top: 40px;
+}
+
+.questionsWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  color: white;
+  background-color: #ea641d;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  height: 20px;
+  margin-top: 15px;
+  cursor: pointer;
+}

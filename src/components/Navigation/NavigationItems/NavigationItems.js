@@ -11,9 +11,12 @@ const navigationItems = (props) => (
     <NavigationItem link="/members" toggleMenu={props.toggleMenu}>
       All staff
     </NavigationItem>
-
-    <NavigationItem link="/new_feature" toggleMenu={props.toggleMenu}>
+    {/* Feature requests disabled after beta */}
+    {/* <NavigationItem link="/new_feature" toggleMenu={props.toggleMenu}>
       Request a feature
+    </NavigationItem> */}
+    <NavigationItem link="/faq" toggleMenu={props.toggleMenu}>
+      FAQ
     </NavigationItem>
     <NavigationItem link="/bug_report" toggleMenu={props.toggleMenu}>
       Report a bug

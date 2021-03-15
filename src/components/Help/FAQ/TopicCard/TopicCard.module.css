@@ -1,0 +1,16 @@
+.TopicCard {
+  height: 100px;
+  min-width: 180px;
+  border: 1px solid #ea641d;
+  flex-basis: 33.333333%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.TopicCard:hover {
+  background-color: #555;
+}

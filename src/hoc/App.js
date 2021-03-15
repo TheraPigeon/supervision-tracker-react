@@ -16,6 +16,7 @@ import NewSoup from '../containers/NewSoup/NewSoup';
 import History from '../containers/History/History';
 import Reset from '../containers/Login/Reset/Reset';
 import NewPassword from '../containers/Login/Reset/NewPassword/NewPassword';
+import FAQ from '../components/Help/FAQ/FAQ';
 
 //For beta testing only
 import NewFeature from '../components/Beta/NewFeature/NewFeature';
@@ -41,6 +42,7 @@ class App extends PureComponent {
         <Switch>
           {/* Public routes */}
           <Route path="/logout" component={Logout} />
+          <Route path="/faq" component={FAQ}></Route>
 
           {/* Authorization required */}
           <PrivateRoute

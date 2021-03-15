@@ -1,0 +1,24 @@
+.QuestionCard {
+  border: 1px solid #ea641d;
+  min-height: 50px;
+  margin: 10px;
+  padding-left: 10px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.QuestionCard:hover {
+  background-color: #555;
+}
+
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50px;
+}
+
+.QuestionCard p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
