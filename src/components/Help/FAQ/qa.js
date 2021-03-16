@@ -12,12 +12,12 @@ const qa = {
         {
           title: 'How do I edit the weekly working hours of an RBT/BT?',
           answer:
-            'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "EDIT" to change their name and hours per week.',
+            'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "EDIT" to change their name and hours per week. The same functionality exists on the "All staff" page.',
         },
         {
           title: 'How do I delete an RBT?',
           answer:
-            'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "DELETE" on the appropriate RBT.',
+            'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "DELETE" on the appropriate RBT. The same functionality exists on the "All staff" page.',
         },
         {
           title: 'What does it mean to "follow" an RBT?',
@@ -32,7 +32,7 @@ const qa = {
         {
           title: 'How do I remove an RBT/BT from my roster?',
           answer:
-            'Click the orange "MANAGE" button on your roster page, then click "UNFOLLOW" on the RBT/BT you no longer want to be following.',
+            'Click the orange "MANAGE" button on your roster page, then click "UNFOLLOW" on the RBT/BT you no longer want to be following. The same functionality exists on the "All staff" page.',
         },
         {
           title: 'What is the number at the top of each RBT/BT card?',
@@ -63,13 +63,13 @@ const qa = {
           title:
             'Where do I find the RBTs in my clinic that I am not following?',
           answer:
-            'In the all staff tab, or by selecting "MANAGE" on your roster page.',
+            'On the "All staff" page, or by selecting "MANAGE" on your roster page.',
         },
         {
           title:
             'One of my RBTs left the company, do I need to do anything in SOUP?',
           answer:
-            'No. In the future we will provide an "archive" feature. It is best practice to hold onto these records for at least seven years. Simply unfollow RBTs/BTs you do not plan to supervise in the near future.',
+            'No. In the future we will provide an "archive" feature. It is best practice to hold onto these records for future reference. Simply unfollow RBTs/BTs you do not plan to supervise in the near future. All completed SOUPs are available to download in PDF format for your personal record keeping.',
         },
       ],
     },
@@ -90,11 +90,11 @@ const qa = {
           title: 'How do I remove a supervisor from my clinic?',
           answer: 'This is not currently implemented.',
         },
-        {
-          title: 'How do I change my name/email etc?',
-          answer:
-            'Go to the settings tab. The button is located on the orange navigation bar on the left side of the window.',
-        },
+        // {
+        //   title: 'How do I change my name/email etc?',
+        //   answer:
+        //     'Go to the settings tab. The button is located on the orange navigation bar on the left side of the window.',
+        // },
       ],
     },
     {
@@ -138,11 +138,11 @@ const qa = {
           answer:
             'Hover over the clinic switcher tab, a white arrow located in the middle of the orange navigation bar at the left side of the window. Click the + button, then select "create a clinic".',
         },
-        {
-          title: 'How many clinics can I make?',
-          answer:
-            'Currently, only the owner of an enterprise account can create clinics.',
-        },
+        // {
+        //   title: 'How many clinics can I make?',
+        //   answer:
+        //     'Currently, only the owner of an enterprise account can create clinics.',
+        // },
       ],
     },
     {
@@ -225,7 +225,7 @@ const qa = {
         },
         {
           title: 'How do I request a feature?',
-          answer: 'Send us an email at therapigeon@gmail.com',
+          answer: 'Send us an email at contact@therapigeon.com',
         },
       ],
     },

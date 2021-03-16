@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import classes from './FAQ.module.css';
-import questions from './qa';
+import qa from './qa';
 import TopicCard from './TopicCard/TopicCard';
 import QuestionCard from './QuestionCard/QuestionCard';
 
 const FAQ = () => {
   const [topic, setTopic] = useState(null);
+  const [questions, setQuestions] = useState(qa);
 
   return (
     <div className={classes.FAQ}>
