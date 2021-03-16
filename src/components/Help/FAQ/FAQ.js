@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, createRef } from 'react';
 import classes from './FAQ.module.css';
 import qa from './qa';
 import TopicCard from './TopicCard/TopicCard';
@@ -37,8 +37,8 @@ const FAQ = () => {
         </div>
       ) : (
         <div className={classes.questionsWrapper}>
-          {questions.topics[topic].questions.map((q) => {
-            return <QuestionCard question={q} />;
+          {questions.topics[topic].questions.map((q, qIndex) => {
+            return <QuestionCard question={q} id={qIndex} />;
           })}
         </div>
       )}
