@@ -21,7 +21,6 @@ const TOC = ({
                 updateQuestions(qes);
                 forceUpdate();
                 const target = document.getElementById(index);
-                target.scrollTop += 20;
 
                 window.setTimeout(() => {
                   target.scrollIntoView({

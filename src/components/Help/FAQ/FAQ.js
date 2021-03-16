@@ -11,6 +11,17 @@ const FAQ = () => {
   const [remountCount, setRemountCount] = useState(0);
   const refresh = () => setRemountCount(remountCount + 1);
 
+  useEffect(() => {
+    const qes = questions;
+    qes.topics.map((t) => {
+      t.questions.map((q) => {
+        q.activate = false;
+      });
+    });
+
+    setQuestions(qes);
+  }, [remountCount]);
+
   return (
     <div className={classes.FAQ}>
       <h1>
@@ -22,7 +33,16 @@ const FAQ = () => {
       <h2>{topic == null ? 'Topics' : 'Questions'}</h2>
 
       {topic != null ? (
-        <button onClick={() => setTopic(null)}>BACK</button>
+        <button
+          onClick={() => {
+            setTopic(null);
+            setQuestions(null);
+            setQuestions({ ...qa });
+            refresh();
+          }}
+        >
+          BACK
+        </button>
       ) : null}
 
       {topic != null ? (
