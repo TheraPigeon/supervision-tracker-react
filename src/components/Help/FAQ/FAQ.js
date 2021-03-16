@@ -3,6 +3,7 @@ import classes from './FAQ.module.css';
 import qa from './qa';
 import TopicCard from './TopicCard/TopicCard';
 import QuestionCard from './QuestionCard/QuestionCard';
+import TableOfContents from './TOC/TOC';
 
 const FAQ = () => {
   const [topic, setTopic] = useState(null);
@@ -22,6 +23,10 @@ const FAQ = () => {
         <button className={classes.backButton} onClick={() => setTopic(null)}>
           BACK
         </button>
+      ) : null}
+
+      {topic != null ? (
+        <TableOfContents questions={questions.topics[topic].questions} />
       ) : null}
 
       {topic === null ? (
