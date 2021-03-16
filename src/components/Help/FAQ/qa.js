@@ -8,31 +8,47 @@ const qa = {
           title: 'How do I add a new RBT/BT?',
           answer:
             'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "ADD NEW MEMBER".',
+          links: [{ title: 'MY ROSTER', path: '/roster/' }],
         },
         {
           title: 'How do I edit the weekly working hours of an RBT/BT?',
           answer:
             'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "EDIT" to change their name and hours per week. The same functionality exists on the "All staff" page.',
+          links: [
+            { title: 'MY ROSTER', path: '/roster/' },
+            { title: 'ALL STAFF', path: '/members/' },
+          ],
         },
         {
           title: 'How do I delete an RBT?',
           answer:
             'On the "My Roster" page, there is a "MANAGE" button at the top right corner of the window. Click this, then click "DELETE" on the appropriate RBT. The same functionality exists on the "All staff" page.',
+          links: [
+            { title: 'MY ROSTER', path: '/roster/' },
+            { title: 'ALL STAFF', path: '/members/' },
+          ],
         },
         {
           title: 'What does it mean to "follow" an RBT?',
           answer:
             'Following an RBT means you want to keep track of their weekly supervision. You can unfollow any RBTs/BTs in your clinic that you do not need to be keeping tabs on. If you know you will be supervising someone on a regular basis, follow them so that they will appear in your roster.',
+          links: [{ title: 'MY ROSTER', path: '/roster/' }],
         },
         {
           title: 'What is my roster?',
           answer:
             'Your roster is the page where you can see all the RBTs you currently follow.',
+          links: [{ title: 'MY ROSTER', path: '/roster/' }],
         },
+
         {
           title: 'How do I remove an RBT/BT from my roster?',
           answer:
             'Click the orange "MANAGE" button on your roster page, then click "UNFOLLOW" on the RBT/BT you no longer want to be following. The same functionality exists on the "All staff" page.',
+          links: [
+            { title: 'MY ROSTER', path: '/roster/' },
+            { title: 'ALL STAFF', path: '/members/' },
+          ],
         },
         {
           title: 'What is the number at the top of each RBT/BT card?',
@@ -64,6 +80,10 @@ const qa = {
             'Where do I find the RBTs in my clinic that I am not following?',
           answer:
             'On the "All staff" page, or by selecting "MANAGE" on your roster page.',
+          links: [
+            { title: 'MY ROSTER', path: '/roster/' },
+            { title: 'ALL STAFF', path: '/members/' },
+          ],
         },
         {
           title:
@@ -79,7 +99,8 @@ const qa = {
         {
           title: 'How do I invite someone to my clinic?',
           answer:
-            'Give them your clinic ID. They can use this on the join clinic page.',
+            'Give them your clinic ID. They can use this on the join clinic page. Your clinic ID can be found on your "My Roster" page when you have the appropriate clinic selected.',
+          links: [{ title: 'MY ROSTER', path: '/roster/' }],
         },
         {
           title: 'What is a candidate/intern?',
@@ -109,6 +130,7 @@ const qa = {
           title: 'How do I join a new clinic?',
           answer:
             'On the orange navigation bar located on the left side of the window, there is a dark gray tab with a white arrow on it. Hover your mouse over this tab. Click the + to join another clinic. To join a new clinic you will need to know the ID of that clinic.',
+          links: [{ title: 'JOIN CLINIC', path: '/join/' }],
         },
         {
           title: 'Can I be in more than one clinic at once?',
@@ -131,7 +153,8 @@ const qa = {
         {
           title: 'What is a clinic ID?',
           answer:
-            'Give your clinic ID to any new supervisors joining SOUP so that they can conduct supervisions on the BTs/RBTs in your clinic. The ID is used to join the clinic.',
+            'Give your clinic ID to any new supervisors joining SOUP so that they can conduct supervisions on the BTs/RBTs in your clinic. The ID is used to join the clinic. Your clinic ID can be found on your "My Roster" page when you have the appropriate clinic selected.',
+          links: [{ title: 'MY ROSTER', path: '/roster/' }],
         },
         {
           title: 'How do I create a clinic?',
@@ -172,6 +195,7 @@ const qa = {
           title: 'How do I continue an in-progress SOUP?',
           answer:
             'If you have any in-progress SOUPS, they will appear at the top of your roster. Click "CONTINUE" to continue conducting the supervision. If you no longer plan to finish the session, or if it was created by accident, click "DISCARD".',
+          links: [{ title: 'MY ROSTER', path: '/roster/' }],
         },
       ],
     },
@@ -217,11 +241,13 @@ const qa = {
           title: 'How do I report a bug?',
           answer:
             'The "Report a bug" navigation button is the second to last button on the orange navigation bar, found on the left side of the screen. Fill out the form and hit submit.',
+          links: [{ title: 'REPORT A BUG', path: '/bug_report/' }],
         },
         {
           title: 'How do I log out?',
           answer:
             'Click the last button on the orange navigation bar, labeled "Logout". This is located at the bottom left corner of the window.',
+          links: [{ title: 'LOGOUT', path: '/logout/' }],
         },
         {
           title: 'How do I request a feature?',

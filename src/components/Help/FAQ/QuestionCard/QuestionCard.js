@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classes from './QuestionCard.module.css';
+import UsefulLinks from './UsefulLinks/UsefulLinks';
 
 const QuestionCard = ({ question, id, startActive }) => {
   const [active, setActive] = useState(startActive);
@@ -20,6 +21,9 @@ const QuestionCard = ({ question, id, startActive }) => {
       </div>
 
       {active ? <p>{question.answer}</p> : null}
+      {active ? (
+        <UsefulLinks links={question.links ? question.links : []} />
+      ) : null}
     </div>
   );
 };
