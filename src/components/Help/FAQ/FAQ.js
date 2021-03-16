@@ -30,8 +30,6 @@ const FAQ = () => {
           : 'Frequently Asked Questions'}
       </h1>
 
-      <h2>{topic == null ? 'Topics' : 'Questions'}</h2>
-
       {topic != null ? (
         <button
           onClick={() => {
@@ -54,6 +52,8 @@ const FAQ = () => {
           forceUpdate={refresh}
         />
       ) : null}
+
+      <h2>{topic == null ? 'Topics' : 'Questions'}</h2>
 
       {topic === null ? (
         <div className={classes.topicsWrapper}>
