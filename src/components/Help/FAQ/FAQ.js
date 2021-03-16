@@ -1,4 +1,4 @@
-import React, { useState, useRef, createRef } from 'react';
+import React, { useState, useRef, createRef, useEffect } from 'react';
 import classes from './FAQ.module.css';
 import qa from './qa';
 import TopicCard from './TopicCard/TopicCard';
@@ -8,6 +8,8 @@ import TableOfContents from './TOC/TOC';
 const FAQ = () => {
   const [topic, setTopic] = useState(null);
   const [questions, setQuestions] = useState(qa);
+  const [remountCount, setRemountCount] = useState(0);
+  const refresh = () => setRemountCount(remountCount + 1);
 
   return (
     <div className={classes.FAQ}>
@@ -24,7 +26,13 @@ const FAQ = () => {
       ) : null}
 
       {topic != null ? (
-        <TableOfContents questions={questions.topics[topic].questions} />
+        <TableOfContents
+          questions={questions.topics[topic].questions}
+          allQuestions={questions}
+          topic={topic}
+          updateQuestions={setQuestions}
+          forceUpdate={refresh}
+        />
       ) : null}
 
       {topic === null ? (
@@ -38,7 +46,13 @@ const FAQ = () => {
       ) : (
         <div className={classes.questionsWrapper}>
           {questions.topics[topic].questions.map((q, qIndex) => {
-            return <QuestionCard question={q} id={qIndex} />;
+            return (
+              <QuestionCard
+                question={q}
+                id={qIndex}
+                startActive={q.activate === true ? true : false}
+              />
+            );
           })}
         </div>
       )}
