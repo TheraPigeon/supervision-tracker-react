@@ -6,9 +6,10 @@ const QuestionCard = ({ question }) => {
 
   return (
     <div className={classes.QuestionCard} onClick={() => setActive(!active)}>
-      <div className={classes.headingContainer}>
-        <h1>{question.title}</h1>
-        <h1>{active ? '-' : '+'}</h1>
+      <div>
+        <h3>{question.title}</h3>
+        <span className={active ? classes.Rotate : null}></span>
+        {/* <span>{active ? '-' : '+'}</span> */}
       </div>
 
       {active ? <p>{question.answer}</p> : null}

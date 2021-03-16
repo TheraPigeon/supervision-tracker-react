@@ -1,4 +1,5 @@
 .QuestionCard {
+  position: relative;
   border: 1px solid #ea641d;
   min-height: 50px;
   margin: 10px;
@@ -11,14 +12,33 @@
   background-color: #555;
 }
 
-.headingContainer {
+.QuestionCard > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 50px;
 }
-
+.QuestionCard h3{
+  font-size: 1.25em;
+}
 .QuestionCard p {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 10px;
+  line-height: 1.25em;
+}
+
+.QuestionCard div span {
+  position: absolute;
+  margin-right: 5px;
+  right: 10px;
+  width: 13px;
+  height: 13px;
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+  transform: rotate(45deg);
+  transition: all 0.25s ease-in-out;
+}
+.QuestionCard > div .Rotate {
+  display: inline-block;
+  transform: rotate(225deg);
 }

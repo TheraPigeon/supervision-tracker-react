@@ -19,9 +19,7 @@ const FAQ = () => {
       <h2>{topic == null ? 'Topics' : 'Questions'}</h2>
 
       {topic != null ? (
-        <button className={classes.backButton} onClick={() => setTopic(null)}>
-          BACK
-        </button>
+        <button onClick={() => setTopic(null)}>BACK</button>
       ) : null}
 
       {topic === null ? (
